@@ -32,6 +32,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     await installModule('@pinia/nuxt', {
       autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+      storesDirs:['./runtime/stores']
     })
   }
 })
