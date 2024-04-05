@@ -13,6 +13,7 @@ export default function (url: string, options: any = {}) {
     }
   }
   const opt: any = {
+    baseURL:moduleConfig.public.glorious.fetch.baseUrl,
     headers:{
       Accept: 'application/json',
       ...header
