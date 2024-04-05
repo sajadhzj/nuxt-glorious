@@ -1,4 +1,6 @@
+//@ts-ignore
 import {defineNuxtModule, addPlugin, createResolver, addImportsDir, installModule} from '@nuxt/kit'
+//@ts-ignore
 import defu from "defu";
 
 // Module options TypeScript interface definition
@@ -12,7 +14,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   // Default configuration options of the Nuxt module
   defaults: {},
-  async setup(options, nuxt: any) {
+  async setup(options: any, nuxt: any) {
     // @ts-ignore
     const resolver = createResolver(import.meta.url)
 
@@ -22,7 +24,10 @@ export default defineNuxtModule<ModuleOptions>({
         baseUrl: '/'
       },
       auth: {
-        cookieName: 'ga-token'
+        cookieName: 'ga-token',
+        redirect: {
+          logout: '/login'
+        }
       }
     })
 

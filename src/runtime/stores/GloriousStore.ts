@@ -1,4 +1,5 @@
 import {defineStore} from "pinia";
+//@ts-ignore
 import {useCookie, useRuntimeConfig} from "nuxt/app";
 
 export const GloriousStore = defineStore("GloriousStore", {
@@ -6,7 +7,9 @@ export const GloriousStore = defineStore("GloriousStore", {
       auth: {
         loaded: false,
         user: {}
-      }
+      },
+      loading:{},
+      keepData:{}
     }),
     getters: {
       authIsLogin() {
@@ -17,6 +20,13 @@ export const GloriousStore = defineStore("GloriousStore", {
       }
     },
     actions: {
+      formCreate(key: string): void {
+        this[key] = {
+          form: {},
+          errors: [],
+          loading: false
+        }
+      },
       authSetToken(token: string): void {
         const moduleConfig: any = useRuntimeConfig()
         const decodeToken = this.authParseToken(token)
