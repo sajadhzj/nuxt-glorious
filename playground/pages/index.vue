@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-
+console.log(GloriousStore().authIsLogin)
 </script>
 
 <style scoped>

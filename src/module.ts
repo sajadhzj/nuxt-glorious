@@ -27,12 +27,12 @@ export default defineNuxtModule<ModuleOptions>({
     })
 
     addImportsDir(resolver.resolve('runtime/composables'))
+    addImportsDir(resolver.resolve('runtime/stores'))
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
 
     await installModule('@pinia/nuxt', {
-      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-      storesDirs:['./runtime/stores']
+      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]]
     })
   }
 })
