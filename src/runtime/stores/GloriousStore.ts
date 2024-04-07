@@ -27,6 +27,13 @@ export const GloriousStore = defineStore("GloriousStore", {
           loading: false
         }
       },
+      authLogout():void{
+        const token: any = useCookie(moduleConfig.public.glorious.auth.cookieName)
+        token.value = null
+        this.auth.loaded = false
+
+        navigateTo(moduleConfig.public.glorious.auth.redirect.logout)
+      },
       authSetToken(token: string): void {
         const moduleConfig: any = useRuntimeConfig()
         const decodeToken = this.authParseToken(token)
@@ -43,7 +50,7 @@ export const GloriousStore = defineStore("GloriousStore", {
         }).join(''));
 
         return JSON.parse(jsonPayload);
-      }
+      },
     }
   }
 )
