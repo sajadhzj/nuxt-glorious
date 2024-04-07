@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 //@ts-ignore
-import {useCookie, useRuntimeConfig} from "nuxt/app";
+import {navigateTo, useCookie, useRuntimeConfig} from "nuxt/app";
 
 export const GloriousStore = defineStore("GloriousStore", {
     state: () => ({
@@ -28,6 +28,7 @@ export const GloriousStore = defineStore("GloriousStore", {
         }
       },
       authLogout():void{
+        const moduleConfig: any = useRuntimeConfig()
         const token: any = useCookie(moduleConfig.public.glorious.auth.cookieName)
         token.value = null
         this.auth.loaded = false

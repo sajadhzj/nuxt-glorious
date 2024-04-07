@@ -44,7 +44,7 @@ export default function (url: string, options: any = {}) {
       }
 
       if (res.status === 401)
-        navigateTo(moduleConfig.public.glorious.auth.redirect.logout)
+        gs.authLogout()
     }
   }
   if (Object.prototype.hasOwnProperty.call(options, 'is$')
