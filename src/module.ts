@@ -33,6 +33,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addImportsDir(resolver.resolve('runtime/composables'))
     addImportsDir(resolver.resolve('runtime/stores'))
+    addImportsDir(resolver.resolve('runtime/middlewares'))
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
 
