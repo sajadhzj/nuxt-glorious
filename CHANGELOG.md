@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v0.0.26
+
+[compare changes](https://github.com/sajadhzj/nuxt-glorious/compare/v0.0.25...v0.0.26)
+
 ## v0.0.25
 
 [compare changes](https://github.com/sajadhzj/nuxt-glorious/compare/v0.0.24...v0.0.25)
