@@ -1,44 +1,78 @@
 //@ts-ignore
-import {defineNuxtModule, addPlugin, createResolver, addImportsDir, installModule} from '@nuxt/kit'
+import {
+  defineNuxtModule,
+  addPlugin,
+  addComponentsDir,
+  createResolver,
+  addImportsDir,
+  installModule,
+} from "@nuxt/kit";
 //@ts-ignore
 import defu from "defu";
 
 // Module options TypeScript interface definition
-export interface ModuleOptions {
-}
+export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'glorious',
-    configKey: 'glorious'
+    name: "glorious",
+    configKey: "glorious",
   },
   // Default configuration options of the Nuxt module
   defaults: {},
   async setup(options: any, nuxt: any) {
     // @ts-ignore
-    const resolver = createResolver(import.meta.url)
+    const resolver = createResolver(import.meta.url);
 
     //config
     nuxt.options.runtimeConfig.public.glorious = defu(nuxt.options.glorious, {
       fetch: {
-        baseUrl: '/'
+        baseUrl: "/",
+      },
+      seo: {
+        suffix: "",
+        title: "",
+        description: "",
       },
       auth: {
-        cookieName: 'ga-token',
+        cookie: {
+          name: "ga-token",
+          httpOnly: false,
+        },
         redirect: {
-          logout: '/login'
-        }
-      }
-    })
+          logout: "/login",
+          login: "/login",
+        },
+        strategy: {
+          provider: "",
+          //[laravel-passport]
+          endpoints: {
+            userInfo: {
+              url: "/",
+              method: "GET",
+              pick: "",
+            },
+          },
+        },
+      },
+    });
 
-    addImportsDir(resolver.resolve('runtime/composables'))
-    addImportsDir(resolver.resolve('runtime/stores'))
-    addImportsDir(resolver.resolve('runtime/middlewares'))
-    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
-    addPlugin(resolver.resolve('./runtime/plugin'))
-
-    await installModule('@pinia/nuxt', {
-      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]]
-    })
-  }
-})
+    addImportsDir(resolver.resolve("runtime/composables"));
+    addImportsDir(resolver.resolve("runtime/stores"));
+    addImportsDir(resolver.resolve("runtime/middlewares"));
+    addComponentsDir({
+      path: resolver.resolve("runtime/components"),
+    });
+    nuxt.hook("nitro:config", async (nitro: any) => {
+      nitro.publicAssets.push({
+        dir: resolver.resolve("./runtime/assets"),
+      });
+    });
+    addPlugin(resolver.resolve("./runtime/middlewares/Auth"));
+    addPlugin(resolver.resolve("./runtime/middlewares/AuthStrategy"));
+    await installModule("@nuxtjs/tailwindcss");
+    await installModule("@pinia/nuxt", {
+      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+    });
+  },
+});

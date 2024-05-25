@@ -1,77 +1,35 @@
-//@ts-ignore
-import {useCookie, useFetch, useRuntimeConfig} from "nuxt/app";
-import {GloriousStore} from "../stores/GloriousStore";
-
-export default function (url: string, options: any = {}) {
-  const gs = GloriousStore()
-  const moduleConfig: any = useRuntimeConfig()
-  const gKey: string = typeof options.gKey !== "undefined"
-    ? options.gKey
-    : url.split('/')[url.split('/').length - 1]
-
-  let header: any = {}
-  if (gs.authIsLogin) {
-    const token: any = useCookie(moduleConfig.public.glorious.auth.cookieName)
-    header = {
-      'Authorization': 'Bearer ' + token.value
-    }
+import { useSeoMeta } from "@unhead/vue";
+import { useRuntimeConfig } from "nuxt/app";
+const head = {
+  title: ``,
+  description: "",
+  image: "",
+  type: "website",
+};
+export default function (object = head) {
+  const title = typeof object.title === "undefined" ? head.title : object.title;
+  const description =
+    typeof object.description === "undefined"
+      ? head.description
+      : object.description;
+  const image = typeof object.image === "undefined" ? head.image : object.image;
+  const type = typeof object.type === "undefined" ? head.type : object.type;
+  const moduleConfig = useRuntimeConfig();
+  const seoObject: any = {
+    title: () => `${title + moduleConfig.public.glorious.seo.suffix}`,
+    ogTitle: () => `${title + moduleConfig.public.glorious.seo.suffix}`,
+    description: () => `${description}`,
+    ogDescription: () => `${description}`,
+    ogType: () => type,
+  };
+  if (image !== "") seoObject["image"] = image;
+  if (title === "") {
+    seoObject["title"] = moduleConfig.public.glorious.seo.title;
+    seoObject["ogTitle"] = moduleConfig.public.glorious.seo.title;
   }
-  const opt: any = {
-    baseURL: moduleConfig.public.glorious.fetch.baseUrl,
-    lazy: false,
-    headers: {
-      Accept: 'application/json',
-      ...header
-    },
-    ...options,
-    onRequest() {
-      try {
-        gs.loading[gKey] = true
-        gs[gKey].loading = true
-      } catch (e) {
-        /* empty */
-      }
-    },
-    onResponse({response: res}: any) {
-      try {
-        gs.loading[gKey] = false
-        gs[gKey].loading = false
-        gs[gKey].errors = []
-        if (res.status >= 200 && res.status <= 299)
-          gs[gKey].form = {}
-      } catch (e: any) {
-        /* empty */
-      }
-    },
-    onResponseError({response: res}: any) {
-      if (res.status === 422) {
-        try {
-          gs[gKey].errors = res._data.errors
-        } catch (e) {
-          /* empty */
-        }
-      }
-
-      if (res.status === 401)
-        gs.authLogout()
-    }
+  if (description === "") {
+    seoObject["description"] = moduleConfig.public.glorious.seo.description;
+    seoObject["ogDescription"] = moduleConfig.public.glorious.seo.description;
   }
-
-  if ((Object.prototype.hasOwnProperty.call(options, 'is$')
-      && options.is$)
-
-    || (Object.prototype.hasOwnProperty.call(options, 'method')
-      && options.method.toString().toUpperCase() === 'POST')
-
-    || (Object.prototype.hasOwnProperty.call(options, 'method')
-      && options.method.toString().toUpperCase() === 'PUT')
-
-    || Object.prototype.hasOwnProperty.call(options, 'body')
-  ) {
-    if (!Object.prototype.hasOwnProperty.call(options, 'method'))
-      opt['method'] = 'POST'
-
-    return $fetch(url, opt)
-  } else
-    return useFetch(url, opt)
+  useSeoMeta(seoObject);
 }
