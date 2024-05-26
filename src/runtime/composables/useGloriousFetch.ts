@@ -1,6 +1,26 @@
 import { useCookie, useFetch, useRuntimeConfig } from "nuxt/app";
 import { GloriousStore } from "../stores/GloriousStore";
 export default function (url: string, options: any = {}) {
+  // compute params
+  const computeParams: any = {};
+  if (Object.prototype.hasOwnProperty.call(options, "params")) {
+    Object.entries(options.params).map((item: any) => {
+      if (item[1] !== null) computeParams[item[0]] = item[1];
+    });
+
+    options.params = computeParams;
+  }
+
+  //compute body
+  const computeBody: any = {};
+  if (Object.prototype.hasOwnProperty.call(options, "body")) {
+    Object.entries(options.body).map((item: any) => {
+      if (item[1] !== null) computeBody[item[0]] = item[1];
+    });
+
+    options.body = computeBody;
+  }
+
   const gs: any = GloriousStore();
   const moduleConfig: any = useRuntimeConfig();
   const gKey: any =
@@ -56,6 +76,7 @@ export default function (url: string, options: any = {}) {
       if (res.status === 401) gs.authLogout();
     },
   };
+
   if (
     (Object.prototype.hasOwnProperty.call(options, "is$") && options.is$) ||
     (Object.prototype.hasOwnProperty.call(options, "method") &&

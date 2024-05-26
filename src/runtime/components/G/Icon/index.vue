@@ -4,8 +4,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
-
 const props = defineProps({
   name: {
     required: true,
@@ -104,19 +102,23 @@ const methods = {
 async function getIcon() {
   try {
     const iconsImport = import.meta.glob("assets/icons/**/**.svg", {
-      as: "raw",
+      query: "?raw",
       eager: false,
     });
-
     let rawIcon = "";
     if (typeof iconsImport[`/assets/icons/${props.name}.svg`] !== "undefined") {
-      rawIcon = await iconsImport[`/assets/icons/${props.name}.svg`]();
+      const icon: any = await iconsImport[`/assets/icons/${props.name}.svg`]();
+      rawIcon = icon.default;
     } else {
       const staticAssets = import.meta.glob("../../../assets/icons/**/**.svg", {
-        as: "raw",
+        query: "?raw",
         eager: false,
       });
-      rawIcon = await staticAssets[`../../../assets/icons/${props.name}.svg`]();
+
+      const icon: any = await staticAssets[
+        `../../../assets/icons/${props.name}.svg`
+      ]();
+      rawIcon = icon.default;
     }
 
     icon.value = methods.computeProps(rawIcon);
