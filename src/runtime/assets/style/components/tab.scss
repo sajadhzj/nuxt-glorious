@@ -1,0 +1,11 @@
+.glorious-tab {
+  @apply flex justify-between bg-green-50 px-3 py-2 rounded-lg gap-3 overflow-y-auto w-full;
+
+  > div > button {
+    @apply text-gray-500 text-[14px];
+
+    &.active {
+      @apply font-bold text-white bg-green-500 px-2 py-1 rounded-lg;
+    }
+  }
+}

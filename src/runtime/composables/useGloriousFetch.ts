@@ -11,16 +11,6 @@ export default function (url: string, options: any = {}) {
     options.params = computeParams;
   }
 
-  //compute body
-  const computeBody: any = {};
-  if (Object.prototype.hasOwnProperty.call(options, "body")) {
-    Object.entries(options.body).map((item: any) => {
-      if (item[1] !== null) computeBody[item[0]] = item[1];
-    });
-
-    options.body = computeBody;
-  }
-
   const gs: any = GloriousStore();
   const moduleConfig: any = useRuntimeConfig();
   const gKey: any =
@@ -77,16 +67,16 @@ export default function (url: string, options: any = {}) {
     },
   };
 
-  if (
-    (Object.prototype.hasOwnProperty.call(options, "is$") && options.is$) ||
-    (Object.prototype.hasOwnProperty.call(options, "method") &&
-      options.method.toString().toUpperCase() === "POST") ||
-    (Object.prototype.hasOwnProperty.call(options, "method") &&
-      options.method.toString().toUpperCase() === "PUT") ||
-    Object.prototype.hasOwnProperty.call(options, "body")
-  ) {
-    if (!Object.prototype.hasOwnProperty.call(options, "method"))
-      opt["method"] = "POST";
+  if (Object.prototype.hasOwnProperty.call(options, "body")) {
+    opt["method"] = "POST";
     return $fetch(url, opt);
-  } else return useFetch(url, opt);
+  }
+
+  if (!Object.prototype.hasOwnProperty.call(options, "is$"))
+    return $fetch(url, opt);
+
+  if (Object.prototype.hasOwnProperty.call(options, "is$") && options.is$)
+    return $fetch(url, opt);
+
+  return useFetch(url, opt);
 }

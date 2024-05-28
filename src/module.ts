@@ -56,6 +56,10 @@ export default defineNuxtModule<ModuleOptions>({
         },
       },
     });
+    await installModule("@nuxtjs/tailwindcss");
+    await installModule("@pinia/nuxt", {
+      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+    });
 
     addImportsDir(resolver.resolve("runtime/composables"));
     addImportsDir(resolver.resolve("runtime/stores"));
@@ -68,11 +72,12 @@ export default defineNuxtModule<ModuleOptions>({
         dir: resolver.resolve("./runtime/assets"),
       });
     });
+    nuxt.options.css.push(
+      resolver.resolve("./runtime/assets/style", "style.scss")
+    );
     addPlugin(resolver.resolve("./runtime/middlewares/Auth"));
     addPlugin(resolver.resolve("./runtime/middlewares/AuthStrategy"));
-    await installModule("@nuxtjs/tailwindcss");
-    await installModule("@pinia/nuxt", {
-      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-    });
+    addPlugin(resolver.resolve("./runtime/plugins/TailwindColor"));
+    addPlugin(resolver.resolve("./runtime/plugins/Modal"));
   },
 });

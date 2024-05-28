@@ -1,0 +1,98 @@
+%size {
+  &.xl {
+    @apply py-2.5;
+  }
+  &.lg {
+    @apply py-2;
+  }
+  &.md {
+    @apply py-1.5;
+  }
+  &.sm {
+    @apply py-1;
+  }
+  &.xsm {
+    @apply py-0.5;
+  }
+}
+%focus {
+  &:focus-visible {
+    @apply outline-none ring-2;
+  }
+}
+
+.glorious-input-primary {
+  @apply rounded-md ring-1 ring-green-500 px-3;
+  @extend %size, %focus;
+  &:disabled {
+    @apply bg-green-300 cursor-not-allowed;
+  }
+}
+
+.glorious-input-red {
+  @apply rounded-md ring-1 ring-red-500 px-3;
+  @extend %size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-input-gray {
+  @apply rounded-md ring-1 ring-gray-500 px-3;
+  @extend %size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-input-blue {
+  @apply rounded-md ring-1 ring-blue-500 px-3;
+  @extend %size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-input-orange {
+  @apply rounded-md ring-1 ring-orange-500 px-3;
+  @extend %size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-input {
+  @apply relative;
+  &.icon-xl {
+    > input {
+      @apply rtl:pr-9 ltr:pl-9;
+    }
+  }
+  &.icon-lg {
+    > input {
+      @apply rtl:pr-9 ltr:pl-8;
+    }
+  }
+  &.icon-md {
+    > input {
+      @apply rtl:pr-9 ltr:pl-8;
+    }
+  }
+  &.icon-sm {
+    > input {
+      @apply rtl:pr-8 ltr:pl-8;
+    }
+  }
+  &.icon-xsm {
+    > input {
+      @apply rtl:pr-8 ltr:pl-7;
+    }
+  }
+}
+.glorious-input-icon {
+  @apply absolute h-max top-0 bottom-0 my-auto rtl:right-1 ltr:left-1;
+}

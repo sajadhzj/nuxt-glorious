@@ -1,0 +1,48 @@
+.glorious-modal {
+  @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto p-3 md:rounded-md rounded-t-md md:bottom-0 bottom-0 overflow-y-auto;
+
+  &.size-full {
+    @apply w-full h-full top-0 rounded-none;
+  }
+
+  &.size-xl {
+    @apply md:w-[70%] w-full md:h-max max-h-[70%];
+  }
+
+  &.size-lg {
+    @apply md:w-[60%] w-full md:h-max max-h-[70%];
+  }
+
+  &.size-md {
+    @apply md:w-[50%] w-full md:h-max max-h-[70%];
+  }
+
+  &.size-sm {
+    @apply lg:w-[25%] md:w-[35%] w-full md:h-max max-h-[70%];
+  }
+
+  &.close {
+    @apply hidden;
+  }
+
+  &.open {
+    @screen md {
+      animation: animation-opacity 0.2s normal forwards;
+    }
+    animation: animation-mobile 0.3s normal forwards;
+  }
+
+  @keyframes animation-opacity {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes animation-mobile {
+    to {
+      bottom: 0;
+    }
+  }
+}

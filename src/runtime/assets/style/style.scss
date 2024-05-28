@@ -1,0 +1,26 @@
+@import "components/buttons";
+@import "components/input";
+@import "components/modal";
+@import "components/tab";
+
+.bg-blur {
+  @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
+}
+
+.glorious-justify-between {
+  @apply justify-between;
+}
+.glorious-justify-center {
+  @apply justify-center;
+}
+.glorious-align-items-center {
+  @apply items-center;
+}
+
+.glorious-w-10 {
+  width: 10px;
+}
+
+.glorious-my-3 {
+  @apply my-3;
+}

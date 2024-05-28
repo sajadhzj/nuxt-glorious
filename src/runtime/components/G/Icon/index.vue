@@ -1,9 +1,6 @@
-<template>
-  <!-- eslint-disable vue/no-v-html -->
-  <div class="w-max h-max" v-html="icon" />
-</template>
-
 <script lang="ts" setup>
+import { ref, watch } from "#imports";
+
 const props = defineProps({
   name: {
     required: true,
@@ -27,7 +24,7 @@ const props = defineProps({
   },
 });
 
-const icon = ref<string | Record<string, any>>("");
+const icon = ref("");
 
 const methods = {
   computeProps: (icon: any) => {
@@ -139,3 +136,7 @@ watch(
   }
 );
 </script>
+<template>
+  <!-- eslint-disable vue/no-v-html -->
+  <div class="w-max h-max" v-html="icon" />
+</template>
