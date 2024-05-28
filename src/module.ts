@@ -73,11 +73,11 @@ export default defineNuxtModule<ModuleOptions>({
       });
     });
     nuxt.options.css.push(
-      resolver.resolve("./runtime/assets/style", "style.scss")
+      resolver.resolve("./runtime/assets/style", "style.css")
     );
     addPlugin(resolver.resolve("./runtime/middlewares/Auth"));
     addPlugin(resolver.resolve("./runtime/middlewares/AuthStrategy"));
-    addPlugin(resolver.resolve("./runtime/plugins/TailwindColor"));
+    // addPlugin(resolver.resolve("./runtime/plugins/TailwindColor"));
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
   },
 });

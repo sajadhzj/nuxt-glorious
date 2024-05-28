@@ -1,0 +1,245 @@
+.xl.glorious-input-orange, .xl.glorious-input-blue, .xl.glorious-input-gray, .xl.glorious-input-red, .xl.glorious-input-primary, .xl.glorious-button-orange, .xl.glorious-button-blue, .xl.glorious-button-gray, .xl.glorious-button-red, .xl.glorious-button-primary {
+  @apply py-2.5;
+}
+.xl.glorious-input-orange > div.loading > div > div, .xl.glorious-input-blue > div.loading > div > div, .xl.glorious-input-gray > div.loading > div > div, .xl.glorious-input-red > div.loading > div > div, .xl.glorious-input-primary > div.loading > div > div, .xl.glorious-button-orange > div.loading > div > div, .xl.glorious-button-blue > div.loading > div > div, .xl.glorious-button-gray > div.loading > div > div, .xl.glorious-button-red > div.loading > div > div, .xl.glorious-button-primary > div.loading > div > div {
+  @apply w-[24px] !important;
+}
+.lg.glorious-input-orange, .lg.glorious-input-blue, .lg.glorious-input-gray, .lg.glorious-input-red, .lg.glorious-input-primary, .lg.glorious-button-orange, .lg.glorious-button-blue, .lg.glorious-button-gray, .lg.glorious-button-red, .lg.glorious-button-primary {
+  @apply py-2;
+}
+.lg.glorious-input-orange > div.loading > div > div, .lg.glorious-input-blue > div.loading > div > div, .lg.glorious-input-gray > div.loading > div > div, .lg.glorious-input-red > div.loading > div > div, .lg.glorious-input-primary > div.loading > div > div, .lg.glorious-button-orange > div.loading > div > div, .lg.glorious-button-blue > div.loading > div > div, .lg.glorious-button-gray > div.loading > div > div, .lg.glorious-button-red > div.loading > div > div, .lg.glorious-button-primary > div.loading > div > div {
+  @apply w-[24px] !important;
+}
+.md.glorious-input-orange, .md.glorious-input-blue, .md.glorious-input-gray, .md.glorious-input-red, .md.glorious-input-primary, .md.glorious-button-orange, .md.glorious-button-blue, .md.glorious-button-gray, .md.glorious-button-red, .md.glorious-button-primary {
+  @apply py-1.5;
+}
+.md.glorious-input-orange > div.loading > div > div, .md.glorious-input-blue > div.loading > div > div, .md.glorious-input-gray > div.loading > div > div, .md.glorious-input-red > div.loading > div > div, .md.glorious-input-primary > div.loading > div > div, .md.glorious-button-orange > div.loading > div > div, .md.glorious-button-blue > div.loading > div > div, .md.glorious-button-gray > div.loading > div > div, .md.glorious-button-red > div.loading > div > div, .md.glorious-button-primary > div.loading > div > div {
+  @apply w-[24px] !important;
+}
+.sm.glorious-input-orange, .sm.glorious-input-blue, .sm.glorious-input-gray, .sm.glorious-input-red, .sm.glorious-input-primary, .sm.glorious-button-orange, .sm.glorious-button-blue, .sm.glorious-button-gray, .sm.glorious-button-red, .sm.glorious-button-primary {
+  @apply py-1;
+}
+.sm.glorious-input-orange > div.loading > div > div, .sm.glorious-input-blue > div.loading > div > div, .sm.glorious-input-gray > div.loading > div > div, .sm.glorious-input-red > div.loading > div > div, .sm.glorious-input-primary > div.loading > div > div, .sm.glorious-button-orange > div.loading > div > div, .sm.glorious-button-blue > div.loading > div > div, .sm.glorious-button-gray > div.loading > div > div, .sm.glorious-button-red > div.loading > div > div, .sm.glorious-button-primary > div.loading > div > div {
+  @apply w-[24px] !important;
+}
+.xsm.glorious-input-orange, .xsm.glorious-input-blue, .xsm.glorious-input-gray, .xsm.glorious-input-red, .xsm.glorious-input-primary, .xsm.glorious-button-orange, .xsm.glorious-button-blue, .xsm.glorious-button-gray, .xsm.glorious-button-red, .xsm.glorious-button-primary {
+  @apply py-0.5;
+}
+.xsm.glorious-input-orange > div.loading > div > div, .xsm.glorious-input-blue > div.loading > div > div, .xsm.glorious-input-gray > div.loading > div > div, .xsm.glorious-input-red > div.loading > div > div, .xsm.glorious-input-primary > div.loading > div > div, .xsm.glorious-button-orange > div.loading > div > div, .xsm.glorious-button-blue > div.loading > div > div, .xsm.glorious-button-gray > div.loading > div > div, .xsm.glorious-button-red > div.loading > div > div, .xsm.glorious-button-primary > div.loading > div > div {
+  @apply w-[24px] !important;
+}
+
+.outline.glorious-button-orange, .outline.glorious-button-blue, .outline.glorious-button-gray, .outline.glorious-button-red, .outline.glorious-button-primary {
+  @apply bg-transparent border outline-none;
+}
+
+.glorious-button-orange > div.loading, .glorious-button-blue > div.loading, .glorious-button-gray > div.loading, .glorious-button-red > div.loading, .glorious-button-primary > div.loading {
+  @apply flex justify-center items-center;
+}
+
+.glorious-button-primary {
+  @apply bg-green-500 hover:bg-green-600 rounded-md text-white border-green-500 px-3;
+}
+.glorious-button-primary.outline {
+  @apply text-gray-500 hover:bg-green-100;
+}
+.glorious-button-primary:disabled {
+  @apply bg-green-300 cursor-not-allowed;
+}
+
+.glorious-button-red {
+  @apply bg-red-500 hover:bg-red-600 rounded-md text-white border-red-500 px-3;
+}
+.glorious-button-red.outline {
+  @apply text-gray-500 hover:bg-red-100;
+}
+.glorious-button-red:disabled {
+  @apply bg-red-300 cursor-not-allowed;
+}
+
+.glorious-button-gray {
+  @apply bg-gray-500 hover:bg-gray-600 rounded-md text-white border-gray-500 px-3;
+}
+.glorious-button-gray.outline {
+  @apply text-gray-500 hover:bg-gray-100;
+}
+.glorious-button-gray:disabled {
+  @apply bg-gray-300 cursor-not-allowed;
+}
+
+.glorious-button-blue {
+  @apply bg-blue-500 hover:bg-blue-600 rounded-md text-white border-blue-500 px-3;
+}
+.glorious-button-blue.outline {
+  @apply text-gray-500 hover:bg-blue-100;
+}
+.glorious-button-blue:disabled {
+  @apply bg-blue-300 cursor-not-allowed;
+}
+
+.glorious-button-orange {
+  @apply bg-orange-500 hover:bg-orange-600 rounded-md text-white border-orange-500 px-3;
+}
+.glorious-button-orange.outline {
+  @apply text-gray-500 hover:bg-orange-100;
+}
+.glorious-button-orange:disabled {
+  @apply bg-orange-300 cursor-not-allowed;
+}
+
+.xl.glorious-input-orange, .xl.glorious-input-blue, .xl.glorious-input-gray, .xl.glorious-input-red, .xl.glorious-input-primary, .xl.glorious-button-primary, .xl.glorious-button-red, .xl.glorious-button-gray, .xl.glorious-button-blue, .xl.glorious-button-orange {
+  @apply py-2.5;
+}
+.lg.glorious-input-orange, .lg.glorious-input-blue, .lg.glorious-input-gray, .lg.glorious-input-red, .lg.glorious-input-primary, .lg.glorious-button-primary, .lg.glorious-button-red, .lg.glorious-button-gray, .lg.glorious-button-blue, .lg.glorious-button-orange {
+  @apply py-2;
+}
+.md.glorious-input-orange, .md.glorious-input-blue, .md.glorious-input-gray, .md.glorious-input-red, .md.glorious-input-primary, .md.glorious-button-primary, .md.glorious-button-red, .md.glorious-button-gray, .md.glorious-button-blue, .md.glorious-button-orange {
+  @apply py-1.5;
+}
+.sm.glorious-input-orange, .sm.glorious-input-blue, .sm.glorious-input-gray, .sm.glorious-input-red, .sm.glorious-input-primary, .sm.glorious-button-primary, .sm.glorious-button-red, .sm.glorious-button-gray, .sm.glorious-button-blue, .sm.glorious-button-orange {
+  @apply py-1;
+}
+.xsm.glorious-input-orange, .xsm.glorious-input-blue, .xsm.glorious-input-gray, .xsm.glorious-input-red, .xsm.glorious-input-primary, .xsm.glorious-button-primary, .xsm.glorious-button-red, .xsm.glorious-button-gray, .xsm.glorious-button-blue, .xsm.glorious-button-orange {
+  @apply py-0.5;
+}
+
+.glorious-input-orange:focus-visible, .glorious-input-blue:focus-visible, .glorious-input-gray:focus-visible, .glorious-input-red:focus-visible, .glorious-input-primary:focus-visible {
+  @apply outline-none ring-2;
+}
+
+.glorious-input-primary {
+  @apply rounded-md ring-1 ring-green-500 px-3;
+}
+.glorious-input-primary:disabled {
+  @apply bg-green-300 cursor-not-allowed;
+}
+
+.glorious-input-red {
+  @apply rounded-md ring-1 ring-red-500 px-3;
+}
+.glorious-input-red:disabled {
+  @apply cursor-not-allowed;
+}
+
+.glorious-input-gray {
+  @apply rounded-md ring-1 ring-gray-500 px-3;
+}
+.glorious-input-gray:disabled {
+  @apply cursor-not-allowed;
+}
+
+.glorious-input-blue {
+  @apply rounded-md ring-1 ring-blue-500 px-3;
+}
+.glorious-input-blue:disabled {
+  @apply cursor-not-allowed;
+}
+
+.glorious-input-orange {
+  @apply rounded-md ring-1 ring-orange-500 px-3;
+}
+.glorious-input-orange:disabled {
+  @apply cursor-not-allowed;
+}
+
+.glorious-input {
+  @apply relative;
+}
+.glorious-input.icon-xl > input {
+  @apply rtl:pr-9 ltr:pl-9;
+}
+.glorious-input.icon-lg > input {
+  @apply rtl:pr-9 ltr:pl-8;
+}
+.glorious-input.icon-md > input {
+  @apply rtl:pr-9 ltr:pl-8;
+}
+.glorious-input.icon-sm > input {
+  @apply rtl:pr-8 ltr:pl-8;
+}
+.glorious-input.icon-xsm > input {
+  @apply rtl:pr-8 ltr:pl-7;
+}
+
+.glorious-input-icon {
+  @apply absolute h-max top-0 bottom-0 my-auto rtl:right-1 ltr:left-1;
+}
+
+.glorious-modal {
+  @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto p-3 md:rounded-md rounded-t-md md:bottom-0 bottom-0 overflow-y-auto;
+}
+.glorious-modal.size-full {
+  @apply w-full h-full top-0 rounded-none;
+}
+.glorious-modal.size-xl {
+  @apply md:w-[70%] w-full md:h-max max-h-[70%];
+}
+.glorious-modal.size-lg {
+  @apply md:w-[60%] w-full md:h-max max-h-[70%];
+}
+.glorious-modal.size-md {
+  @apply md:w-[50%] w-full md:h-max max-h-[70%];
+}
+.glorious-modal.size-sm {
+  @apply lg:w-[25%] md:w-[35%] w-full md:h-max max-h-[70%];
+}
+.glorious-modal.close {
+  @apply hidden;
+}
+.glorious-modal.open {
+  animation: animation-mobile 0.3s normal forwards;
+}
+@screen md {
+  .glorious-modal.open {
+    animation: animation-opacity 0.2s normal forwards;
+  }
+}
+@keyframes animation-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes animation-mobile {
+  to {
+    bottom: 0;
+  }
+}
+
+.glorious-tab {
+  @apply flex justify-between bg-green-50 px-3 py-2 rounded-lg gap-3 overflow-y-auto w-full;
+}
+.glorious-tab > div > button {
+  @apply text-gray-500 text-[14px];
+}
+.glorious-tab > div > button.active {
+  @apply font-bold text-white bg-green-500 px-2 py-1 rounded-lg;
+}
+
+.bg-blur {
+  @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
+}
+
+.glorious-justify-between {
+  @apply justify-between;
+}
+
+.glorious-justify-center {
+  @apply justify-center;
+}
+
+.glorious-align-items-center {
+  @apply items-center;
+}
+
+.glorious-w-10 {
+  width: 10px;
+}
+
+.glorious-my-3 {
+  @apply my-3;
+}
+
+/*# sourceMappingURL=style.css.map */

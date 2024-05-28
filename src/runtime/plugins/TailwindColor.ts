@@ -1,5 +1,6 @@
 import { defineNuxtPlugin } from "nuxt/app";
-import colors from "tailwindcss/colors";
+
+import colors from "tailwindcss/colors.js";
 
 export default defineNuxtPlugin(() => {
   const tailwindColor: any = colors;

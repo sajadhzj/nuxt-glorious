@@ -1,3 +1,5 @@
+import { defineNuxtPlugin } from "#app";
+
 export default defineNuxtPlugin(() => {
   const methods = {
     addBlurBackground: (key: string): void => {
