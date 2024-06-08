@@ -1,13 +1,13 @@
-import {defineNuxtPlugin} from '#app'
-import {addRouteMiddleware, navigateTo} from "nuxt/app";
+import { defineNuxtPlugin } from "#app";
+import { addRouteMiddleware, navigateTo } from "nuxt/app";
+import { GloriousStore } from "../stores/GloriousStore";
 
-export default defineNuxtPlugin((nuxtApp:any) => {
-  addRouteMiddleware('g-auth', () => {
-    nuxtApp.hook('page:finish', () => {
-      const gs = nuxtApp.$pinia._s.get('GloriousStore')
-      const moduleConfig: any = nuxtApp.$config.public.glorious
-      if (!gs.authIsLogin)
-        navigateTo(moduleConfig.auth.redirect.login)
-    })
-  })
-})
+export default defineNuxtPlugin((nuxtApp: any) => {
+  addRouteMiddleware("g-auth", () => {
+    setTimeout(() => {
+      const gs = GloriousStore();
+      const moduleConfig: any = nuxtApp.$config.public.glorious;
+      if (!gs.authIsLogin) return navigateTo(moduleConfig.auth.redirect.login);
+    }, 500);
+  });
+});

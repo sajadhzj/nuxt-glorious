@@ -1,5 +1,5 @@
 {
-  "version": "0.6.9-8",
+  "version": "0.7.2-5",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
   "repository": "sajadhzj/nuxt-glorious",
@@ -22,17 +22,19 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run prepack && npm publish",
+    "release": "sass src/runtime/assets/style/style.scss src/runtime/assets/style/style.css && npm run prepack && npm publish",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
   "dependencies": {
     "@nuxt/kit": "^3.11.1",
+    "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia/nuxt": "^0.5.1",
+    "@vueup/vue-quill": "^1.2.0",
     "defu": "^6.1.4",
     "pinia": "^2.1.7",
-    "@nuxtjs/tailwindcss": "^6.12.0"
+    "quill-image-uploader": "^1.3.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

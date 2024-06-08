@@ -1,0 +1,30 @@
+.drawer {
+  @apply fixed top-0 bg-white h-full w-[300px] z-[50];
+
+  &.close {
+    animation: drawer-close 250ms normal forwards;
+  }
+
+  &.open {
+    @apply flex;
+    animation: drawer-open 100ms normal forwards;
+  }
+}
+
+@keyframes drawer-open {
+  from {
+    @apply right-[-300px];
+  }
+  to {
+    @apply right-0;
+  }
+}
+
+@keyframes drawer-close {
+  from {
+    @apply right-0;
+  }
+  to {
+    @apply right-[-300px] hidden;
+  }
+}

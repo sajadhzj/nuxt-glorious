@@ -1,4 +1,4 @@
-%size {
+%button-size {
   &.xl {
     @apply py-2.5;
     > div.loading > div > div {
@@ -44,8 +44,8 @@
 }
 
 .glorious-button-primary {
-  @apply bg-green-500 hover:bg-green-600 rounded-md text-white border-green-500 px-3;
-  @extend %size, %outline, %loading;
+  @apply bg-green-700 hover:bg-green-600 rounded-md text-white border-green-500 px-3;
+  @extend %button-size, %outline, %loading;
   &.outline {
     @apply text-gray-500 hover:bg-green-100;
   }
@@ -56,7 +56,7 @@
 
 .glorious-button-red {
   @apply bg-red-500 hover:bg-red-600 rounded-md text-white border-red-500 px-3;
-  @extend %size, %outline, %loading;
+  @extend %button-size, %outline, %loading;
   &.outline {
     @apply text-gray-500 hover:bg-red-100;
   }
@@ -67,7 +67,7 @@
 
 .glorious-button-gray {
   @apply bg-gray-500 hover:bg-gray-600 rounded-md text-white border-gray-500 px-3;
-  @extend %size, %outline, %loading;
+  @extend %button-size, %outline, %loading;
   &.outline {
     @apply text-gray-500 hover:bg-gray-100;
   }
@@ -78,7 +78,7 @@
 
 .glorious-button-blue {
   @apply bg-blue-500 hover:bg-blue-600 rounded-md text-white border-blue-500 px-3;
-  @extend %size, %outline, %loading;
+  @extend %button-size, %outline, %loading;
   &.outline {
     @apply text-gray-500 hover:bg-blue-100;
   }
@@ -89,7 +89,7 @@
 
 .glorious-button-orange {
   @apply bg-orange-500 hover:bg-orange-600 rounded-md text-white border-orange-500 px-3;
-  @extend %size, %outline, %loading;
+  @extend %button-size, %outline, %loading;
   &.outline {
     @apply text-gray-500 hover:bg-orange-100;
   }

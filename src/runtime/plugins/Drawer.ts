@@ -1,5 +1,4 @@
 import { defineNuxtPlugin } from "#app";
-import { GloriousStore } from "../stores/GloriousStore";
 
 export default defineNuxtPlugin(() => {
   const methods = {
@@ -14,17 +13,15 @@ export default defineNuxtPlugin(() => {
         backgroundBlur.remove();
       });
     },
-    modal: {
-      provide: (key: any, keepData: any = {}) => {
-        const modal: any = document.getElementById(key);
-        const gloriousStore = GloriousStore();
-        gloriousStore.keepData = keepData;
-        if (modal?.classList.contains("close")) {
-          modal?.classList.replace("close", "open");
-          modal.style.bottom = `-${modal.offsetHeight}px`;
+    drawer: {
+      provide: (key: any) => {
+        let drawer: any = document.getElementById(key);
+        if (drawer.classList.contains("close")) {
+          drawer.classList.remove("hidden");
+          drawer.classList.replace("close", "open");
           methods.addBlurBackground(key);
         } else {
-          modal?.classList.add("close");
+          drawer.classList.replace("open", "close");
           const bgBlur: any = document.querySelector(".bg-blur");
           bgBlur?.remove();
         }
@@ -34,8 +31,7 @@ export default defineNuxtPlugin(() => {
 
   return {
     provide: {
-      modal: (key: string = "modal", keepData: any = {}): void =>
-        methods.modal.provide(key, keepData),
+      drawer: (key: string = "drawer"): void => methods.drawer.provide(key),
     },
   };
 });

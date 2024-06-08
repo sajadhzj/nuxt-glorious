@@ -1,0 +1,68 @@
+%select-size {
+  &.xl {
+    @apply py-[0.657rem];
+  }
+  &.lg {
+    @apply py-[0.532rem];
+  }
+  &.md {
+    @apply py-[0.407rem];
+  }
+  &.sm {
+    @apply py-[0.282rem];
+  }
+  &.xsm {
+    @apply py-[0.157rem];
+  }
+}
+
+%focus {
+  &:focus-visible {
+    @apply outline-none ring-2;
+  }
+}
+
+.glorious-select-primary {
+  @apply rounded-md ring-1 ring-green-500 px-3;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-select-red {
+  @apply rounded-md ring-1 ring-red-500 px-3;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-select-gray {
+  @apply rounded-md ring-1 ring-gray-500 px-3;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-select-blue {
+  @apply rounded-md ring-1 ring-blue-500 px-3;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-select-orange {
+  @apply rounded-md ring-1 ring-orange-500 px-3;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}

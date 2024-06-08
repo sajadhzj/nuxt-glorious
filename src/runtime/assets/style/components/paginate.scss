@@ -1,0 +1,18 @@
+.glorious-paginate {
+  > div {
+    @apply border border-gray-50 rounded-xl h-8 flex items-center px-1 bg-white shadow-md gap-1 w-max;
+    direction: rtl;
+    > div {
+      @apply px-2;
+      &:last-child {
+        @apply rotate-[180deg];
+      }
+    }
+  }
+}
+.paginate {
+  @apply text-[13px];
+  &.active {
+    @apply bg-green-500 rounded-lg text-white font-bold text-[13px];
+  }
+}

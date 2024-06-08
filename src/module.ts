@@ -1,4 +1,3 @@
-//@ts-ignore
 import {
   defineNuxtModule,
   addPlugin,
@@ -7,7 +6,7 @@ import {
   addImportsDir,
   installModule,
 } from "@nuxt/kit";
-//@ts-ignore
+
 import defu from "defu";
 
 // Module options TypeScript interface definition
@@ -21,7 +20,6 @@ export default defineNuxtModule<ModuleOptions>({
   // Default configuration options of the Nuxt module
   defaults: {},
   async setup(options: any, nuxt: any) {
-    // @ts-ignore
     const resolver = createResolver(import.meta.url);
 
     //config
@@ -72,12 +70,21 @@ export default defineNuxtModule<ModuleOptions>({
         dir: resolver.resolve("./runtime/assets"),
       });
     });
+
     nuxt.options.css.push(
       resolver.resolve("./runtime/assets/style", "style.css")
     );
     addPlugin(resolver.resolve("./runtime/middlewares/Auth"));
     addPlugin(resolver.resolve("./runtime/middlewares/AuthStrategy"));
-    // addPlugin(resolver.resolve("./runtime/plugins/TailwindColor"));
+    // addPlugin({
+    //   src: resolver.resolve("./runtime/plugins/TailwindColor"),
+    //   mode: "server",
+    // });
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
+    addPlugin(resolver.resolve("./runtime/plugins/Drawer"));
+    // addPlugin({
+    //   src: resolver.resolve("./runtime/plugins/quill"),
+    //   mode: "client",
+    // });
   },
 });

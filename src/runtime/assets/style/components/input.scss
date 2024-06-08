@@ -1,4 +1,4 @@
-%size {
+%input-size {
   &.xl {
     @apply py-2.5;
   }
@@ -23,7 +23,7 @@
 
 .glorious-input-primary {
   @apply rounded-md ring-1 ring-green-500 px-3;
-  @extend %size, %focus;
+  @extend %input-size, %focus;
   &:disabled {
     @apply bg-green-300 cursor-not-allowed;
   }
@@ -31,7 +31,7 @@
 
 .glorious-input-red {
   @apply rounded-md ring-1 ring-red-500 px-3;
-  @extend %size, %focus;
+  @extend %input-size, %focus;
 
   &:disabled {
     @apply cursor-not-allowed;
@@ -40,7 +40,7 @@
 
 .glorious-input-gray {
   @apply rounded-md ring-1 ring-gray-500 px-3;
-  @extend %size, %focus;
+  @extend %input-size, %focus;
 
   &:disabled {
     @apply cursor-not-allowed;
@@ -49,7 +49,7 @@
 
 .glorious-input-blue {
   @apply rounded-md ring-1 ring-blue-500 px-3;
-  @extend %size, %focus;
+  @extend %input-size, %focus;
 
   &:disabled {
     @apply cursor-not-allowed;
@@ -58,7 +58,7 @@
 
 .glorious-input-orange {
   @apply rounded-md ring-1 ring-orange-500 px-3;
-  @extend %size, %focus;
+  @extend %input-size, %focus;
 
   &:disabled {
     @apply cursor-not-allowed;
@@ -66,7 +66,13 @@
 }
 
 .glorious-input {
-  @apply relative;
+  @apply relative w-full;
+  > input {
+    @apply w-full;
+  }
+  > input::placeholder {
+    @apply text-[14px];
+  }
   &.icon-xl {
     > input {
       @apply rtl:pr-9 ltr:pl-9;
@@ -95,4 +101,12 @@
 }
 .glorious-input-icon {
   @apply absolute h-max top-0 bottom-0 my-auto rtl:right-1 ltr:left-1;
+}
+
+/* ----------------------------------------------- TAG */
+.glorious-input-tag {
+  @apply mt-3;
+  > div {
+    @apply bg-green-500 px-1 rounded text-white flex items-center gap-2 cursor-pointer;
+  }
 }

@@ -1,0 +1,19 @@
+.glorious-dropdown {
+  @apply relative;
+  > div:last-child {
+    @apply hidden;
+  }
+  > div:first-child {
+    @apply relative;
+    > button {
+      @apply z-[30] w-5 relative;
+    }
+    > div:nth-child(2) {
+      @apply absolute top-0 bottom-0 my-auto z-[20];
+    }
+  }
+
+  &.open > div:last-child {
+    @apply bg-white px-2 py-2 rounded-md shadow absolute z-[41] left-[16px] top-5 flex;
+  }
+}

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, ref, watch } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -40,15 +41,37 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
+  type: {
+    required: false,
+    default: "text",
+    type: String,
+  },
+  autocomplete: {
+    required: false,
+    default: "off",
+    type: String,
+  },
+  mode: {
+    required: false,
+    default: "normal",
+    type: String,
+  },
 });
-const inputValue = ref(null);
+
+const inputValue: any = ref(null);
+
 const emits = defineEmits(["update:modelValue"]);
-const gs: any = GloriousStore();
-const error: any = props.error.split("|");
+
 watch(
   () => inputValue.value,
-  () => emits("update:modelValue", inputValue.value)
+  () => {
+    if (props.mode === "tag") return;
+    emits("update:modelValue", inputValue.value);
+  }
 );
+
+const gs: any = GloriousStore();
+const error: any = props.error.split("|");
 
 const computeIconSize = computed(() => {
   let iconSize = 0;
@@ -76,6 +99,34 @@ const computeIconSize = computed(() => {
 
   return iconSize;
 });
+
+// -------------------------------- TAG
+const tags = ref([]);
+const addTag = (event: any) => {
+  event.preventDefault();
+  if (props.mode !== "tag") return;
+  tags.value.push(event.target.value);
+  emits("update:modelValue", tags.value);
+  inputValue.value = "";
+};
+const removeTag = (tag: string) => {
+  tags.value = tags.value.filter((item: any) => item !== tag);
+  emits("update:modelValue", tags.value);
+};
+
+// -------------------------------------- init value
+watch(
+  () => props.modelValue,
+  () => {
+    console.log(props.modelValue);
+
+    if (props.mode === "tag") {
+      tags.value = props.modelValue;
+      return;
+    }
+    inputValue.value = props.modelValue;
+  }
+);
 </script>
 
 <template>
@@ -86,12 +137,28 @@ const computeIconSize = computed(() => {
       :class="[props.icon !== '' ? `icon-${props.size}` : '']"
     >
       <input
+        :autocomplete="props.autocomplete"
         :class="[props.size, `glorious-input-${props.color}`]"
         :placeholder="props.placeholder"
         v-model="inputValue"
         :disabled="props.disabled"
+        :type="props.type"
+        @keypress.enter="addTag($event)"
       />
-
+      <div
+        class="flex flex-wrap gap-2 glorious-input-tag"
+        v-if="tags.length !== 0"
+      >
+        <div v-for="(item, index) in tags" :key="index">
+          {{ item }}
+          <GIcon
+            name="glorious-x"
+            :size="10"
+            color="#ff0000"
+            @click="removeTag(item)"
+          />
+        </div>
+      </div>
       <GIcon
         class="glorious-input-icon"
         :name="props.icon"
@@ -103,7 +170,8 @@ const computeIconSize = computed(() => {
     <span
       class="text-[12px] text-red-500"
       v-if="gs[error[0]]?.errors[error[1]]"
-      >{{ gs[error[0]].errors[error[1]][0] }}</span
     >
+      {{ gs[error[0]].errors[error[1]][0] }}
+    </span>
   </div>
 </template>

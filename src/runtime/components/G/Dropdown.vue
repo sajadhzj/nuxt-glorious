@@ -1,0 +1,39 @@
+<script lang="ts" setup>
+const props = defineProps({
+  icon: {
+    required: false,
+    default: "",
+    type: String,
+  },
+});
+
+const openDropdown = (event: any) =>
+  event.currentTarget.parentElement.parentElement.classList.toggle("open");
+
+onMounted(() => {
+  window.onclick = (event: any) => {
+    if (!event.target.matches(".glorious-dropdown-button")) {
+      const allDropdown = document.querySelectorAll(".glorious-dropdown");
+      allDropdown.forEach((item: any) => {
+        item.classList.remove("open");
+      });
+    }
+  };
+});
+</script>
+<template>
+  <div class="glorious-dropdown">
+    <div>
+      <button
+        @click.prevent="openDropdown($event)"
+        class="glorious-dropdown-button"
+      >
+        &nbsp;
+      </button>
+      <GIcon :name="props.icon" :color="$tailwindColor('gray', '500')" />
+    </div>
+    <div>
+      <slot />
+    </div>
+  </div>
+</template>

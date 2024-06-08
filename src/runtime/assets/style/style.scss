@@ -1,12 +1,25 @@
 @import "components/buttons";
 @import "components/input";
+@import "components/textarea";
+@import "components/file";
 @import "components/modal";
 @import "components/tab";
+@import "components/select";
+@import "components/dropdown";
+@import "components/editor";
+@import "components/drawer";
+@import "components/paginate";
 
 .bg-blur {
   @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
 }
 
+.glorious-flex-col {
+  @apply flex-col;
+}
+.glorious-hidden {
+  @apply hidden;
+}
 .glorious-justify-between {
   @apply justify-between;
 }
@@ -15,6 +28,9 @@
 }
 .glorious-align-items-center {
   @apply items-center;
+}
+.glorious-cursor-pointer {
+  @apply cursor-pointer;
 }
 
 .glorious-w-10 {

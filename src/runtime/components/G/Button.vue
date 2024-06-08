@@ -30,11 +30,17 @@ const props = defineProps({
     default: "",
     type: String,
   },
+  ariaLabel: {
+    requried: false,
+    default: "",
+    type: String,
+  },
 });
 </script>
 
 <template>
   <button
+    :aria-label="props.ariaLabel"
     v-if="props.to === ''"
     :class="[
       `glorious-button-${props.color}`,

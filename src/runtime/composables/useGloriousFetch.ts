@@ -5,7 +5,7 @@ export default function (url: string, options: any = {}) {
   const computeParams: any = {};
   if (Object.prototype.hasOwnProperty.call(options, "params")) {
     Object.entries(options.params).map((item: any) => {
-      if (item[1] !== null) computeParams[item[0]] = item[1];
+      if (item[1] !== null && item[1] !== "") computeParams[item[0]] = item[1];
     });
 
     options.params = computeParams;
@@ -23,6 +23,19 @@ export default function (url: string, options: any = {}) {
     header = {
       Authorization: "Bearer " + token.value,
     };
+  }
+
+  if (
+    Object.prototype.hasOwnProperty.call(options, "bodyType") &&
+    options.bodyType === "formData"
+  ) {
+    const form: any = new FormData();
+
+    Object.entries(options.body).forEach((item: any) => {
+      form.append(item[0], item[1]);
+    });
+
+    options.body = form;
   }
   const opt = {
     baseURL: moduleConfig.public.glorious.fetch.baseUrl,
@@ -67,7 +80,11 @@ export default function (url: string, options: any = {}) {
     },
   };
 
-  if (Object.prototype.hasOwnProperty.call(options, "body")) {
+  if (
+    Object.prototype.hasOwnProperty.call(options, "body") &&
+    !Object.prototype.hasOwnProperty.call(options, "method")
+  ) {
+    console.log(options);
     opt["method"] = "POST";
     return $fetch(url, opt);
   }

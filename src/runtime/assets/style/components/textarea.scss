@@ -1,0 +1,76 @@
+%textarea-size {
+  &.xl {
+    @apply py-2.5;
+  }
+  &.lg {
+    @apply py-2;
+  }
+  &.md {
+    @apply py-1.5;
+  }
+  &.sm {
+    @apply py-1;
+  }
+  &.xsm {
+    @apply py-0.5;
+  }
+}
+%focus {
+  &:focus-visible {
+    @apply outline-none ring-2;
+  }
+}
+
+.glorious-textarea-primary {
+  @apply rounded-md ring-1 ring-green-500 px-3;
+  @extend %textarea-size, %focus;
+  &:disabled {
+    @apply bg-green-300 cursor-not-allowed;
+  }
+}
+
+.glorious-textarea-red {
+  @apply rounded-md ring-1 ring-red-500 px-3;
+  @extend %textarea-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-textarea-gray {
+  @apply rounded-md ring-1 ring-gray-500 px-3;
+  @extend %textarea-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-textarea-blue {
+  @apply rounded-md ring-1 ring-blue-500 px-3;
+  @extend %textarea-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-textarea-orange {
+  @apply rounded-md ring-1 ring-orange-500 px-3;
+  @extend %textarea-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
+  }
+}
+
+.glorious-textarea {
+  @apply relative w-full;
+  > textarea {
+    @apply w-full;
+  }
+  > textarea::placeholder {
+    @apply text-[14px];
+  }
+}
