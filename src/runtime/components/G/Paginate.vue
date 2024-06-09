@@ -17,22 +17,23 @@ const el = reactive({
 const emits = defineEmits(["update:modelValue"]);
 const methods = {
   emit: (item: any) => {
-    if (props.data.current_page !== item) emits("update:modelValue", item);
+    if (props.data?.current_page !== item) emits("update:modelValue", item);
   },
   computePageList: () => {
-    let count = 0;
+    let count: number = 0;
 
     for (
-      let i = props.data.current_page;
+      let i: number = props.data?.current_page;
       i > 0 && el.pageList.length <= 2;
       i--
     ) {
-      el.pageList.push(i);
+      if (!el.pageList.includes(i)) el.pageList.push(i);
+
       count++;
     }
 
-    let page = props.data.current_page;
-    while (count < 5 && page < props.data.last_page) {
+    let page: number = props.data?.current_page;
+    while (count < 5 && page < props.data?.last_page) {
       page++;
 
       if (!el.pageList.includes(page)) el.pageList.push(page);
@@ -40,12 +41,10 @@ const methods = {
       count++;
     }
 
-    if (!el.pageList.includes(props.data.current_page))
-      el.pageList.push(props.data.current_page);
+    if (!el.pageList.includes(props.data?.current_page))
+      el.pageList.push(props.data?.current_page);
 
-    el.pageList = el.pageList.sort(function (a, b) {
-      return a - b;
-    });
+    el.pageList = el.pageList.sort((a: number, b: number) => a - b);
   },
 };
 methods.computePageList();
@@ -58,17 +57,17 @@ watch(
 
 <template>
   <div
-    v-if="props.data.current_page && props.data.last_page !== 1"
+    v-if="props.data?.current_page && props.data?.last_page !== 1"
     class="w-max glorious-paginate"
   >
     <div>
       <ClientOnly>
         <GIcon
-          v-if="props.data.current_page !== 1"
+          v-if="props.data?.current_page !== 1"
           class="ml-2 glorious-cursor-pointer"
           name="glorious-arrow"
           :size="15"
-          @click="methods.emit(props.data.current_page - 1)"
+          @click="methods.emit(props.data?.current_page - 1)"
         />
         <GIcon
           v-else
@@ -84,7 +83,7 @@ watch(
         :key="index"
         class="w-6 h-6 rounded-lg flex items-center justify-center paginate"
         :class="[
-          props.data.current_page === item
+          props.data?.current_page === item
             ? 'active'
             : 'glorious-cursor-pointer',
         ]"
@@ -95,11 +94,11 @@ watch(
 
       <ClientOnly>
         <GIcon
-          v-if="props.data.current_page !== props.data.last_page"
+          v-if="props.data?.current_page !== props.data?.last_page"
           name="glorious-arrow"
           class="mr-2 glorious-cursor-pointer"
           :size="15"
-          @click="methods.emit(props.data.current_page + 1)"
+          @click="methods.emit(props.data?.current_page + 1)"
         />
         <GIcon
           v-else

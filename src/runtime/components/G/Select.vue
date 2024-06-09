@@ -77,7 +77,6 @@ watch(
       aria-label="glorious select"
       v-model="selectValue"
       :disabled="props.disabled"
-      class="text-gray-500 text-[14px]"
       :class="[`glorious-select-${props.color}`, props.size]"
     >
       <option

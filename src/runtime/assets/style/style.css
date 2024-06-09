@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .xl.glorious-button-orange, .xl.glorious-button-blue, .xl.glorious-button-gray, .xl.glorious-button-red, .xl.glorious-button-primary {
   @apply py-2.5;
 }
@@ -384,7 +387,7 @@
 }
 
 .glorious-select-primary {
-  @apply rounded-md ring-1 ring-green-500 px-3;
+  @apply rounded-md ring-1 ring-green-500 px-3 text-gray-500 text-[14px];
 }
 .glorious-select-primary:disabled {
   @apply cursor-not-allowed;

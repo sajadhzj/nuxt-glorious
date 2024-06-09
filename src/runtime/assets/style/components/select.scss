@@ -23,7 +23,7 @@
 }
 
 .glorious-select-primary {
-  @apply rounded-md ring-1 ring-green-500 px-3;
+  @apply rounded-md ring-1 ring-green-500 px-3 text-gray-500 text-[14px];
   @extend %select-size, %focus;
 
   &:disabled {

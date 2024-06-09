@@ -95,5 +95,7 @@ export default function (url: string, options: any = {}) {
   if (Object.prototype.hasOwnProperty.call(options, "is$") && options.is$)
     return $fetch(url, opt);
 
+  if (!Object.prototype.hasOwnProperty.call(opt, "server")) opt.server = false;
+
   return useFetch(url, opt);
 }
