@@ -3,7 +3,7 @@ import { GloriousStore, ref, watch } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
-    default: "",
+    default: null,
     type: [String, Number],
   },
   options: {
@@ -62,6 +62,7 @@ if (props.placeholder !== "") {
 }
 
 // -------------------------------------- init value
+selectValue.value = props.modelValue;
 watch(
   () => props.modelValue,
   () => {

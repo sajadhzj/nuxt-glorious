@@ -25,6 +25,7 @@ onMounted(() => {
   <div class="glorious-dropdown">
     <div>
       <button
+        aria-label="dots"
         @click.prevent="openDropdown($event)"
         class="glorious-dropdown-button"
       >

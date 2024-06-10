@@ -1,6 +1,9 @@
 import { useCookie, useFetch, useRuntimeConfig } from "nuxt/app";
 import { GloriousStore } from "../stores/GloriousStore";
 export default function (url: string, options: any = {}) {
+  if (!Object.prototype.hasOwnProperty.call(options, "server"))
+    options.lazy = true;
+
   // compute params
   const computeParams: any = {};
   if (Object.prototype.hasOwnProperty.call(options, "params")) {
@@ -79,12 +82,10 @@ export default function (url: string, options: any = {}) {
       if (res.status === 401) gs.authLogout();
     },
   };
-
   if (
     Object.prototype.hasOwnProperty.call(options, "body") &&
     !Object.prototype.hasOwnProperty.call(options, "method")
   ) {
-    console.log(options);
     opt["method"] = "POST";
     return $fetch(url, opt);
   }

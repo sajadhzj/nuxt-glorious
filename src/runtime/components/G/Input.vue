@@ -4,7 +4,7 @@ const props = defineProps({
   modelValue: {
     required: false,
     default: "",
-    type: String,
+    type: [String, Array<String>],
   },
   color: {
     required: false,
@@ -115,17 +115,18 @@ const removeTag = (tag: string) => {
 };
 
 // -------------------------------------- init value
+const initValue = () => {
+  if (props.mode === "tag") {
+    tags.value = props.modelValue;
+    return;
+  }
+
+  inputValue.value = props.modelValue;
+};
+initValue();
 watch(
   () => props.modelValue,
-  () => {
-    console.log(props.modelValue);
-
-    if (props.mode === "tag") {
-      tags.value = props.modelValue;
-      return;
-    }
-    inputValue.value = props.modelValue;
-  }
+  () => initValue()
 );
 </script>
 

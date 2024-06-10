@@ -82,9 +82,9 @@ export default defineNuxtModule<ModuleOptions>({
     // });
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
     addPlugin(resolver.resolve("./runtime/plugins/Drawer"));
-    // addPlugin({
-    //   src: resolver.resolve("./runtime/plugins/quill"),
-    //   mode: "client",
-    // });
+    addPlugin({
+      src: resolver.resolve("./runtime/plugins/quill"),
+      mode: "client",
+    });
   },
 });
