@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { navigateTo, useCookie, useRuntimeConfig } from "nuxt/app";
+import { navigateTo, useCookie, useRuntimeConfig, useFetch } from "#imports";
 export const GloriousStore = defineStore("GloriousStore", {
   state: (): any => ({
     auth: {
@@ -13,6 +13,7 @@ export const GloriousStore = defineStore("GloriousStore", {
     authIsLogin() {
       const moduleConfig: any = useRuntimeConfig();
       const cookie = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+
       return typeof cookie.value !== "undefined";
     },
   },
@@ -39,6 +40,8 @@ export const GloriousStore = defineStore("GloriousStore", {
         httpOnly: moduleConfig.public.glorious.auth.cookie.httpOnly,
       });
       cookie.value = token;
+
+      this.authGetUser(token);
       if (to) navigateTo(to);
     },
     authParseToken(token: any) {
@@ -54,6 +57,32 @@ export const GloriousStore = defineStore("GloriousStore", {
           .join("")
       );
       return JSON.parse(jsonPayload);
+    },
+    authGetUser(token: string = "") {
+      const moduleConfig: any = useRuntimeConfig();
+
+      useFetch(
+        moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.url,
+        {
+          lazy: false,
+          baseURL: moduleConfig.public.glorious.fetch.baseUrl,
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + token,
+          },
+          method:
+            moduleConfig.public.glorious.auth.strategy.endpoints.userInfo
+              .method,
+        }
+      ).then((data: any) => {
+        const pick =
+          moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.pick;
+
+        if (pick !== "") this.auth.user = data[pick];
+        else this.auth.user = data;
+
+        this.auth.loaded = true;
+      });
     },
   },
 });

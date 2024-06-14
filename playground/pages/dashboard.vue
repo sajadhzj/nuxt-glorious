@@ -1,20 +1,16 @@
 <template>
   <div>
-
+    <GButton @click="gs.authLogout()">Logout</GButton>
+    <GButton to="/">home</GButton>
+    <span>{{ gs.auth.user }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
-import useGloriousFetch from "../../src/runtime/composables/useGloriousFetch";
-
-onMounted(() => {
-  setTimeout(()=>{
-    console.log('fire')
-    useGloriousFetch('https://api.sajad-hzj.ir/api/skills?type=1&page=1')
-  } , 1000)
-})
+const gs = GloriousStore();
+definePageMeta({
+  middleware: ["g-auth"],
+});
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

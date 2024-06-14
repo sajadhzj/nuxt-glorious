@@ -23,7 +23,7 @@
 
       <GIcon
         v-if="index !== Object.entries(props.items).length - 1"
-        name="arrow_left"
+        name="glorious-arrow"
         :size="10"
         :color="$tailwindColor('gray', '500')"
       />

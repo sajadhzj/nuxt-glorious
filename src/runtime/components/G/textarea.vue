@@ -67,10 +67,7 @@ const error: any = props.error.split("|");
         :disabled="props.disabled"
       />
     </div>
-    <span
-      class="text-[12px] text-red-500"
-      v-if="gs[error[0]]?.errors[error[1]]"
-    >
+    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
       {{ gs[error[0]].errors[error[1]][0] }}
     </span>
   </div>

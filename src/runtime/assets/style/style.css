@@ -526,4 +526,8 @@
   @apply my-3;
 }
 
+.glorious-error-text {
+  @apply text-[12px] text-red-500;
+}
+
 /*# sourceMappingURL=style.css.map */

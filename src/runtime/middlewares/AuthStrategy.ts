@@ -1,38 +1,20 @@
-// @ts-ignore
-import { defineNuxtPlugin } from "#app";
-// @ts-ignore
-import { addRouteMiddleware } from "nuxt/app";
-import useGloriousFetch from "../composables/useGloriousFetch";
-import { GloriousStore } from "../stores/GloriousStore";
+import {
+  GloriousStore,
+  defineNuxtRouteMiddleware,
+  useCookie,
+  useNuxtApp,
+} from "#imports";
 
-export default defineNuxtPlugin((nuxtApp: any) => {
-  addRouteMiddleware(
-    "g-auth-strategy",
-    () => {
-      const moduleConfig: any = nuxtApp.$config.public.glorious;
+export default defineNuxtRouteMiddleware(() => {
+  const nuxtApp = useNuxtApp();
+  const moduleConfig: any = nuxtApp.$config.public.glorious;
+  const gs = GloriousStore();
 
-      nuxtApp.hook("page:finish", () => {
-        // @ts-ignore
-        const gs = GloriousStore();
+  if (moduleConfig.auth.strategy.provider === "") return;
 
-        if (moduleConfig.auth.strategy.provider === "") return;
+  const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
 
-        if (gs.auth.loaded || !gs.authIsLogin) return;
+  if (typeof cookieToken.value === "undefined") return;
 
-        useGloriousFetch(moduleConfig.auth.strategy.endpoints.userInfo.url, {
-          method: moduleConfig.auth.strategy.endpoints.userInfo.method,
-        }).then((data: any) => {
-          const pick = moduleConfig.auth.strategy.endpoints.userInfo.pick;
-
-          if (pick !== "") gs.auth.user = data[pick];
-          else gs.auth.user = data;
-
-          gs.auth.loaded = true;
-        });
-      });
-    },
-    {
-      global: true,
-    }
-  );
+  nuxtApp.hook("app:beforeMount", () => gs.authGetUser(cookieToken.value));
 });

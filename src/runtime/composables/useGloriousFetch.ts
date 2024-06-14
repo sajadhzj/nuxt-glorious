@@ -21,6 +21,7 @@ export default function (url: string, options: any = {}) {
       ? options.gKey
       : url.split("/")[url.split("/").length - 1];
   let header = {};
+
   if (gs.authIsLogin) {
     const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
     header = {
@@ -97,6 +98,8 @@ export default function (url: string, options: any = {}) {
     return $fetch(url, opt);
 
   if (!Object.prototype.hasOwnProperty.call(opt, "server")) opt.server = false;
+
+  console.log(url, "here");
 
   return useFetch(url, opt);
 }

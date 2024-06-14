@@ -88,10 +88,8 @@ watch(
         {{ item.text }}
       </option>
     </select>
-    <span
-      class="text-[12px] text-red-500"
-      v-if="gs[error[0]]?.errors[error[1]]"
-      >{{ gs[error[0]].errors[error[1]][0] }}</span
-    >
+    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">{{
+      gs[error[0]].errors[error[1]][0]
+    }}</span>
   </div>
 </template>

@@ -1,13 +1,14 @@
-import { defineNuxtPlugin } from "#app";
-import { addRouteMiddleware, navigateTo } from "nuxt/app";
-import { GloriousStore } from "../stores/GloriousStore";
+import {
+  defineNuxtRouteMiddleware,
+  navigateTo,
+  useCookie,
+  useRuntimeConfig,
+} from "#imports";
 
-export default defineNuxtPlugin((nuxtApp: any) => {
-  addRouteMiddleware("g-auth", () => {
-    setTimeout(() => {
-      const gs = GloriousStore();
-      const moduleConfig: any = nuxtApp.$config.public.glorious;
-      if (!gs.authIsLogin) return navigateTo(moduleConfig.auth.redirect.login);
-    }, 500);
-  });
+export default defineNuxtRouteMiddleware(() => {
+  const moduleConfig: any = useRuntimeConfig();
+  const authCookie = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+
+  if (typeof authCookie.value === "undefined")
+    return navigateTo(moduleConfig.public.glorious.auth.redirect.login);
 });

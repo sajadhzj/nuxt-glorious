@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { GloriousStore } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -66,10 +67,7 @@ const deleteFile = (event: any) => {
         @click.prevent="deleteFile($event)"
       />
     </label>
-    <span
-      class="text-[12px] text-red-500"
-      v-if="gs[error[0]]?.errors[error[1]]"
-    >
+    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
       {{ gs[error[0]].errors[error[1]][0] }}
     </span>
   </div>

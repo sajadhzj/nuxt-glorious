@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "#imports";
+import { computed, ref, watch, GloriousStore } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -168,10 +168,7 @@ watch(
         :color="$tailwindColor('gray', '500')"
       />
     </div>
-    <span
-      class="text-[12px] text-red-500"
-      v-if="gs[error[0]]?.errors[error[1]]"
-    >
+    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
       {{ gs[error[0]].errors[error[1]][0] }}
     </span>
   </div>

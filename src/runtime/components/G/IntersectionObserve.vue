@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from "#imports";
 const elementId = useId();
 const emits = defineEmits(["intersect"]);
 onMounted(() => {

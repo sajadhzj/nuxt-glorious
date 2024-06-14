@@ -1,50 +1,5 @@
-<template>
-  <div class="glorious-wizard">
-    <div class="glorious-wizard-desktop">
-      <div v-for="(item, index) in props.items" :key="index">
-        <div class="circle" :class="index < props.step ? 'checked' : ''">
-          <GIcon
-            v-if="index < props.step"
-            name="glorious-check-fill"
-            color="#ffffff"
-          />
-
-          <span v-else>{{ index }}</span>
-        </div>
-        <span class="text-[14px] font-medium">{{ item }}</span>
-      </div>
-    </div>
-    <div class="glorious-wizard-mobile">
-      <div
-        class="circular-progress"
-        :style="{ width: '48px', height: '48px' }"
-        :data-percentage="(props.step / props.items.length) * 100"
-        :data-progress-color="props.progressColor"
-        :data-bg-color="props.bgColor"
-      >
-        <div
-          class="inner-circle"
-          :class="[props.step === props.items.length ? 'checked' : '']"
-          :style="{ width: '44px', height: '44px' }"
-        />
-        <p
-          v-show="props.step !== props.items.length"
-          class="percentage text-blue-500"
-        >
-          {{ props.step + 1 }}
-        </p>
-        <GIcon
-          v-show="props.step === props.items.length"
-          name="glorious-check-fill"
-          color="#ffffff"
-        />
-      </div>
-      <span>{{ props.items[props.step] }}</span>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
+import { watch } from "#imports";
 const props = defineProps({
   items: {
     required: true,
@@ -58,10 +13,12 @@ const props = defineProps({
   progressColor: {
     required: false,
     default: "#00ff00",
+    type: String,
   },
   bgColor: {
     required: false,
     default: "0000ff",
+    type: String,
   },
 });
 
@@ -114,6 +71,52 @@ watch(
   }
 );
 </script>
+
+<template>
+  <div class="glorious-wizard">
+    <div class="glorious-wizard-desktop">
+      <div v-for="(item, index) in props.items" :key="index">
+        <div class="circle" :class="index < props.step ? 'checked' : ''">
+          <GIcon
+            v-if="index < props.step"
+            name="glorious-check-fill"
+            color="#ffffff"
+          />
+
+          <span v-else>{{ index }}</span>
+        </div>
+        <span class="text-[14px] font-medium">{{ item }}</span>
+      </div>
+    </div>
+    <div class="glorious-wizard-mobile">
+      <div
+        class="circular-progress"
+        :style="{ width: '48px', height: '48px' }"
+        :data-percentage="(props.step / props.items.length) * 100"
+        :data-progress-color="props.progressColor"
+        :data-bg-color="props.bgColor"
+      >
+        <div
+          class="inner-circle"
+          :class="[props.step === props.items.length ? 'checked' : '']"
+          :style="{ width: '44px', height: '44px' }"
+        />
+        <p
+          v-show="props.step !== props.items.length"
+          class="percentage text-blue-500"
+        >
+          {{ props.step + 1 }}
+        </p>
+        <GIcon
+          v-show="props.step === props.items.length"
+          name="glorious-check-fill"
+          color="#ffffff"
+        />
+      </div>
+      <span>{{ props.items[props.step] }}</span>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .glorious-wizard {

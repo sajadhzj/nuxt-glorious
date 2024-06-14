@@ -5,6 +5,7 @@ import {
   createResolver,
   addImportsDir,
   installModule,
+  addRouteMiddleware,
 } from "@nuxt/kit";
 
 import defu from "defu";
@@ -74,17 +75,21 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.css.push(
       resolver.resolve("./runtime/assets/style", "style.css")
     );
-    addPlugin(resolver.resolve("./runtime/middlewares/Auth"));
-    addPlugin(resolver.resolve("./runtime/middlewares/AuthStrategy"));
     // addPlugin({
     //   src: resolver.resolve("./runtime/plugins/TailwindColor"),
     //   mode: "server",
     // });
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
     addPlugin(resolver.resolve("./runtime/plugins/Drawer"));
-    addPlugin({
-      src: resolver.resolve("./runtime/plugins/quill"),
-      mode: "client",
+
+    addRouteMiddleware({
+      name: "g-auth-strategy",
+      path: resolver.resolve("./runtime/middlewares/AuthStrategy"),
+      global: true,
+    });
+    addRouteMiddleware({
+      name: "g-auth",
+      path: resolver.resolve("./runtime/middlewares/Auth"),
     });
   },
 });
