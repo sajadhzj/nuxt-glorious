@@ -78,8 +78,8 @@ export const GloriousStore = defineStore("GloriousStore", {
         const pick =
           moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.pick;
 
-        if (pick !== "") this.auth.user = data[pick];
-        else this.auth.user = data;
+        if (pick !== "") this.auth.user = data.data.value[pick];
+        else this.auth.user = data.data.value;
 
         this.auth.loaded = true;
       });

@@ -22,6 +22,8 @@ export default function (url: string, options: any = {}) {
       : url.split("/")[url.split("/").length - 1];
   let header = {};
 
+  console.log(useCookie(moduleConfig.public.glorious.auth.cookie.name).value);
+
   if (gs.authIsLogin) {
     const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
     header = {

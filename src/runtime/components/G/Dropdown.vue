@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { onMounted } from "#imports";
+
 const props = defineProps({
   icon: {
     required: false,

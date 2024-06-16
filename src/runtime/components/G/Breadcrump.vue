@@ -24,8 +24,9 @@
       <GIcon
         v-if="index !== Object.entries(props.items).length - 1"
         name="glorious-arrow"
+        style="rotate: 180deg"
         :size="10"
-        :color="$tailwindColor('gray', '500')"
+        color="#6b7280"
       />
     </div>
   </div>
