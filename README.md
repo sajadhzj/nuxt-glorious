@@ -2,17 +2,11 @@
 
 glorious is module for nuxt 3 for fast make project
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
-
 ## Features
-
-<!-- Highlight some of the features your module provide here -->
 
 - authenticates
 - amazing fetch
+- components
 - seo
 
 ## Quick Setup

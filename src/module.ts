@@ -9,7 +9,6 @@ import {
 } from "@nuxt/kit";
 
 import defu from "defu";
-
 // Module options TypeScript interface definition
 export interface ModuleOptions {}
 
@@ -55,7 +54,20 @@ export default defineNuxtModule<ModuleOptions>({
         },
       },
     });
-    await installModule("@nuxtjs/tailwindcss");
+
+    await installModule("@nuxtjs/tailwindcss", {
+      // module configuration
+      exposeConfig: true,
+      config: {
+        darkMode: "class",
+        content: {
+          files: [
+            resolver.resolve("./runtime/components/G/**/*.{vue,mjs,ts}"),
+            resolver.resolve("./runtime/*.{mjs,js,ts}"),
+          ],
+        },
+      },
+    });
     await installModule("@pinia/nuxt", {
       autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
     });
@@ -65,6 +77,8 @@ export default defineNuxtModule<ModuleOptions>({
     addImportsDir(resolver.resolve("runtime/middlewares"));
     addComponentsDir({
       path: resolver.resolve("runtime/components"),
+      global: true,
+      watch: false,
     });
     nuxt.hook("nitro:config", async (nitro: any) => {
       nitro.publicAssets.push({
@@ -72,14 +86,12 @@ export default defineNuxtModule<ModuleOptions>({
       });
     });
 
-    nuxt.options.css.push(
-      resolver.resolve("./runtime/assets/style", "style.css")
-    );
-    // addPlugin({
-    //   src: resolver.resolve("./runtime/plugins/TailwindColor"),
-    //   mode: "server",
-    // });
+    addPlugin({
+      src: resolver.resolve("./runtime/plugins/shortcut-key"),
+      mode: "client",
+    });
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
+    addPlugin(resolver.resolve("./runtime/plugins/glorious-app-setting"));
     addPlugin(resolver.resolve("./runtime/plugins/Drawer"));
 
     addRouteMiddleware({

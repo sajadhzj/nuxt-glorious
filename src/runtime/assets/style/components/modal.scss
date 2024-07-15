@@ -1,3 +1,6 @@
+.bg-blur-modal {
+  @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
+}
 .glorious-modal {
   @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto p-3 md:rounded-md rounded-t-md md:bottom-0 bottom-0 overflow-y-auto;
 

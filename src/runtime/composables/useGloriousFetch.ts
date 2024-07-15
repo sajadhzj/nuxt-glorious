@@ -22,14 +22,11 @@ export default function (url: string, options: any = {}) {
       : url.split("/")[url.split("/").length - 1];
   let header = {};
 
-  console.log(useCookie(moduleConfig.public.glorious.auth.cookie.name).value);
-
-  if (gs.authIsLogin) {
-    const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+  const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+  if (typeof token.value !== "undefined")
     header = {
       Authorization: "Bearer " + token.value,
     };
-  }
 
   if (
     Object.prototype.hasOwnProperty.call(options, "bodyType") &&
@@ -38,7 +35,20 @@ export default function (url: string, options: any = {}) {
     const form: any = new FormData();
 
     Object.entries(options.body).forEach((item: any) => {
-      form.append(item[0], item[1]);
+      if (item[1] === null) return;
+
+      if (
+        Object.prototype.hasOwnProperty.call(options, "fileKey") &&
+        options.fileKey.includes(item[0])
+      )
+        form.append(item[0], item[1]);
+      else {
+        if (typeof item[1] === "object")
+          Object.entries(item[1]).forEach((nestedItem, index) => {
+            form.append(`${item[0]}[${index}]`, nestedItem[1]);
+          });
+        else form.append(`${item[0]}`, item[1]);
+      }
     });
 
     options.body = form;
@@ -50,6 +60,7 @@ export default function (url: string, options: any = {}) {
       ...header,
     },
     ...options,
+    credentials: "include",
     onRequest() {
       try {
         gs.loading[gKey] = true;
@@ -74,7 +85,13 @@ export default function (url: string, options: any = {}) {
         /* empty */
       }
     },
-    onResponseError({ response: res }) {
+    async onResponseError({ response: res }) {
+      const fetch = import.meta.glob("/glorious/fetch.ts");
+      if (typeof fetch["/glorious/fetch.ts"] !== "undefined")
+        fetch["/glorious/fetch.ts"]().then((data: any) => {
+          data.fetchHandler.onResponseError(res);
+        });
+
       if (res.status === 422) {
         try {
           gs[gKey].errors = res._data.errors;
@@ -82,7 +99,11 @@ export default function (url: string, options: any = {}) {
           /* empty */
         }
       }
-      if (res.status === 401) gs.authLogout();
+      if (res.status === 401 && process.client) {
+        const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
+
+        if (typeof cookieToken.value !== "undefined") gs.authLogout();
+      }
     },
   };
   if (
@@ -100,8 +121,6 @@ export default function (url: string, options: any = {}) {
     return $fetch(url, opt);
 
   if (!Object.prototype.hasOwnProperty.call(opt, "server")) opt.server = false;
-
-  console.log(url, "here");
 
   return useFetch(url, opt);
 }

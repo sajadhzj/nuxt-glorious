@@ -54,13 +54,6 @@ watch(
 const gs: any = GloriousStore();
 const error: any = props.error.split("|");
 
-if (props.placeholder !== "") {
-  props.options.unshift({
-    text: props.placeholder,
-    value: null,
-  });
-}
-
 // -------------------------------------- init value
 selectValue.value = props.modelValue;
 watch(
@@ -93,3 +86,7 @@ watch(
     }}</span>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/select.scss";
+</style>

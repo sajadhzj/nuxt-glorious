@@ -72,3 +72,7 @@ const deleteFile = (event: any) => {
     </span>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/file.scss";
+</style>

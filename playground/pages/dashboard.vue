@@ -8,9 +8,9 @@
 
 <script lang="ts" setup>
 const gs = GloriousStore();
-definePageMeta({
-  middleware: ["g-auth"],
-});
+// definePageMeta({
+//   middleware: ["g-auth"],
+// });
 </script>
 
 <style scoped lang="scss"></style>

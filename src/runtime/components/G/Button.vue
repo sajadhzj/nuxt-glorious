@@ -40,8 +40,8 @@ const props = defineProps({
 
 <template>
   <button
-    :aria-label="props.ariaLabel"
     v-if="props.to === ''"
+    :aria-label="props.ariaLabel"
     :class="[
       `glorious-button-${props.color}`,
       props.size,
@@ -49,7 +49,7 @@ const props = defineProps({
     ]"
     :disabled="props.disabled"
   >
-    <div class="loading" v-if="props.loading">
+    <div v-if="props.loading" class="loading">
       <GLoading />
     </div>
     <slot v-else />
@@ -64,9 +64,13 @@ const props = defineProps({
     ]"
     :disabled="props.disabled"
   >
-    <div class="loading" v-if="props.loading">
+    <div v-if="props.loading" class="loading">
       <GLoading />
     </div>
     <slot v-else />
   </NuxtLink>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/buttons.scss";
+</style>

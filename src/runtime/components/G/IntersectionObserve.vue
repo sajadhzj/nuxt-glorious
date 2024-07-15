@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useId } from "#imports";
+import { onMounted, useId } from "#imports";
 const elementId = useId();
 const emits = defineEmits(["intersect"]);
+
 onMounted(() => {
   const element: any = document.querySelector(
     `#intersection-observe-${elementId}`

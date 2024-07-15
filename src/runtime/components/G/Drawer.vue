@@ -1,16 +1,26 @@
+<script lang="ts" setup>
+import { useGloriousAppSetting } from "../../composables/useGloriousAppSetting";
+
+const props = defineProps({
+  id: {
+    required: false,
+    default: "drawer",
+    type: String,
+  },
+});
+</script>
 <template>
-  <div class="drawer close hidden" :id="props.id">
+  <div
+    :id="props.id"
+    :class="[useGloriousAppSetting.getSetting().dir]"
+    class="drawer close hidden"
+  >
     <div class="w-full">
       <slot></slot>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-const props = defineProps({
-  id: {
-    required: false,
-    default: 'drawer'
-  }
-})
-</script>
+<style lang="scss">
+@import "../../assets/style/components/drawer.scss";
+</style>

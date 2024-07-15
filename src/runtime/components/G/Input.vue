@@ -100,12 +100,15 @@ const computeIconSize = computed(() => {
   return iconSize;
 });
 
-// -------------------------------- TAG
-const tags = ref([]);
+// ------------------------------------------------------------------------------------------------ TAG
+const tags: any = ref([]);
+
 const addTag = (event: any) => {
-  event.preventDefault();
+  if (tags.value.length === 0) tags.value = [];
+
   if (props.mode !== "tag") return;
-  tags.value.push(event.target.value);
+  const value: any = event.target.value;
+  tags.value.push(value);
   emits("update:modelValue", tags.value);
   inputValue.value = "";
 };
@@ -138,18 +141,15 @@ watch(
       :class="[props.icon !== '' ? `icon-${props.size}` : '']"
     >
       <input
+        v-model="inputValue"
         :autocomplete="props.autocomplete"
         :class="[props.size, `glorious-input-${props.color}`]"
         :placeholder="props.placeholder"
-        v-model="inputValue"
         :disabled="props.disabled"
         :type="props.type"
-        @keypress.enter="addTag($event)"
+        @keyup.enter="addTag($event)"
       />
-      <div
-        class="flex flex-wrap gap-2 glorious-input-tag"
-        v-if="tags.length !== 0"
-      >
+      <div v-if="tags.length !== 0" class="glorious-input-tag">
         <div v-for="(item, index) in tags" :key="index">
           {{ item }}
           <GIcon
@@ -161,15 +161,19 @@ watch(
         </div>
       </div>
       <GIcon
+        v-if="props.icon !== ''"
         class="glorious-input-icon"
         :name="props.icon"
         :size="computeIconSize"
-        v-if="props.icon !== ''"
         :color="$tailwindColor('gray', '500')"
       />
     </div>
-    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
+    <span v-if="gs[error[0]]?.errors[error[1]]" class="glorious-error-text">
       {{ gs[error[0]].errors[error[1]][0] }}
     </span>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/input.scss";
+</style>

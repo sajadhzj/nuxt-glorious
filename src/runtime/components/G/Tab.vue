@@ -43,3 +43,7 @@ const tabClicked: any = (key: string, event: any) => {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/tab.scss";
+</style>

@@ -5,7 +5,7 @@ export default defineNuxtPlugin(() => {
   const methods = {
     addBlurBackground: (key: string): void => {
       const backgroundBlur = document.createElement("div");
-      backgroundBlur.classList.add("bg-blur");
+      backgroundBlur.classList.add("bg-blur-modal");
       const nuxt: any = document.getElementById("__nuxt");
       nuxt.appendChild(backgroundBlur);
       backgroundBlur.addEventListener("click", () => {
@@ -25,7 +25,7 @@ export default defineNuxtPlugin(() => {
           methods.addBlurBackground(key);
         } else {
           modal?.classList.add("close");
-          const bgBlur: any = document.querySelector(".bg-blur");
+          const bgBlur: any = document.querySelector(".bg-blur-modal");
           bgBlur?.remove();
         }
       },

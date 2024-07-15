@@ -72,3 +72,7 @@ const error: any = props.error.split("|");
     </span>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/textarea.scss";
+</style>

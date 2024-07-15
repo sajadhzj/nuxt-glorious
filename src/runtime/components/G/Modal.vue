@@ -20,14 +20,14 @@ const props = defineProps({
 
 <template>
   <div
-    :class="[`size-${props.size}`]"
     :id="props.id"
+    :class="[`size-${props.size}`]"
     class="glorious-modal close"
   >
     <!-- start title -->
     <div
-      class="flex glorious-items-center glorious-justify-between"
       v-if="props?.title !== ''"
+      class="flex glorious-items-center glorious-justify-between"
     >
       <span class="font-medium">{{ props.title }}</span>
       <GButton
@@ -38,9 +38,13 @@ const props = defineProps({
         <GIcon name="glorious-x" color="#fff" :size="10" />
       </GButton>
     </div>
-    <hr class="glorious-my-3" v-if="props.title !== ''" />
+    <hr v-if="props.title !== ''" class="glorious-my-3" />
     <!-- end title -->
 
     <slot />
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/modal.scss";
+</style>

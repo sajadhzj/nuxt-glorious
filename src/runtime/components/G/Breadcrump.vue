@@ -1,4 +1,12 @@
-<!-- filename: Breadcrump.vue -->
+<script lang="ts" setup>
+const props = defineProps({
+  items: {
+    required: true,
+    type: Object,
+  },
+});
+</script>
+
 <template>
   <div class="flex gap-1 flex-wrap">
     <div
@@ -31,12 +39,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-const props = defineProps({
-  items: {
-    required: true,
-    type: Object,
-  },
-});
-</script>

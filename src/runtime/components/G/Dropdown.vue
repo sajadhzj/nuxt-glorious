@@ -28,8 +28,8 @@ onMounted(() => {
     <div>
       <button
         aria-label="dots"
-        @click.prevent="openDropdown($event)"
         class="glorious-dropdown-button"
+        @click.prevent="openDropdown($event)"
       >
         &nbsp;
       </button>
@@ -40,3 +40,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../assets/style/components/dropdown.scss";
+</style>
