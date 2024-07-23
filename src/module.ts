@@ -25,7 +25,8 @@ export default defineNuxtModule<ModuleOptions>({
     //config
     nuxt.options.runtimeConfig.public.glorious = defu(nuxt.options.glorious, {
       fetch: {
-        baseUrl: "/",
+        baseURL: "/",
+        credentials: "same-origin",
       },
       seo: {
         suffix: "",

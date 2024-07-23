@@ -67,8 +67,8 @@ const deleteFile = (event: any) => {
         @click.prevent="deleteFile($event)"
       />
     </label>
-    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
-      {{ gs[error[0]].errors[error[1]][0] }}
+    <span v-if="gs[error[0]]?.errors[error[1]]" class="text-red-500">
+      {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>
 </template>

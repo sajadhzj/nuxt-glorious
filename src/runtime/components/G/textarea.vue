@@ -60,15 +60,15 @@ const error: any = props.error.split("|");
     <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
     <div class="glorious-textarea">
       <textarea
+        v-model="inputValue"
         :autocomplete="props.autocomplete"
         :class="[props.size, `glorious-textarea-${props.color}`]"
         :placeholder="props.placeholder"
-        v-model="inputValue"
         :disabled="props.disabled"
       />
     </div>
-    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">
-      {{ gs[error[0]].errors[error[1]][0] }}
+    <span v-if="gs[error[0]]?.errors[error[1]]" class="text-red-500">
+      {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>
 </template>

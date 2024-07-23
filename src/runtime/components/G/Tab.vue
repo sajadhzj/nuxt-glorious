@@ -31,7 +31,7 @@ const tabClicked: any = (key: string, event: any) => {
     <div
       v-for="(item, index) in props.items"
       :key="index"
-      class="flex glorious-justify-center"
+      class="flex justify-center"
       :style="{ flexBasis: `${100 / props.items.length}%` }"
     >
       <button

@@ -25,20 +25,17 @@ const props = defineProps({
     class="glorious-modal close"
   >
     <!-- start title -->
-    <div
-      v-if="props?.title !== ''"
-      class="flex glorious-items-center glorious-justify-between"
-    >
+    <div v-if="props?.title !== ''" class="flex justify-between items-center">
       <span class="font-medium">{{ props.title }}</span>
       <GButton
-        class="flex glorious-justify-center glorious-align-items-center glorious-w-10"
+        class="flex justify-center items-center w-[10px]"
         size="sm"
         @click="$modal(`${props.id}`)"
       >
         <GIcon name="glorious-x" color="#fff" :size="10" />
       </GButton>
     </div>
-    <hr v-if="props.title !== ''" class="glorious-my-3" />
+    <hr v-if="props.title !== ''" class="my-3" />
     <!-- end title -->
 
     <slot />

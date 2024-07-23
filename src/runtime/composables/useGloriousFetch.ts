@@ -1,32 +1,41 @@
 import { useCookie, useFetch, useRuntimeConfig } from "nuxt/app";
 import { GloriousStore } from "../stores/GloriousStore";
-export default function (url: string, options: any = {}) {
-  if (!Object.prototype.hasOwnProperty.call(options, "server"))
-    options.lazy = true;
+import defu from "defu";
+interface gloriousFetchOptions {
+  gKey?: String;
+  params?: Object;
+  server?: Boolean;
+  is$?: Boolean;
+  lazy?: Boolean;
+  headers?: Object;
+  body?: Object;
+  method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE" | "HEAD";
+  credentials?: "same-origin" | "include";
+}
+const defaultOptions: gloriousFetchOptions = {
+  server: false,
+  method: "GET",
+  lazy: true,
+  is$: true,
+  params: {},
+  headers: {
+    Accept: "application/json",
+  },
+  body: {},
+  credentials: "same-origin",
+};
 
-  // compute params
-  const computeParams: any = {};
-  if (Object.prototype.hasOwnProperty.call(options, "params")) {
-    Object.entries(options.params).map((item: any) => {
-      if (item[1] !== null && item[1] !== "") computeParams[item[0]] = item[1];
-    });
-
-    options.params = computeParams;
-  }
+export default function (url: string, options: gloriousFetchOptions) {
+  const moduleConfig: any = useRuntimeConfig();
+  options = defu(moduleConfig.public.glorious.fetch, options, defaultOptions);
 
   const gs: any = GloriousStore();
-  const moduleConfig: any = useRuntimeConfig();
-  const gKey: any =
-    typeof options.gKey !== "undefined"
-      ? options.gKey
-      : url.split("/")[url.split("/").length - 1];
-  let header = {};
+  const gKey: String = computeGKey(options.gKey, url);
 
-  const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
-  if (typeof token.value !== "undefined")
-    header = {
-      Authorization: "Bearer " + token.value,
-    };
+  options.params = computeParams(<Object>options.params);
+  options.headers = { ...options.headers, ...computeAuth() };
+
+  if (Object.entries(<Object>options.body).length === 0) delete options.body;
 
   if (
     Object.prototype.hasOwnProperty.call(options, "bodyType") &&
@@ -53,14 +62,9 @@ export default function (url: string, options: any = {}) {
 
     options.body = form;
   }
-  const opt = {
-    baseURL: moduleConfig.public.glorious.fetch.baseUrl,
-    headers: {
-      Accept: "application/json",
-      ...header,
-    },
+
+  const opt: gloriousFetchOptions | any = {
     ...options,
-    credentials: "include",
     onRequest() {
       try {
         gs.loading[gKey] = true;
@@ -89,38 +93,61 @@ export default function (url: string, options: any = {}) {
       const fetch = import.meta.glob("/glorious/fetch.ts");
       if (typeof fetch["/glorious/fetch.ts"] !== "undefined")
         fetch["/glorious/fetch.ts"]().then((data: any) => {
-          data.fetchHandler.onResponseError(res);
+          data.fetchHandler.onResponseError(res, gKey);
         });
-
-      if (res.status === 422) {
-        try {
-          gs[gKey].errors = res._data.errors;
-        } catch (e) {
-          /* empty */
+      else {
+        if (res.status === 422) {
+          try {
+            gs[gKey].errors = res._data.errors;
+          } catch (e) {
+            /* empty */
+          }
         }
-      }
-      if (res.status === 401 && process.client) {
-        const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
+        if (res.status === 401 && process.client) {
+          const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
 
-        if (typeof cookieToken.value !== "undefined") gs.authLogout();
+          if (typeof cookieToken.value !== "undefined") gs.authLogout();
+        }
       }
     },
   };
-  if (
-    Object.prototype.hasOwnProperty.call(options, "body") &&
-    !Object.prototype.hasOwnProperty.call(options, "method")
-  ) {
-    opt["method"] = "POST";
+
+  if (opt.method === "GET" && typeof opt.body !== "undefined") {
+    opt.method = "POST";
     return $fetch(url, opt);
-  }
+  } else if (
+    opt.method === "GET" &&
+    typeof opt.body === "undefined" &&
+    !opt.is$
+  )
+    return useFetch(url, opt);
+  else return $fetch(url, opt);
+}
 
-  if (!Object.prototype.hasOwnProperty.call(options, "is$"))
-    return $fetch(url, opt);
+function computeParams(params: Object): Object {
+  const computeParams: any = {};
+  Object.entries(params).map((item: any) => {
+    if (item[1] !== null && item[1] !== "") computeParams[item[0]] = item[1];
+  });
 
-  if (Object.prototype.hasOwnProperty.call(options, "is$") && options.is$)
-    return $fetch(url, opt);
+  return computeParams;
+}
 
-  if (!Object.prototype.hasOwnProperty.call(opt, "server")) opt.server = false;
+function computeGKey(gKey: String | undefined, url: string) {
+  return typeof gKey !== "undefined"
+    ? gKey
+    : url.split("/")[url.split("/").length - 1];
+}
 
-  return useFetch(url, opt);
+function computeAuth(): Object {
+  const moduleConfig: any = useRuntimeConfig();
+
+  type headerType = { Authorization?: String };
+  const header: headerType = {};
+  const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+
+  if (typeof token.value !== "undefined")
+    header.Authorization = "Bearer " + token.value;
+
+  return header;
 }

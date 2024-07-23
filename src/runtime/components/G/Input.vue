@@ -4,7 +4,7 @@ const props = defineProps({
   modelValue: {
     required: false,
     default: "",
-    type: [String, Array<String>],
+    type: [String, Array<String>, Number],
   },
   color: {
     required: false,
@@ -168,8 +168,8 @@ watch(
         :color="$tailwindColor('gray', '500')"
       />
     </div>
-    <span v-if="gs[error[0]]?.errors[error[1]]" class="glorious-error-text">
-      {{ gs[error[0]].errors[error[1]][0] }}
+    <span v-if="gs[error[0]]?.errors[error[1]]" class="text-red-500">
+      {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>
 </template>

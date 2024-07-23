@@ -68,8 +68,8 @@ watch(
   <div class="flex flex-col">
     <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
     <select
-      aria-label="glorious select"
       v-model="selectValue"
+      aria-label="glorious select"
       :disabled="props.disabled"
       :class="[`glorious-select-${props.color}`, props.size]"
     >
@@ -81,9 +81,9 @@ watch(
         {{ item.text }}
       </option>
     </select>
-    <span class="glorious-error-text" v-if="gs[error[0]]?.errors[error[1]]">{{
-      gs[error[0]].errors[error[1]][0]
-    }}</span>
+    <span v-if="gs[error[0]]?.errors[error[1]]" class="text-red-500">
+      {{ gs.forms[error[0]].errors[error[1]][0] }}
+    </span>
   </div>
 </template>
 

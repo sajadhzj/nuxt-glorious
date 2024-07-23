@@ -64,7 +64,7 @@ watch(
       <ClientOnly>
         <GIcon
           v-if="props.data?.current_page !== 1"
-          class="ml-2 glorious-cursor-pointer"
+          class="ml-2 cursor-pointer"
           name="glorious-arrow"
           :size="15"
           @click="methods.emit(props.data?.current_page - 1)"
@@ -83,9 +83,7 @@ watch(
         :key="index"
         class="w-6 h-6 rounded-lg flex items-center justify-center paginate"
         :class="[
-          props.data?.current_page === item
-            ? 'active'
-            : 'glorious-cursor-pointer',
+          props.data?.current_page === item ? 'active' : 'cursor-pointer',
         ]"
         @click="methods.emit(item)"
       >
@@ -96,7 +94,7 @@ watch(
         <GIcon
           v-if="props.data?.current_page !== props.data?.last_page"
           name="glorious-arrow"
-          class="mr-2 glorious-cursor-pointer"
+          class="mr-2 cursor-pointer"
           :size="15"
           @click="methods.emit(props.data?.current_page + 1)"
         />
@@ -104,7 +102,7 @@ watch(
           v-else
           name="glorious-arrow"
           color="#cbd5e1"
-          class="mr-2 glorious-cursor-pointer"
+          class="mr-2 cursor-pointer"
         />
       </ClientOnly>
     </div>

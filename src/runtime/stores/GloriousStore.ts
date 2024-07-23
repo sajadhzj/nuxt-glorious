@@ -8,6 +8,7 @@ export const GloriousStore = defineStore("GloriousStore", {
     },
     loading: {},
     keepData: {},
+    forms: {},
   }),
   getters: {
     authIsLogin() {
@@ -18,12 +19,20 @@ export const GloriousStore = defineStore("GloriousStore", {
     },
   },
   actions: {
-    formCreate(key: string) {
-      this[key] = {
-        form: {},
-        errors: [],
-        loading: false,
-      };
+    formCreate(key: string | Array<string>) {
+      this.forms = {};
+      if (typeof key === "string")
+        this.forms[<string>key] = {
+          form: {},
+          errors: [],
+        };
+      else
+        key.map((item) => {
+          this.forms[item] = {
+            form: {},
+            errors: [],
+          };
+        });
     },
     authLogout() {
       const moduleConfig: any = useRuntimeConfig();
@@ -65,7 +74,7 @@ export const GloriousStore = defineStore("GloriousStore", {
         moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.url,
         {
           lazy: false,
-          baseURL: moduleConfig.public.glorious.fetch.baseUrl,
+          baseURL: moduleConfig.public.glorious.fetch.baseURL,
           headers: {
             Accept: "application/json",
             Authorization: "Bearer " + token,
