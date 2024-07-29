@@ -9,6 +9,7 @@ interface gloriousFetchOptions {
   lazy?: Boolean;
   headers?: Object;
   body?: Object;
+  bodyType: "formData" | "formDataCustom" | "normal";
   method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE" | "HEAD";
   credentials?: "same-origin" | "include";
 }
@@ -21,6 +22,7 @@ const defaultOptions: gloriousFetchOptions = {
   headers: {
     Accept: "application/json",
   },
+  bodyType: "normal",
   body: {},
   credentials: "same-origin",
 };
@@ -35,56 +37,34 @@ export default function (url: string, options: gloriousFetchOptions) {
   options.params = computeParams(<Object>options.params);
   options.headers = { ...options.headers, ...computeAuth() };
 
-  if (Object.entries(<Object>options.body).length === 0) delete options.body;
+  if (options.bodyType === "formData") options.body = computeFormData(options);
 
   if (
-    Object.prototype.hasOwnProperty.call(options, "bodyType") &&
-    options.bodyType === "formData"
-  ) {
-    const form: any = new FormData();
-
-    Object.entries(options.body).forEach((item: any) => {
-      if (item[1] === null) return;
-
-      if (
-        Object.prototype.hasOwnProperty.call(options, "fileKey") &&
-        options.fileKey.includes(item[0])
-      )
-        form.append(item[0], item[1]);
-      else {
-        if (typeof item[1] === "object")
-          Object.entries(item[1]).forEach((nestedItem, index) => {
-            form.append(`${item[0]}[${index}]`, nestedItem[1]);
-          });
-        else form.append(`${item[0]}`, item[1]);
-      }
-    });
-
-    options.body = form;
-  }
+    options.bodyType === "normal" &&
+    Object.entries(<Object>options.body).length === 0
+  )
+    delete options.body;
 
   const opt: gloriousFetchOptions | any = {
     ...options,
     onRequest() {
       try {
-        gs.loading[gKey] = true;
-        gs[gKey].loading = true;
+        gs.loading[<string>gKey] = true;
       } catch (e) {
         /* empty */
       }
     },
     onResponse({ response: res }) {
       try {
-        gs.loading[gKey] = false;
-        gs[gKey].loading = false;
-        gs[gKey].errors = [];
+        gs.loading[<string>gKey] = false;
+        gs.forms[<string>gKey].errors = [];
         if (
           res.status >= 200 &&
           res.status <= 299 &&
           Object.prototype.hasOwnProperty.call(options, "saveBody") &&
           !options.saveBody
         )
-          gs[gKey].form = {};
+          gs.forms[<string>gKey].form = {};
       } catch (e) {
         /* empty */
       }
@@ -98,7 +78,7 @@ export default function (url: string, options: gloriousFetchOptions) {
       else {
         if (res.status === 422) {
           try {
-            gs[gKey].errors = res._data.errors;
+            gs.forms[<string>gKey].errors = res._data.errors;
           } catch (e) {
             /* empty */
           }
@@ -150,4 +130,25 @@ function computeAuth(): Object {
     header.Authorization = "Bearer " + token.value;
 
   return header;
+}
+
+function computeFormData(options: gloriousFetchOptions) {
+  const form: any = new FormData();
+
+  Object.entries(<Object>options.body).forEach((item: any) => {
+    if (item[1] === null) return;
+
+    if (
+      typeof item[1] === "object" &&
+      typeof item[1].lastModifiedDate === "undefined"
+    )
+      Object.entries(item[1]).forEach((nestedItem, index) => {
+        form.append(`${item[0]}[${index}]`, nestedItem[1]);
+      });
+    else {
+      form.append(`${item[0]}`, item[1]);
+    }
+  });
+
+  return form;
 }
