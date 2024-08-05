@@ -36,11 +36,6 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
-  placeholder: {
-    required: false,
-    default: "",
-    type: String,
-  },
 });
 const selectValue = ref(null);
 const emits = defineEmits(["update:modelValue"]);
@@ -81,7 +76,10 @@ watch(
         {{ item.text }}
       </option>
     </select>
-    <span v-if="gs.forms[error[0]]?.errors[error[1]]" class="text-red-500">
+    <span
+      v-if="gs.forms[error[0]]?.errors[error[1]]"
+      class="text-red-500 text-[14px]"
+    >
       {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>

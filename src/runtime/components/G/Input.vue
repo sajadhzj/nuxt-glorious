@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, GloriousStore } from "#imports";
+import { useGloriousCore } from "../../composables/useGloriousCore";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -56,6 +57,11 @@ const props = defineProps({
     default: "normal",
     type: String,
   },
+  display: {
+    required: false,
+    default: "",
+    type: String as () => "price",
+  },
 });
 
 const inputValue: any = ref(null);
@@ -66,7 +72,21 @@ watch(
   () => inputValue.value,
   () => {
     if (props.mode === "tag") return;
-    emits("update:modelValue", inputValue.value);
+
+    switch (props.display) {
+      case "price":
+        inputValue.value = useGloriousCore.numbersWithSeperateSamePrice(
+          inputValue.value
+        );
+        emits(
+          "update:modelValue",
+          inputValue.value.toString().replaceAll(",", "")
+        );
+        break;
+      default:
+        emits("update:modelValue", inputValue.value);
+        break;
+    }
   }
 );
 
@@ -168,7 +188,11 @@ watch(
         :color="$tailwindColor('gray', '500')"
       />
     </div>
-    <span v-if="gs.forms[error[0]]?.errors[error[1]]" class="text-red-500">
+
+    <span
+      v-if="gs.forms[error[0]]?.errors[error[1]]"
+      class="text-red-500 text-[14px]"
+    >
       {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>

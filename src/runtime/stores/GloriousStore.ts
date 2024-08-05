@@ -39,6 +39,7 @@ export const GloriousStore = defineStore("GloriousStore", {
       const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
       token.value = null;
       this.auth.loaded = false;
+
       navigateTo(moduleConfig.public.glorious.auth.redirect.logout);
     },
     authSetToken(token: string, to: string | null = null) {

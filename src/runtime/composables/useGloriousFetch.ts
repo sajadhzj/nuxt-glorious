@@ -1,4 +1,4 @@
-import { useCookie, useFetch, useRuntimeConfig } from "nuxt/app";
+import { useCookie, useFetch, useNuxtApp, useRuntimeConfig } from "nuxt/app";
 import { GloriousStore } from "../stores/GloriousStore";
 import defu from "defu";
 interface gloriousFetchOptions {
@@ -9,9 +9,10 @@ interface gloriousFetchOptions {
   lazy?: Boolean;
   headers?: Object;
   body?: Object;
-  bodyType: "formData" | "formDataCustom" | "normal";
+  bodyType?: "formData" | "formDataCustom" | "normal";
   method?: "POST" | "GET" | "PATCH" | "PUT" | "DELETE" | "HEAD";
   credentials?: "same-origin" | "include";
+  watch?: Array<Object>;
 }
 const defaultOptions: gloriousFetchOptions = {
   server: false,
@@ -83,11 +84,7 @@ export default function (url: string, options: gloriousFetchOptions) {
             /* empty */
           }
         }
-        if (res.status === 401 && process.client) {
-          const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
-
-          if (typeof cookieToken.value !== "undefined") gs.authLogout();
-        }
+        if (res.status === 401 && process.client) gs.authLogout();
       }
     },
   };
@@ -133,6 +130,8 @@ function computeAuth(): Object {
 }
 
 function computeFormData(options: gloriousFetchOptions) {
+  console.log(options.body);
+
   const form: any = new FormData();
 
   Object.entries(<Object>options.body).forEach((item: any) => {

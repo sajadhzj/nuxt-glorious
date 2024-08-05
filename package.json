@@ -1,5 +1,5 @@
 {
-  "version": "0.7.9-9",
+  "version": "0.8.5",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
   "repository": "sajadhzj/nuxt-glorious",

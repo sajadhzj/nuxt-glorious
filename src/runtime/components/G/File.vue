@@ -4,7 +4,7 @@ const props = defineProps({
   modelValue: {
     required: false,
     default: "",
-    type: String,
+    type: [String, Object],
   },
   color: {
     required: false,
@@ -67,7 +67,10 @@ const deleteFile = (event: any) => {
         @click.prevent="deleteFile($event)"
       />
     </label>
-    <span v-if="gs.forms[error[0]]?.errors[error[1]]" class="text-red-500">
+    <span
+      v-if="gs.forms[error[0]]?.errors[error[1]]"
+      class="text-red-500 text-[14px]"
+    >
       {{ gs.forms[error[0]].errors[error[1]][0] }}
     </span>
   </div>

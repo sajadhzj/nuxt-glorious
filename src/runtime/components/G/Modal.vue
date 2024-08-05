@@ -28,7 +28,7 @@ const props = defineProps({
     <div v-if="props?.title !== ''" class="flex justify-between items-center">
       <span class="font-medium">{{ props.title }}</span>
       <GButton
-        class="flex justify-center items-center w-[10px]"
+        class="flex justify-center items-center w-6 h-6"
         size="sm"
         @click="$modal(`${props.id}`)"
       >
