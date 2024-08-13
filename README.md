@@ -4,11 +4,14 @@ glorious is module for nuxt 3 for fast make project
 
 ## Features
 
+- Free and [open source](https://github.com/sajadhzj/nuxt-glorious).
+- Ready components.
+- Advanced data fetching
+- handle seo
 - authenticates
-- amazing fetch
-- components
-- seo
-
+- error handling
+- handel loading
+[📖 &nbsp;Read more](https://nuxt-glorious.unibas.ir/)
 ## Quick Setup
 
 Install the module to your Nuxt application with one command:
