@@ -33,7 +33,7 @@ onMounted(() => {
       >
         &nbsp;
       </button>
-      <GIcon :name="props.icon" :color="$tailwindColor('gray', '500')" />
+      <GIcon :name="props.icon" color="#000" />
     </div>
     <div>
       <slot />

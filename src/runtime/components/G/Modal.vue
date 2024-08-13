@@ -7,8 +7,8 @@ const props = defineProps({
   },
   size: {
     required: false,
-    default: "md", //[sm,md,lg,xl,full]
-    type: String,
+    default: "md",
+    type: String as () => "xl" | "lg" | "md" | "sm" | "full",
   },
   title: {
     required: false,

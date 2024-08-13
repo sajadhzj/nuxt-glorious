@@ -2,29 +2,28 @@
 import { GloriousStore } from "#imports";
 const props = defineProps({
   modelValue: {
-    required: false,
-    default: "",
+    required: true,
     type: [String, Object],
   },
   color: {
     required: false,
     default: "primary",
-    type: String,
+    type: String as () => "orange" | "blue" | "gray" | "red" | "primary",
   },
   placeholder: {
     required: false,
-    default: "",
+    default: "choose file",
     type: String,
   },
   title: {
     required: false,
-    default: "",
+    default: "file",
     type: String,
   },
   size: {
     required: false,
     default: "md",
-    type: String,
+    type: String as () => "xl" | "lg" | "md" | "sm" | "xsm",
   },
   error: {
     required: false,

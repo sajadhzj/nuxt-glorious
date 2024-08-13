@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch } from "#imports";
+import { watch, onMounted } from "#imports";
 const props = defineProps({
   items: {
     required: true,
@@ -137,7 +137,7 @@ watch(
 }
 
 .glorious-wizard-mobile {
-  @apply w-max flex flex-col items-center;
+  @apply w-max md:hidden flex flex-col items-center;
 }
 .glorious-wizard-mobile > span {
   @apply text-gray-500 text-[12px];

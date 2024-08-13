@@ -10,7 +10,7 @@ const props = defineProps({
   color: {
     required: false,
     default: "primary",
-    type: String,
+    type: String as () => "orange" | "blue" | "gray" | "red" | "primary",
   },
   placeholder: {
     required: false,
@@ -25,7 +25,7 @@ const props = defineProps({
   size: {
     required: false,
     default: "md",
-    type: String,
+    type: String as () => "xl" | "lg" | "md" | "sm" | "xsm",
   },
   error: {
     required: false,

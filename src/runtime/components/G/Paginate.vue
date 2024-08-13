@@ -60,7 +60,6 @@ const arrowNext = () => {
     v-if="props.currentPage && props.lastPage !== 1"
     class="w-max glorious-paginate"
   >
-    ds
     <div>
       <GIcon
         :color="props.currentPage !== 1 ? '#000' : '#cbd5e1'"

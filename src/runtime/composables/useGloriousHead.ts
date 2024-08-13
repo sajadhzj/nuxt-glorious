@@ -1,6 +1,5 @@
 import { useSeoMeta } from "@unhead/vue";
 import { useRuntimeConfig } from "nuxt/app";
-import type { Interface } from "readline";
 interface headInterface {
   title?: string;
   description?: string;

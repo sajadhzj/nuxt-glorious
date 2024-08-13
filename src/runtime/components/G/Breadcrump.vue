@@ -4,11 +4,16 @@ const props = defineProps({
     required: true,
     type: Object,
   },
+  dir: {
+    required: false,
+    type: String as () => "rtl" | "ltr",
+    default: "rtl",
+  },
 });
 </script>
 
 <template>
-  <div class="flex gap-1 flex-wrap">
+  <div class="flex gap-1 flex-wrap dir-ltr" :dir="props.dir">
     <div
       v-for="(item, key, index) in props.items"
       :key="index"
@@ -32,7 +37,7 @@ const props = defineProps({
       <GIcon
         v-if="index !== Object.entries(props.items).length - 1"
         name="glorious-arrow"
-        style="rotate: 180deg"
+        :style="{ rotate: props.dir === 'rtl' ? '180deg' : '0deg' }"
         :size="10"
         color="#6b7280"
       />
