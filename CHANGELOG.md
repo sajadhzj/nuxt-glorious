@@ -1,9 +1,5 @@
 # Changelog
 
-## v1.1.2
-
-[compare changes](https://github.com/sajadhzj/nuxt-glorious/compare/v0.6.6...v1.1.2)
-
 ## `v1.1.0`
 
 - new component for error handle text, this component just show text
