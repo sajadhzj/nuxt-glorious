@@ -22,7 +22,7 @@
 }
 
 .glorious-input-primary {
-  @apply rounded-md ring-1 ring-green-500 px-3;
+  @apply rounded-md ring-1 ring-green-500 ;
   @extend %input-size, %focus;
   &:disabled {
     @apply bg-green-300 cursor-not-allowed;
@@ -30,7 +30,7 @@
 }
 
 .glorious-input-red {
-  @apply rounded-md ring-1 ring-red-500 px-3;
+  @apply rounded-md ring-1 ring-red-500 ;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -39,7 +39,7 @@
 }
 
 .glorious-input-gray {
-  @apply rounded-md ring-1 ring-gray-500 px-3;
+  @apply rounded-md ring-1 ring-gray-500 ;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -48,7 +48,7 @@
 }
 
 .glorious-input-blue {
-  @apply rounded-md ring-1 ring-blue-500 px-3;
+  @apply rounded-md ring-1 ring-blue-500 ;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -57,7 +57,7 @@
 }
 
 .glorious-input-orange {
-  @apply rounded-md ring-1 ring-orange-500 px-3;
+  @apply rounded-md ring-1 ring-orange-500 ;
   @extend %input-size, %focus;
 
   &:disabled {

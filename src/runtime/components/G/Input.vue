@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, GloriousStore } from "#imports";
+import { computed, ref, watch } from "#imports";
 import { useGloriousCore } from "../../composables/useGloriousCore";
+import tailwindColor from "../../utils/tailwindColor";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -45,17 +46,31 @@ const props = defineProps({
   type: {
     required: false,
     default: "text",
-    type: String,
+    type: String as () =>
+      | "button"
+      | "checkbox"
+      | "color"
+      | "date"
+      | "email"
+      | "file"
+      | "hidden"
+      | "password"
+      | "radio"
+      | "range"
+      | "tel"
+      | "text"
+      | "url"
+      | "number",
   },
   autocomplete: {
     required: false,
     default: "off",
-    type: String,
+    type: String as () => "off" | "on" | "new-password",
   },
   mode: {
     required: false,
     default: "normal",
-    type: String,
+    type: String as () => "normal" | "tag",
   },
   display: {
     required: false,
@@ -89,9 +104,6 @@ watch(
     }
   }
 );
-
-const gs: any = GloriousStore();
-const error: any = props.error.split("|");
 
 const computeIconSize = computed(() => {
   let iconSize = 0;
@@ -151,6 +163,8 @@ watch(
   () => props.modelValue,
   () => initValue()
 );
+
+const typeInput = ref(props.type);
 </script>
 
 <template>
@@ -160,15 +174,38 @@ watch(
       class="glorious-input"
       :class="[props.icon !== '' ? `icon-${props.size}` : '']"
     >
-      <input
-        v-model="inputValue"
-        :autocomplete="props.autocomplete"
-        :class="[props.size, `glorious-input-${props.color}`]"
-        :placeholder="props.placeholder"
-        :disabled="props.disabled"
-        :type="props.type"
-        @keyup.enter="addTag($event)"
-      />
+      <div class="relative">
+        <input
+          v-model="inputValue"
+          :autocomplete="props.autocomplete"
+          class="w-full"
+          :class="[
+            props.size,
+            `glorious-input-${props.color}`,
+            props.type === 'password' ? 'pl-[30px] pr-3' : 'px-3',
+          ]"
+          :placeholder="props.placeholder"
+          :disabled="props.disabled"
+          :type="typeInput"
+          @keyup.enter="addTag($event)"
+        />
+        <GIcon
+          v-if="props.type === 'password' && typeInput === 'password'"
+          class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
+          :size="23"
+          name="glorious-eye-fill"
+          :color="tailwindColor('gray', 500)"
+          @click="typeInput = 'text'"
+        ></GIcon>
+        <GIcon
+          v-if="props.type === 'password' && typeInput === 'text'"
+          class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
+          :size="23"
+          name="glorious-eye-off-fill"
+          :color="tailwindColor('gray', 500)"
+          @click="typeInput = 'password'"
+        ></GIcon>
+      </div>
       <div v-if="tags.length !== 0" class="glorious-input-tag">
         <div v-for="(item, index) in tags" :key="index">
           {{ item }}
@@ -188,13 +225,7 @@ watch(
         :color="$tailwindColor('gray', '500')"
       />
     </div>
-
-    <span
-      v-if="gs.forms[error[0]]?.errors[error[1]]"
-      class="text-red-500 text-[14px]"
-    >
-      {{ gs.forms[error[0]].errors[error[1]][0] }}
-    </span>
+    <GErrorText :error="props.error" />
   </div>
 </template>
 

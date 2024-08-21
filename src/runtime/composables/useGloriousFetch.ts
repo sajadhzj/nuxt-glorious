@@ -1,4 +1,4 @@
-import { useCookie, useFetch, useNuxtApp, useRuntimeConfig } from "nuxt/app";
+import { useCookie, useFetch, useRuntimeConfig } from "nuxt/app";
 import { GloriousStore } from "../stores/GloriousStore";
 import defu from "defu";
 interface gloriousFetchOptions {
@@ -130,16 +130,17 @@ function computeAuth(): Object {
 }
 
 function computeFormData(options: gloriousFetchOptions) {
-  console.log(options.body);
-
   const form: any = new FormData();
 
   Object.entries(<Object>options.body).forEach((item: any) => {
+    console.log(item[1]);
+
     if (item[1] === null) return;
 
     if (
       typeof item[1] === "object" &&
-      typeof item[1].lastModifiedDate === "undefined"
+      typeof item[1].lastModifiedDate === "undefined" &&
+      (typeof item[1].type === 'undefined' && typeof item[1].size === 'undefined')
     )
       Object.entries(item[1]).forEach((nestedItem, index) => {
         form.append(`${item[0]}[${index}]`, nestedItem[1]);

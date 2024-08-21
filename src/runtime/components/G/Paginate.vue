@@ -35,7 +35,7 @@ const computeListPage = () => {
   let firstPage = props.currentPage - props.numberSugestPage;
   const endPage = props.currentPage + (props.numberSugestPage + 1);
 
-  while (firstPage < endPage) {
+  while (firstPage <= endPage) {
     if (firstPage > 0 && firstPage <= props.lastPage)
       listPage.value.push(firstPage);
     firstPage++;
@@ -72,7 +72,7 @@ const arrowNext = () => {
       <div
         v-for="(item, index) in listPage"
         :key="index"
-        class="w-6 h-6 rounded-lg flex items-center justify-center paginate"
+        class="w-6 h-6 rounded-lg flex items-center justify-center paginate font-bold"
         :class="[props.currentPage === item ? 'active' : 'cursor-pointer']"
         @click="emit(item)"
       >

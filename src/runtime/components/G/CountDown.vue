@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "#imports";
+import { onMounted, ref, useId, useSlots } from "#imports";
 
 const isEnd = ref<Boolean>(false);
 const props = defineProps({
@@ -13,7 +13,8 @@ const props = defineProps({
     default: "flex text-gray-500 font-medium",
   },
 });
-
+const slot = useSlots();
+const id = useId();
 onMounted(() => {
   const currentSecond = props.second;
   let second = props.second;
@@ -41,7 +42,7 @@ onMounted(() => {
         }
       }
 
-      document.getElementById("countDown").innerText = timeString;
+      document.getElementById("countDown" + id).innerText = timeString;
 
       if (second === 0) {
         isEnd.value = true;
@@ -55,10 +56,16 @@ onMounted(() => {
 </script>
 <template>
   <div>
+    <span
+      v-if="isEnd && typeof slot.end === 'undefined'"
+      :class="props.className"
+    >
+      00:00
+    </span>
     <slot v-if="isEnd" name="end" />
     <div v-else :class="props.className">
       <slot name="one"></slot>
-      <div id="countDown" />
+      <div :id="`countDown` + id" />
       <slot name="two"></slot>
     </div>
   </div>

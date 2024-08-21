@@ -70,10 +70,12 @@ export default defineNuxtModule<ModuleOptions>({
       },
     });
     await installModule("@pinia/nuxt", {
+      exposeConfig: true,
       autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
     });
 
     addImportsDir(resolver.resolve("runtime/composables"));
+    addImportsDir(resolver.resolve("runtime/utils"));
     addImportsDir(resolver.resolve("runtime/stores"));
     addImportsDir(resolver.resolve("runtime/middlewares"));
     addComponentsDir({
@@ -87,10 +89,6 @@ export default defineNuxtModule<ModuleOptions>({
       });
     });
 
-    addPlugin({
-      src: resolver.resolve("./runtime/plugins/shortcut-key"),
-      mode: "client",
-    });
     addPlugin(resolver.resolve("./runtime/plugins/Modal"));
     addPlugin(resolver.resolve("./runtime/plugins/glorious-app-setting"));
     addPlugin(resolver.resolve("./runtime/plugins/Drawer"));

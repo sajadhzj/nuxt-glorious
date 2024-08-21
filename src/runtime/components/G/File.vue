@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { GloriousStore } from "#imports";
 const props = defineProps({
   modelValue: {
     required: true,
@@ -20,6 +19,11 @@ const props = defineProps({
     default: "file",
     type: String,
   },
+  text: {
+    required: false,
+    default: "No file has been selected",
+    type: String,
+  },
   size: {
     required: false,
     default: "md",
@@ -31,8 +35,6 @@ const props = defineProps({
     type: String,
   },
 });
-const gs: any = GloriousStore();
-const error: any = props.error.split("|");
 const emits = defineEmits(["update:modelValue"]);
 
 const changeInput = (event: any) => {
@@ -43,8 +45,7 @@ const changeInput = (event: any) => {
 };
 const deleteFile = (event: any) => {
   event.currentTarget.style.display = "none";
-  event.currentTarget.previousElementSibling.innerText =
-    "فایلی انتخاب نشده است";
+  event.currentTarget.previousElementSibling.innerText = props.text;
   emits("update:modelValue", null);
 };
 </script>
@@ -59,19 +60,14 @@ const deleteFile = (event: any) => {
         <span>{{ props.placeholder }}</span>
       </div>
       <input type="file" class="hidden" @change="changeInput($event)" />
-      <span class="text-[12px]">فایلی انتخاب نشده است</span>
+      <span class="text-[12px]">{{ props.text }}</span>
       <GIcon
         name="glorious-x"
         color="#ff0000"
         @click.prevent="deleteFile($event)"
       />
     </label>
-    <span
-      v-if="gs.forms[error[0]]?.errors[error[1]]"
-      class="text-red-500 text-[14px]"
-    >
-      {{ gs.forms[error[0]].errors[error[1]][0] }}
-    </span>
+    <GErrorText :error="props.error" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { GloriousStore, ref, watch } from "#imports";
+import { ref, watch } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -36,6 +36,11 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
+  placeholder: {
+    require: false,
+    default: "",
+    type: String,
+  },
 });
 const selectValue = ref(null);
 const emits = defineEmits(["update:modelValue"]);
@@ -45,9 +50,6 @@ watch(
     emits("update:modelValue", selectValue.value);
   }
 );
-
-const gs: any = GloriousStore();
-const error: any = props.error.split("|");
 
 // -------------------------------------- init value
 selectValue.value = props.modelValue;
@@ -62,26 +64,30 @@ watch(
 <template>
   <div class="flex flex-col">
     <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
-    <select
-      v-model="selectValue"
-      aria-label="glorious select"
-      :disabled="props.disabled"
-      :class="[`glorious-select-${props.color}`, props.size]"
-    >
-      <option
-        v-for="(item, index) in props.options"
-        :key="index"
-        :value="item.value"
+    <div class="grow flex relative">
+      <select
+        v-model="selectValue"
+        aria-label="glorious select"
+        :disabled="props.disabled"
+        class="grow"
+        :class="[`glorious-select-${props.color}`, props.size]"
       >
-        {{ item.text }}
-      </option>
-    </select>
-    <span
-      v-if="gs.forms[error[0]]?.errors[error[1]]"
-      class="text-red-500 text-[14px]"
-    >
-      {{ gs.forms[error[0]].errors[error[1]][0] }}
-    </span>
+        <option
+          v-for="(item, index) in props.options"
+          :key="index"
+          :value="item.value"
+        >
+          {{ item.text }}
+        </option>
+      </select>
+      <span
+        v-if="selectValue === null"
+        class="absolute top-0 bottom-0 my-auto pr-2 h-max"
+      >
+        {{ props.placeholder }}
+      </span>
+    </div>
+    <GErrorText :error="props.error" />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GloriousStore, ref, watch } from "#imports";
+import { ref, watch } from "#imports";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -50,9 +50,10 @@ watch(
   () => inputValue.value,
   () => emits("update:modelValue", inputValue.value)
 );
-
-const gs: any = GloriousStore();
-const error: any = props.error.split("|");
+watch(
+  () => props.modelValue,
+  () => (inputValue.value = props.modelValue)
+);
 </script>
 
 <template>
@@ -67,12 +68,7 @@ const error: any = props.error.split("|");
         :disabled="props.disabled"
       />
     </div>
-    <span
-      v-if="gs.forms[error[0]]?.errors[error[1]]"
-      class="text-red-500 text-[14px]"
-    >
-      {{ gs.forms[error[0]].errors[error[1]][0] }}
-    </span>
+    <GErrorText :error="props.error" />
   </div>
 </template>
 
