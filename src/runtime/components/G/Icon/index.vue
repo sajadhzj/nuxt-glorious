@@ -19,8 +19,8 @@ const props = defineProps({
   },
   stroke: {
     required: false,
-    type: Number,
-    default: 1,
+    type: [Number, null],
+    default: null,
   },
 });
 
@@ -81,16 +81,17 @@ const methods = {
       .join(" ");
 
     //stroke
-    icon = icon.replaceAll("\n", " ");
-
-    icon = icon
-      .split(" ")
-      .map((item: any) =>
-        item.includes("stroke-width") && typeof props.stroke !== "undefined"
-          ? 'stroke-width="' + props.stroke + '"'
-          : item
-      )
-      .join(" ");
+    if (props.stroke !== null) {
+      icon = icon.replaceAll("\n", " ");
+      icon = icon
+        .split(" ")
+        .map((item: any) =>
+          item.includes("stroke-width") && typeof props.stroke !== "undefined"
+            ? 'stroke-width="' + props.stroke + '"'
+            : item
+        )
+        .join(" ");
+    }
 
     return icon;
   },

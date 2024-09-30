@@ -89,7 +89,6 @@ export default defineNuxtModule<ModuleOptions>({
       });
     });
 
-    addPlugin(resolver.resolve("./runtime/plugins/Modal"));
     addPlugin(resolver.resolve("./runtime/plugins/glorious-app-setting"));
     addPlugin(resolver.resolve("./runtime/plugins/Drawer"));
 

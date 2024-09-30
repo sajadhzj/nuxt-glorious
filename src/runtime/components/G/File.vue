@@ -2,7 +2,7 @@
 const props = defineProps({
   modelValue: {
     required: true,
-    type: [String, Object],
+    type: null,
   },
   color: {
     required: false,

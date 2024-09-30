@@ -24,11 +24,10 @@ const defaultOptions: gloriousFetchOptions = {
     Accept: "application/json",
   },
   bodyType: "normal",
-  body: {},
   credentials: "same-origin",
 };
 
-export default function (url: string, options: gloriousFetchOptions) {
+export default function (url: string, options: gloriousFetchOptions = defaultOptions) {
   const moduleConfig: any = useRuntimeConfig();
   options = defu(moduleConfig.public.glorious.fetch, options, defaultOptions);
 

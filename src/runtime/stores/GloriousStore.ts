@@ -34,6 +34,18 @@ export const GloriousStore = defineStore("GloriousStore", {
           };
         });
     },
+    modalCreate(key:string|Array<string>) {
+      this.modals = {};
+      const defaultValue = {
+        show: false,
+        keepData: {},
+      };
+      if (typeof key === "string") this.modals[key] = defaultValue;
+      else
+        key.map((item) => {
+          this.modals[item] = defaultValue;
+        });
+    },
     authLogout() {
       const moduleConfig: any = useRuntimeConfig();
       const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);

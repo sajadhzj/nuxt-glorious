@@ -17,7 +17,7 @@ const props = defineProps({
   },
   bgColor: {
     required: false,
-    default: "0000ff",
+    default: "#0000ff",
     type: String,
   },
 });
@@ -28,8 +28,8 @@ const methods = {
     Array.from(circularProgress).forEach((progressBar: any) => {
       const progressValue: any = progressBar.querySelector(".percentage");
       const innerCircle: any = progressBar.querySelector(".inner-circle");
-      console.log(props.step);
       const eachStep = (1 / props.items.length) * 100;
+
       let startValue =
         Number(progressBar.getAttribute("data-percentage")) - eachStep < 0
           ? 0
@@ -40,7 +40,7 @@ const methods = {
             ? 0
             : Number(progressBar.getAttribute("data-percentage")) + eachStep,
         progressColor = progressBar.getAttribute("data-progress-color");
-      console.log(startValue, endValue);
+
       const progress = setInterval(() => {
         progressValue.textContent = props.step + 1;
 
@@ -51,24 +51,21 @@ const methods = {
         progressBar.style.background = `conic-gradient(${progressColor} ${
           startValue * 3.6
         }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
-        if (startValue === endValue) {
+
+        if (Math.floor(startValue) == Math.floor(endValue))
           clearInterval(progress);
-        }
+
         startValue++;
       }, 10);
     });
   },
 };
 
-onMounted(() => {
-  methods.computeWizardMobile();
-});
+onMounted(() => methods.computeWizardMobile());
 
 watch(
   () => props.step,
-  () => {
-    methods.computeWizardMobile();
-  }
+  () => methods.computeWizardMobile()
 );
 </script>
 
@@ -76,9 +73,12 @@ watch(
   <div class="glorious-wizard">
     <div class="glorious-wizard-desktop">
       <div v-for="(item, index) in props.items" :key="index">
-        <div class="circle" :class="index < props.step ? 'checked' : ''">
+        <div
+          class="circle"
+          :class="parseInt(index) < props.step ? 'checked' : ''"
+        >
           <GIcon
-            v-if="index < props.step"
+            v-if="parseInt(index) < props.step"
             name="glorious-check-fill"
             color="#ffffff"
           />
@@ -122,7 +122,6 @@ watch(
 .glorious-wizard {
   @apply md:w-full w-max;
 }
-
 .glorious-wizard-desktop {
   @apply md:flex hidden flex-wrap gap-[3%] w-full justify-center;
 }
@@ -135,36 +134,32 @@ watch(
 .glorious-wizard-desktop > div > div.circle.checked {
   @apply border-green-500 bg-green-500;
 }
-
 .glorious-wizard-mobile {
   @apply w-max md:hidden flex flex-col items-center;
 }
 .glorious-wizard-mobile > span {
   @apply text-gray-500 text-[12px];
 }
-
 .circular-progress {
+  align-items: center;
   border-radius: 50%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-.circular-progress > div,
-.circular-progress p {
+.circular-progress p,
+.circular-progress > div {
   @apply z-[25] text-gray-500;
 }
-
 .inner-circle {
   background-color: #fff;
-  position: absolute;
   border-radius: 50%;
+  position: absolute;
 }
 .inner-circle.checked {
   @apply bg-green-500;
 }
-
 .percentage {
-  position: relative;
   font-size: 1rem;
+  position: relative;
 }
 </style>

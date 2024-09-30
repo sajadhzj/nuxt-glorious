@@ -1,4 +1,11 @@
 # Changelog
+## `v1.2.0`
+
+- $modal replaced to modal , now is not plugin , is utils
+- useGloriousFetch optimize
+- modal component changed , read doc
+- file component optimize
+- wizard component fixed ui in mobile
 
 ## `v1.1.0`
 

@@ -77,6 +77,19 @@ const props = defineProps({
     default: "",
     type: String as () => "price",
   },
+  inputMode: {
+    required: false,
+    default: "text",
+    type: String as () =>
+      | "text"
+      | "none"
+      | "decimal"
+      | "numeric"
+      | "tel"
+      | "search"
+      | "email"
+      | "url",
+  },
 });
 
 const inputValue: any = ref(null);
@@ -177,6 +190,7 @@ const typeInput = ref(props.type);
       <div class="relative">
         <input
           v-model="inputValue"
+          :inputmode="props.inputMode"
           :autocomplete="props.autocomplete"
           class="w-full"
           :class="[
