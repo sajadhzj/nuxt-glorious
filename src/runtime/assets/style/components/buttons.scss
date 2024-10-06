@@ -1,3 +1,7 @@
+button:focus-visible{
+    @apply outline-none
+}
+
 %button-size {
   &.xl {
     @apply py-2.5;

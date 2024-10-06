@@ -69,10 +69,7 @@ export default defineNuxtModule<ModuleOptions>({
         },
       },
     });
-    await installModule("@pinia/nuxt", {
-      exposeConfig: true,
-      autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-    });
+    await installModule("@pinia/nuxt");
 
     addImportsDir(resolver.resolve("runtime/composables"));
     addImportsDir(resolver.resolve("runtime/utils"));

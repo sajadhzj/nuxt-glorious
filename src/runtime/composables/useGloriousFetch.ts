@@ -39,12 +39,6 @@ export default function (url: string, options: gloriousFetchOptions = defaultOpt
 
   if (options.bodyType === "formData") options.body = computeFormData(options);
 
-  if (
-    options.bodyType === "normal" &&
-    Object.entries(<Object>options.body).length === 0
-  )
-    delete options.body;
-
   const opt: gloriousFetchOptions | any = {
     ...options,
     onRequest() {
