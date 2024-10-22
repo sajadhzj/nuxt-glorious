@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "#imports";
 import { useGloriousCore } from "../../composables/useGloriousCore";
-import gTailwindColor from "../../utils/gTailwindColor";
 const props = defineProps({
   modelValue: {
     required: false,
@@ -208,7 +207,6 @@ const typeInput = ref(props.type);
           class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
           :size="23"
           name="glorious-eye-fill"
-          :color="gTailwindColor('gray', 500)"
           @click="typeInput = 'text'"
         ></GIcon>
         <GIcon
@@ -216,7 +214,6 @@ const typeInput = ref(props.type);
           class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
           :size="23"
           name="glorious-eye-off-fill"
-          :color="gTailwindColor('gray', 500)"
           @click="typeInput = 'password'"
         ></GIcon>
       </div>
@@ -236,7 +233,6 @@ const typeInput = ref(props.type);
         class="glorious-input-icon"
         :name="props.icon"
         :size="computeIconSize"
-        :color="gTailwindColor('gray', '500')"
       />
     </div>
     <GErrorText :error="props.error" />

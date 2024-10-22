@@ -1,0 +1,52 @@
+@import "../variable.scss";
+$svg-check-icon: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzFfNDg2MTQpIj4KPHBhdGggZD0iTTkuOTk5OTkgMTUuMTcyTDE5LjE5MiA1Ljk3OUwyMC42MDcgNy4zOTNMOS45OTk5OSAxOEwzLjYzNTk5IDExLjYzNkw1LjA0OTk5IDEwLjIyMkw5Ljk5OTk5IDE1LjE3MloiIGZpbGw9IndoaXRlIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfMV80ODYxNCI+CjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K";
+
+.glorious-checkbox {
+  @apply block relative cursor-pointer;
+
+  > input {
+    @apply hidden;
+
+    &:checked ~ div {
+      @apply border-none;
+
+      &:after {
+        @apply block h-max w-max;
+      }
+    }
+
+    &:disabled ~ div {
+      @apply cursor-not-allowed;
+    }
+  }
+  > div:last-child {
+    @apply border border-gray-500 rounded bg-white left-0 top-0 absolute hover:shadow-lg;
+    > div:first-child {
+      @apply hidden;
+    }
+
+    &:after {
+      content: url(#{$svg-check-icon});
+      @apply absolute hidden top-1 right-0 left-0 bottom-0 m-auto;
+    }
+  }
+
+  @each $color in $colors {
+    &.#{$color} {
+      > input {
+        &:checked ~ div {
+          @apply bg-#{$color}-500;
+        }
+      }
+    }
+  }
+
+  @each $key, $value in $sizes {
+    &.size-#{$key} {
+      @apply w-[#{$value}px] h-[#{$value}px];
+      > div:last-child {
+        @apply w-[#{$value}px] h-[#{$value}px];
+      }
+    }
+  }
+}

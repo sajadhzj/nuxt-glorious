@@ -1,4 +1,12 @@
 # Changelog
+
+## `v1.3.0`
+
+- tailwind utils removed
+- checkbox component added
+- radio button component added
+- avatar component added
+
 ## `v1.2.0`
 
 - $modal replaced to modal , now is not plugin , is utils
@@ -15,7 +23,7 @@
 - count down component if ended without set slot, not hidden!
 - drawer component have new prop, this prop is `dir` with `rtl` and `ltr` value
 - `useGloriousFetch` optimized
-- textarea compontent optimized
+- textarea component optimized
 - disable color for button optimized
 - pagination component , some compute data fixed
 

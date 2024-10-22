@@ -20,20 +20,15 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
-  name: {
-    required: true,
-    type: String,
-  },
 });
 
 const emits = defineEmits(["update:modelValue"]);
 </script>
 
 <template>
-  <label class="glorious-radio" :class="[props.color, `size-${props.size}`]">
+  <label class="glorious-checkbox" :class="[props.color, `size-${props.size}`]">
     <input
-      :name="props.name"
-      type="radio"
+      type="checkbox"
       :disabled="props.disabled"
       @input="emits('update:modelValue', $event.currentTarget.checked)"
     />
@@ -42,5 +37,5 @@ const emits = defineEmits(["update:modelValue"]);
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/radio.scss";
+@import "../../assets/style/components/checkbox.scss";
 </style>

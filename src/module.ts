@@ -72,7 +72,6 @@ export default defineNuxtModule<ModuleOptions>({
     await installModule("@pinia/nuxt");
 
     addImportsDir(resolver.resolve("runtime/composables"));
-    addImportsDir(resolver.resolve("runtime/utils"));
     addImportsDir(resolver.resolve("runtime/stores"));
     addImportsDir(resolver.resolve("runtime/middlewares"));
     addComponentsDir({
