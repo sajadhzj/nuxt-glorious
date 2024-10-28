@@ -1,9 +1,9 @@
 import {
-  GloriousStore,
   defineNuxtRouteMiddleware,
   useCookie,
   useNuxtApp,
 } from "#imports";
+import { GloriousStore } from "../stores/GloriousStore";
 
 export default defineNuxtRouteMiddleware(() => {
   const nuxtApp = useNuxtApp();

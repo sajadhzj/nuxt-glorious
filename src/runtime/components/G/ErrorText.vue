@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import { GloriousStore } from "#imports";
+import { GloriousStore } from "../../stores/GloriousStore";
+
 const props = defineProps({
   error: {
     required: false,

@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { ref, watch } from "#imports";
+interface selectOptionsInterface {
+  text: string;
+  value: [string, object];
+}
 const props = defineProps({
   modelValue: {
     required: false,
@@ -9,7 +13,7 @@ const props = defineProps({
   options: {
     required: true,
     default: [],
-    type: Array<object>,
+    type: Array<selectOptionsInterface>,
   },
   color: {
     required: false,
@@ -42,7 +46,7 @@ const props = defineProps({
     type: String,
   },
 });
-const selectValue = ref(null);
+const selectValue: any = ref(null);
 const emits = defineEmits(["update:modelValue"]);
 watch(
   () => selectValue.value,

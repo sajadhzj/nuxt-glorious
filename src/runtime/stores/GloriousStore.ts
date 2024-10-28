@@ -34,7 +34,7 @@ export const GloriousStore = defineStore("GloriousStore", {
           };
         });
     },
-    modalCreate(key:string|Array<string>) {
+    modalCreate(key: string | Array<string>) {
       this.modals = {};
       const defaultValue = {
         show: false,
@@ -44,6 +44,14 @@ export const GloriousStore = defineStore("GloriousStore", {
       else
         key.map((item) => {
           this.modals[item] = defaultValue;
+        });
+    },
+    drawerCreate(key: string | Array<string>) {
+      this.drawers = {};
+      if (typeof key === "string") this.drawers[key] = false;
+      else
+        key.map((item) => {
+          this.drawers[item] = false;
         });
     },
     authLogout() {

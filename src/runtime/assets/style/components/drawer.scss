@@ -1,6 +1,9 @@
-.bg-blur-drawer {
-  @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
+.glorious-scaffold-drawer {
+  &-bg-blur {
+    @apply fixed top-0 right-0 backdrop-blur-sm bg-gray-500 bg-opacity-50 h-full w-full z-[40];
+  }
 }
+
 .drawer {
   @apply fixed top-0 bg-white h-full w-[300px] z-[50];
 

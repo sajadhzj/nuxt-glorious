@@ -1,0 +1,10 @@
+@import "../variable.scss";
+.glorious-alert {
+  @apply p-3 rounded shadow;
+
+  @each $color in $colors {
+    &.#{"color-" + $color} {
+      @apply #{"border border-" + $color + "-300" + " bg-" + $color + "-100"}
+    }
+  }
+}

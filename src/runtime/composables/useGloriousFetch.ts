@@ -48,22 +48,22 @@ export default function (url: string, options: gloriousFetchOptions = defaultOpt
         /* empty */
       }
     },
-    onResponse({ response: res }) {
+    onResponse(/*{ response: res }:any*/) {
       try {
         gs.loading[<string>gKey] = false;
         gs.forms[<string>gKey].errors = [];
-        if (
-          res.status >= 200 &&
-          res.status <= 299 &&
-          Object.prototype.hasOwnProperty.call(options, "saveBody") &&
-          !options.saveBody
-        )
-          gs.forms[<string>gKey].form = {};
+        // if (
+        //   res.status >= 200 &&
+        //   res.status <= 299 &&
+        //   Object.prototype.hasOwnProperty.call(options, "saveBody") &&
+        //   !options.saveBody
+        // )
+        //   gs.forms[<string>gKey].form = {};
       } catch (e) {
         /* empty */
       }
     },
-    async onResponseError({ response: res }) {
+    async onResponseError({ response: res }:any) {
       const fetch = import.meta.glob("/glorious/fetch.ts");
       if (typeof fetch["/glorious/fetch.ts"] !== "undefined")
         fetch["/glorious/fetch.ts"]().then((data: any) => {

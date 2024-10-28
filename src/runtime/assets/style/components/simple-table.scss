@@ -1,0 +1,43 @@
+@import "../variable.scss";
+
+.glorious-simple-table {
+  @apply overflow-x-auto;
+  @each $color in $colors {
+    &.#{"color-" + $color} {
+      > table {
+        @apply border #{"border-" + $color + "-400"};
+      }
+
+      > table > thead {
+        @apply rounded-t-md overflow-hidden;
+        @apply #{"bg-" + $color + "-400"};
+      }
+
+      > table > tbody {
+        > tr {
+          &:nth-child(even) {
+            @apply #{"bg-" + $color + "-50"};
+          }
+          > td {
+            @apply px-4 py-1 text-center;
+          }
+        }
+      }
+    }
+  }
+  > table {
+    @apply w-full;
+
+    > thead > tr > th {
+      @apply px-4 py-2 text-center;
+    }
+
+    > tbody {
+      > tr {
+        > td {
+          @apply px-4 py-1 text-center;
+        }
+      }
+    }
+  }
+}

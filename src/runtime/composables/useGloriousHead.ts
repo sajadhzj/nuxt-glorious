@@ -20,7 +20,7 @@ export default function (object = head) {
       : object.description;
   const image = typeof object.image === "undefined" ? head.image : object.image;
   const type = typeof object.type === "undefined" ? head.type : object.type;
-  const moduleConfig = useRuntimeConfig();
+  const moduleConfig:any = useRuntimeConfig();
   const seoObject: any = {
     title: () => `${title + moduleConfig.public.glorious.seo.suffix}`,
     ogTitle: () => `${title + moduleConfig.public.glorious.seo.suffix}`,

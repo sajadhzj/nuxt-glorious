@@ -3,7 +3,7 @@ const props = defineProps({
   modelValue: {
     required: false,
     default: true,
-    type: Boolean,
+    type: [Boolean, String, Object],
   },
   color: {
     required: false,
@@ -24,9 +24,21 @@ const props = defineProps({
     required: true,
     type: String,
   },
+  value: {
+    required: false,
+    default: "",
+    type: String,
+  },
+  checked: {
+    required: false,
+    type: Boolean,
+  },
 });
 
 const emits = defineEmits(["update:modelValue"]);
+
+const inputFunction = (event: any) =>
+  emits("update:modelValue", event.currentTarget.checked);
 </script>
 
 <template>
@@ -35,7 +47,9 @@ const emits = defineEmits(["update:modelValue"]);
       :name="props.name"
       type="radio"
       :disabled="props.disabled"
-      @input="emits('update:modelValue', $event.currentTarget.checked)"
+      :value="props.value"
+      :checked="props.checked"
+      @input="inputFunction($event)"
     />
     <div></div>
   </label>

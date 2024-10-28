@@ -23,6 +23,9 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["update:modelValue"]);
+
+const inputFunction = (event: any) =>
+  emits("update:modelValue", event.currentTarget.checked);
 </script>
 
 <template>
@@ -30,7 +33,7 @@ const emits = defineEmits(["update:modelValue"]);
     <input
       type="checkbox"
       :disabled="props.disabled"
-      @input="emits('update:modelValue', $event.currentTarget.checked)"
+      @input="inputFunction($event)"
     />
     <div></div>
   </label>

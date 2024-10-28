@@ -42,7 +42,8 @@ onMounted(() => {
         }
       }
 
-      document.getElementById("countDown" + id).innerText = timeString;
+      const countDownElement: any = document.getElementById("countDown" + id);
+      countDownElement.innerText = timeString;
 
       if (second === 0) {
         isEnd.value = true;
