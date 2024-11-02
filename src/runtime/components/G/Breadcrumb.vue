@@ -25,11 +25,11 @@ const props = defineProps({
       :key="index"
       class="flex items-center gap-1 flex-wrap"
     >
-      <GIcon v-if="item.icon" :name="item.icon" />
+      <GIcon v-if="item.icon" :name="`${item.icon}`" />
       <nuxt-link
         v-if="item.to"
         class="glorious-breadcrumb-link"
-        :to="item.to.toString()"
+        :to="`${item.to}`"
       >
         {{ item.text }}
       </nuxt-link>

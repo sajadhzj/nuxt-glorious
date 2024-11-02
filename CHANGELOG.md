@@ -10,6 +10,8 @@
 - simple table component added
 - breadcrumb component changed props
 - drawer component now work with v-model and $drawer() not supported
+- type check fixed
+- modal content style fixed
 
 ## `v1.2.0`
 

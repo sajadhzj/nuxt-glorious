@@ -22,15 +22,15 @@
 }
 
 .glorious-input-primary {
-  @apply rounded-md ring-1 ring-green-500 ;
+  @apply rounded-md ring-1 ring-green-500;
   @extend %input-size, %focus;
   &:disabled {
-    @apply bg-green-300 cursor-not-allowed;
+    @apply bg-green-100 cursor-not-allowed;
   }
 }
 
 .glorious-input-red {
-  @apply rounded-md ring-1 ring-red-500 ;
+  @apply rounded-md ring-1 ring-red-500;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -39,7 +39,7 @@
 }
 
 .glorious-input-gray {
-  @apply rounded-md ring-1 ring-gray-500 ;
+  @apply rounded-md ring-1 ring-gray-500;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -48,7 +48,7 @@
 }
 
 .glorious-input-blue {
-  @apply rounded-md ring-1 ring-blue-500 ;
+  @apply rounded-md ring-1 ring-blue-500;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -57,7 +57,7 @@
 }
 
 .glorious-input-orange {
-  @apply rounded-md ring-1 ring-orange-500 ;
+  @apply rounded-md ring-1 ring-orange-500;
   @extend %input-size, %focus;
 
   &:disabled {
@@ -108,5 +108,20 @@
   @apply mt-3 gap-2 flex flex-wrap;
   > div {
     @apply bg-green-500 px-1 rounded text-white flex items-center gap-2 cursor-pointer;
+  }
+}
+
+.glorious-input {
+  // -------------------------------------------------- OPTION
+  &-options {
+    @apply p-1 shadow-lg absolute w-full bg-white rounded border-gray-200 border max-h-[200px] overflow-y-auto;
+
+    > div {
+      @apply py-2 hover:bg-gray-100 cursor-pointer rounded px-2;
+    }
+
+    &.size-md {
+      @apply top-11;
+    }
   }
 }

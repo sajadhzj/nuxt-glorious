@@ -35,6 +35,7 @@ export const GloriousStore = defineStore("GloriousStore", {
         });
     },
     modalCreate(key: string | Array<string>) {
+      //TODO: maybe should be remove because when use two component in page have conflict
       this.modals = {};
       const defaultValue = {
         show: false,

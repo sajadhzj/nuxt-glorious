@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "#imports";
-import { useGloriousCore } from "../../composables/useGloriousCore";
+import { computed, ref, watch } from '#imports'
+import { useGloriousCore } from '../../composables/useGloriousCore'
 const props = defineProps({
   modelValue: {
     required: false,
-    default: "",
+    default: '',
     type: [String, Array<String>, Number],
   },
   color: {
     required: false,
-    default: "primary",
-    type: String as () => "orange" | "blue" | "gray" | "red" | "primary",
+    default: 'primary',
+    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'primary',
   },
   placeholder: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   title: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   size: {
     required: false,
-    default: "md",
-    type: String as () => "xl" | "lg" | "md" | "sm" | "xsm",
+    default: 'md',
+    type: String as () => 'xl' | 'lg' | 'md' | 'sm' | 'xsm',
   },
   error: {
     required: false,
-    default: "|",
+    default: '|',
     type: String,
   },
   icon: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   disabled: {
@@ -44,139 +44,177 @@ const props = defineProps({
   },
   type: {
     required: false,
-    default: "text",
+    default: 'text',
     type: String as () =>
-      | "button"
-      | "checkbox"
-      | "color"
-      | "date"
-      | "email"
-      | "file"
-      | "hidden"
-      | "password"
-      | "radio"
-      | "range"
-      | "tel"
-      | "text"
-      | "url"
-      | "number",
+      | 'button'
+      | 'checkbox'
+      | 'color'
+      | 'date'
+      | 'email'
+      | 'file'
+      | 'hidden'
+      | 'password'
+      | 'radio'
+      | 'range'
+      | 'tel'
+      | 'text'
+      | 'url'
+      | 'number',
   },
   autocomplete: {
     required: false,
-    default: "off",
-    type: String as () => "off" | "on" | "new-password",
-  },
-  mode: {
-    required: false,
-    default: "normal",
-    type: String as () => "normal" | "tag",
+    default: 'off',
+    type: String as () => 'off' | 'on' | 'new-password',
   },
   display: {
     required: false,
-    default: "",
-    type: String as () => "price",
+    default: '',
+    type: String as () => 'price',
   },
   inputMode: {
     required: false,
-    default: "text",
+    default: 'text',
     type: String as () =>
-      | "text"
-      | "none"
-      | "decimal"
-      | "numeric"
-      | "tel"
-      | "search"
-      | "email"
-      | "url",
+      | 'text'
+      | 'none'
+      | 'decimal'
+      | 'numeric'
+      | 'tel'
+      | 'search'
+      | 'email'
+      | 'url',
   },
-});
+  mode: {
+    required: false,
+    default: 'normal',
+    type: String as () => 'normal' | 'tag',
+  },
+  tagLockOption: {
+    required: false,
+    default: false,
+    type: Boolean,
+  },
+  options: {
+    required: false,
+    default: [],
+    type: Array<object>,
+  },
+  loadingOptions: {
+    required: false,
+    default: false,
+    type: Boolean,
+  },
+})
 
-const inputValue: any = ref(null);
+const inputValue: any = ref(null)
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue'])
 
 watch(
   () => inputValue.value,
   () => {
-    if (props.mode === "tag") return;
+    if (props.mode === 'tag') return
 
     switch (props.display) {
-      case "price":
+      case 'price':
         inputValue.value = useGloriousCore.numbersWithSeperateSamePrice(
           inputValue.value
-        );
+        )
         emits(
-          "update:modelValue",
-          inputValue.value.toString().replaceAll(",", "")
-        );
-        break;
+          'update:modelValue',
+          inputValue.value.toString().replaceAll(',', '')
+        )
+        break
       default:
-        emits("update:modelValue", inputValue.value);
-        break;
+        emits('update:modelValue', inputValue.value)
+        break
     }
   }
-);
+)
 
 const computeIconSize = computed(() => {
-  let iconSize = 0;
+  let iconSize = 0
 
   switch (props.size) {
-    case "xl":
-      iconSize = 30;
-      break;
-    case "lg":
-      iconSize = 27;
-      break;
-    case "md":
-      iconSize = 25;
-      break;
-    case "sm":
-      iconSize = 23;
-      break;
-    case "xsm":
-      iconSize = 20;
-      break;
+    case 'xl':
+      iconSize = 30
+      break
+    case 'lg':
+      iconSize = 27
+      break
+    case 'md':
+      iconSize = 25
+      break
+    case 'sm':
+      iconSize = 23
+      break
+    case 'xsm':
+      iconSize = 20
+      break
     default:
-      iconSize = 30;
-      break;
+      iconSize = 30
+      break
   }
 
-  return iconSize;
-});
+  return iconSize
+})
 
 // ------------------------------------------------------------------------------------------------ TAG
-const tags: any = ref([]);
+const tags: any = ref([])
 
 const addTag = (event: any) => {
-  if (tags.value.length === 0) tags.value = [];
+  if (props.tagLockOption) return
 
-  if (props.mode !== "tag") return;
-  const value: any = event.target.value;
-  tags.value.push(value);
-  emits("update:modelValue", tags.value);
-  inputValue.value = "";
-};
+  if (tags.value.length === 0) tags.value = []
+
+  if (props.mode !== 'tag') return
+  const value: any = event.target.value
+  tags.value.push(value)
+  emits('update:modelValue', tags.value)
+  inputValue.value = ''
+}
+
+const addTagViaOption = (option: any, event: any) => {
+  //   event.stopPropagation() if want not close with window
+  if (tags.value.length === 0) tags.value = []
+
+  const value: any = option
+  tags.value.push(value)
+  emits('update:modelValue', tags.value)
+  inputValue.value = ''
+}
+
 const removeTag = (tag: string) => {
-  tags.value = tags.value.filter((item: any) => item !== tag);
-  emits("update:modelValue", tags.value);
-};
+  tags.value = tags.value.filter((item: any) => item !== tag)
+  emits('update:modelValue', tags.value)
+}
 
 // -------------------------------------- init value
 const initValue = () => {
-  if (props.mode === "tag") {
-    tags.value = props.modelValue;
-    return;
+  if (props.mode === 'tag') {
+    tags.value = props.modelValue
+    return
   }
 
-  inputValue.value = props.modelValue;
-};
-initValue();
+  inputValue.value = props.modelValue
+}
+initValue()
 watch(
   () => props.modelValue,
   () => initValue()
-);
+)
 
-const typeInput = ref(props.type);
+const typeInput = ref(props.type)
+
+const inputClicked = (event: any) => {
+  if (props.mode === 'tag' && props.options) {
+    console.log(event.currentTarget.parentElement.children)
+
+    const optionsElement = event.currentTarget.parentElement.children[1]
+    if (optionsElement.classList.contains('hidden'))
+      optionsElement.classList.remove('hidden')
+  }
+}
 </script>
 
 <template>
@@ -191,7 +229,7 @@ const typeInput = ref(props.type);
           v-model="inputValue"
           :inputmode="props.inputMode"
           :autocomplete="props.autocomplete"
-          class="w-full"
+          class="w-full glorious-input-field"
           :class="[
             props.size,
             `glorious-input-${props.color}`,
@@ -201,6 +239,7 @@ const typeInput = ref(props.type);
           :disabled="props.disabled"
           :type="typeInput"
           @keyup.enter="addTag($event)"
+          @click="inputClicked($event)"
         />
         <GIcon
           v-if="props.type === 'password' && typeInput === 'password'"
@@ -216,10 +255,29 @@ const typeInput = ref(props.type);
           name="glorious-eye-off-fill"
           @click="typeInput = 'password'"
         ></GIcon>
+
+        <div
+          v-if="props.options.length > 0"
+          class="glorious-input-options"
+          :class="[`size-${props.size}`]"
+        >
+          <div v-if="props.loadingOptions" class="flex justify-center">
+            <GLoading color="green" />
+          </div>
+          <template v-else>
+            <div
+              v-for="(option, index) in props.options"
+              :key="index"
+              @click="addTagViaOption(option, $event)"
+            >
+              {{ option.text }}
+            </div>
+          </template>
+        </div>
       </div>
       <div v-if="tags.length !== 0" class="glorious-input-tag">
         <div v-for="(item, index) in tags" :key="index">
-          {{ item }}
+          {{ typeof item === 'object' ? item.text : item }}
           <GIcon
             name="glorious-x"
             :size="10"
@@ -240,5 +298,5 @@ const typeInput = ref(props.type);
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/input.scss";
+@import '../../assets/style/components/input.scss';
 </style>

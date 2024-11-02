@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useGloriousAppSetting } from "../../composables/useGloriousAppSetting";
+import { watch } from "#imports";
 
 const props = defineProps({
   modelValue: {

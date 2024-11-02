@@ -1,16 +1,22 @@
 @import "../variable.scss";
 
-.glorious-simple-table {
+.glorious-table {
   @apply overflow-x-auto;
   @each $color in $colors {
     &.#{"color-" + $color} {
-      > table {
-        @apply border #{"border-" + $color + "-400"};
-      }
-
       > table > thead {
         @apply rounded-t-md overflow-hidden;
-        @apply #{"bg-" + $color + "-400"};
+        > tr {
+          > th:first-child {
+            @apply rounded-r-lg #{"bg-" + $color + "-400"};
+          }
+          > th {
+            @apply #{"bg-" + $color + "-400"};
+          }
+          > th:last-child {
+            @apply rounded-l-lg #{"bg-" + $color + "-400"};
+          }
+        }
       }
 
       > table > tbody {
@@ -19,7 +25,7 @@
             @apply #{"bg-" + $color + "-50"};
           }
           > td {
-            @apply px-4 py-1 text-center;
+            @apply px-4 py-2 text-center;
           }
         }
       }
@@ -30,14 +36,6 @@
 
     > thead > tr > th {
       @apply px-4 py-2 text-center;
-    }
-
-    > tbody {
-      > tr {
-        > td {
-          @apply px-4 py-1 text-center;
-        }
-      }
     }
   }
 }

@@ -86,7 +86,10 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     addPlugin(resolver.resolve("./runtime/plugins/glorious-app-setting"));
-    addPlugin(resolver.resolve("./runtime/plugins/InputComponent"));
+    addPlugin({
+      src: resolver.resolve("./runtime/plugins/InputComponent"),
+      mode: "client",
+    });
 
     addRouteMiddleware({
       name: "g-auth-strategy",
