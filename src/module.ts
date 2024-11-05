@@ -14,7 +14,7 @@ export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "glorious",
+    name: "nuxt-glorious",
     configKey: "glorious",
   },
   // Default configuration options of the Nuxt module

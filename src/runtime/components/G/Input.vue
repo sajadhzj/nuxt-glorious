@@ -208,7 +208,8 @@ const typeInput = ref(props.type)
 
 const inputClicked = (event: any) => {
   if (props.mode === 'tag' && props.options) {
-    console.log(event.currentTarget.parentElement.children)
+    const gio = document.querySelectorAll('.glorious-input-options')
+    gio.forEach((element: any) => element.classList.add('hidden'))
 
     const optionsElement = event.currentTarget.parentElement.children[1]
     if (optionsElement.classList.contains('hidden'))
@@ -258,7 +259,7 @@ const inputClicked = (event: any) => {
 
         <div
           v-if="props.options.length > 0"
-          class="glorious-input-options"
+          class="glorious-input-options hidden"
           :class="[`size-${props.size}`]"
         >
           <div v-if="props.loadingOptions" class="flex justify-center">

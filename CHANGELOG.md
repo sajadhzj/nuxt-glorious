@@ -12,6 +12,7 @@
 - drawer component now work with v-model and $drawer() not supported
 - type check fixed
 - modal content style fixed
+- input component now can get options for search select when type is tag
 
 ## `v1.2.0`
 
