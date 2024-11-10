@@ -8,6 +8,7 @@
 - avatar component added
 - alert component added
 - switch component added
+- rating component added
 - simple table component added
 - breadcrumb component changed props
 - drawer component now work with v-model and $drawer() not supported
