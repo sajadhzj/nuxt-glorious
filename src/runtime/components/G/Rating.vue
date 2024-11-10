@@ -1,49 +1,37 @@
+<script lang="ts" setup>
+const props = defineProps({
+  modelValue: {
+    required: true,
+  },
+})
+
+const emits = defineEmits(['update:modelValue'])
+const computeModelValue = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emits('update:modelValue', target.value)
+}
+
+const id = useId()
+</script>
+
 <template>
-  <div class="flex gap-2">
-    <div
+  <div class="rating">
+    <template
       v-for="(item, index) in 5"
       :key="index"
-      class="cursor-pointer start-box"
-      @click="methods.computeStar($event, 5 - index)"
     >
-      <GIcon
-        name="glorious-star-line"
-        size="20"
+      <input
+        type="radio"
+        :id="`star${index}-${id}`"
+        :name="`star-name${index}-${id}`"
+        :value="item"
+        @input="computeModelValue"
       />
-      <GIcon
-        v-show="false"
-        name="glorious-star-fill"
-        size="20"
-      />
-    </div>
+      <label :for="`star${index}-${id}`"></label>
+    </template>
   </div>
 </template>
 
-<script lang="ts" setup>
-const emits = defineEmits(['update:modelValue'])
-const methods = {
-  computeStar: (event, index) => {
-    emits('update:modelValue', index)
-    let cEvent = event.currentTarget
-    cEvent.children[0].style.display = 'none'
-    cEvent.children[1].style.display = 'inline'
-
-    for (let i = index; i > 1; i--) {
-      cEvent = cEvent.nextElementSibling
-      cEvent.children[0].style.display = 'none'
-      cEvent.children[1].style.display = 'inline'
-    }
-
-    let pEvent = event.currentTarget
-    for (let i = 10; i > 1; i--) {
-      if (pEvent.previousElementSibling !== null) {
-        pEvent = pEvent.previousElementSibling
-        pEvent.children[0].style.display = 'inline'
-        pEvent.children[1].style.display = 'none'
-      }
-    }
-  },
-}
-</script>
-
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import '../../assets/style/components/rating.scss';
+</style>
