@@ -1,10 +1,4 @@
 <script lang="ts" setup>
-const props = defineProps({
-  modelValue: {
-    required: true,
-  },
-})
-
 const emits = defineEmits(['update:modelValue'])
 const computeModelValue = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -12,6 +6,7 @@ const computeModelValue = (event: Event) => {
 }
 
 const id = useId()
+const value = [5, 4, 3, 2, 1]
 </script>
 
 <template>
@@ -22,12 +17,12 @@ const id = useId()
     >
       <input
         type="radio"
-        :id="`star${index}-${id}`"
-        :name="`star-name${index}-${id}`"
-        :value="item"
+        :id="`star${item}-${id}`"
+        :name="`star-name${id}`"
+        :value="value[index]"
         @input="computeModelValue"
       />
-      <label :for="`star${index}-${id}`"></label>
+      <label :for="`star${item}-${id}`"></label>
     </template>
   </div>
 </template>
