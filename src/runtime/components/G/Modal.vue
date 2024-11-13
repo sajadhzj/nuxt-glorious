@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { watch } from "#imports";
-import { GloriousStore } from "../../stores/GloriousStore";
+import { watch } from '#imports'
+
 const props = defineProps({
   modelValue: {
     required: true,
@@ -9,17 +9,17 @@ const props = defineProps({
   },
   size: {
     required: false,
-    default: "md",
-    type: String as () => "xl" | "lg" | "md" | "sm" | "full",
+    default: 'md',
+    type: String as () => 'xl' | 'lg' | 'md' | 'sm' | 'full',
   },
   title: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   okBtn: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   okBtnLoading: {
@@ -29,13 +29,13 @@ const props = defineProps({
   },
   closeBtn: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   rtl: {
     required: false,
-    default: "rtl",
-    type: String as () => "rtl" | "ltr",
+    default: 'rtl',
+    type: String as () => 'rtl' | 'ltr',
   },
   blur: {
     required: false,
@@ -47,45 +47,50 @@ const props = defineProps({
     default: true,
     type: Boolean,
   },
-});
+  colorBtn: {
+    required: false,
+    default: 'primary',
+    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'primary',
+  },
+})
 
-const emits = defineEmits(["ok", "close", "update:modelValue"]);
+const emits = defineEmits(['ok', 'close', 'update:modelValue'])
 
 const addBlurBackground = (): void => {
-  const backgroundBlur = document.createElement("div");
-  backgroundBlur.classList.add("glorious-scaffold-modal-bg-blur");
-  const nuxt: any = document.getElementById("__nuxt");
-  nuxt.appendChild(backgroundBlur);
-  backgroundBlur.addEventListener("click", () => {
+  const backgroundBlur = document.createElement('div')
+  backgroundBlur.classList.add('glorious-scaffold-modal-bg-blur')
+  const nuxt: any = document.getElementById('__nuxt')
+  nuxt.appendChild(backgroundBlur)
+  backgroundBlur.addEventListener('click', () => {
     if (props.blurClose) {
-      emits("update:modelValue", false);
-      backgroundBlur.remove();
+      emits('update:modelValue', false)
+      backgroundBlur.remove()
     }
-  });
-};
+  })
+}
 
 watch(
   () => props.modelValue,
   () => {
-    const modals = document.querySelectorAll(".glorious-scaffold-modal");
+    const modals = document.querySelectorAll('.glorious-scaffold-modal')
     if (props.modelValue && props.blur) {
-      addBlurBackground();
+      addBlurBackground()
       setTimeout(() => {
         modals.forEach((el: any) => {
-          el.classList.remove("animation");
-        });
-      }, 500);
+          el.classList.remove('animation')
+        })
+      }, 500)
     } else {
       const blur: any = document.querySelector(
-        ".glorious-scaffold-modal-bg-blur"
-      );
+        '.glorious-scaffold-modal-bg-blur'
+      )
       modals.forEach((el: any) => {
-        el.classList.add("animation");
-      });
-      if (blur !== null) blur.remove();
+        el.classList.add('animation')
+      })
+      if (blur !== null) blur.remove()
     }
   }
-);
+)
 </script>
 
 <template>
@@ -94,7 +99,10 @@ watch(
     :class="[props.modelValue ? 'open' : 'close', `size-${props.size}`]"
   >
     <!-- header -->
-    <div v-show="props?.title !== ''" class="glorious-scaffold-modal-header">
+    <div
+      v-show="props?.title !== ''"
+      class="glorious-scaffold-modal-header"
+    >
       <span class="font-medium">{{ props.title }}</span>
       <GButton
         class="flex justify-center items-center w-6 h-6"
@@ -102,10 +110,17 @@ watch(
         color="red"
         @click="emits('update:modelValue', false)"
       >
-        <GIcon name="glorious-x" color="#fff" :size="10" />
+        <GIcon
+          name="glorious-x"
+          color="#fff"
+          :size="10"
+        />
       </GButton>
     </div>
-    <hr v-show="props.title !== ''" class="my-3" />
+    <hr
+      v-show="props.title !== ''"
+      class="my-3"
+    />
     <!-- end header -->
 
     <div class="glorious-scaffold-modal-content">
@@ -113,12 +128,21 @@ watch(
     </div>
 
     <!-- start footer -->
-    <div v-show="props.okBtn !== ''" class="glorious-scaffold-modal-footer">
-      <GButton :loading="props.okBtnLoading" @click="emits('ok')">
+    <div
+      v-show="props.okBtn !== ''"
+      class="glorious-scaffold-modal-footer"
+    >
+      <GButton
+        :color="props.colorBtn"
+        :loading="props.okBtnLoading"
+        @click="emits('ok')"
+      >
         {{ props.okBtn }}
       </GButton>
       <GButton
+        :color="props.colorBtn"
         v-show="props.closeBtn !== ''"
+        outline
         @click="emits('update:modelValue', false)"
       >
         {{ props.closeBtn }}
@@ -129,5 +153,5 @@ watch(
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/modal.scss";
+@import '../../assets/style/components/modal.scss';
 </style>

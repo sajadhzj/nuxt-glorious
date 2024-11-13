@@ -9,12 +9,14 @@
 - alert component added
 - switch component added
 - rating component added
+- timeline component added
 - simple table component added
 - breadcrumb component changed props
 - drawer component now work with v-model and $drawer() not supported
 - type check fixed
 - modal content style fixed
 - input component now can get options for search select when type is tag
+- tab component now show arrow if scrolled
 
 ## `v1.2.0`
 
