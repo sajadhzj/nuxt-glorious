@@ -17,6 +17,7 @@
 - modal content style fixed
 - input component now can get options for search select when type is tag
 - tab component now show arrow if scrolled
+- now you can access to response in all of project with `gs.response` see more information is `useGloriousFetch`
 
 ## `v1.2.0`
 

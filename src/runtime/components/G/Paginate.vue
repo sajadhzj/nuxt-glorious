@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch, ref } from "#imports";
+import { watch, ref } from '#imports'
 const props = defineProps({
   currentPage: {
     required: true,
@@ -17,42 +17,45 @@ const props = defineProps({
     default: 3,
   },
   modelValue: {
-    required: true,
+    required: false,
     type: Number,
   },
-});
+})
 
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits(['update:modelValue', 'change'])
 
 const emit = (item: any) => {
-  if (props.currentPage !== item) emits("update:modelValue", item);
-};
+  if (props.currentPage !== item) {
+    emits('update:modelValue', item)
+    emits('change', { page: item })
+  }
+}
 
-const listPage = ref<Array<Number>>([]);
+const listPage = ref<Array<Number>>([])
 
 const computeListPage = () => {
-  listPage.value = [];
-  let firstPage = props.currentPage - props.numberSugestPage;
-  const endPage = props.currentPage + (props.numberSugestPage + 1);
+  listPage.value = []
+  let firstPage = props.currentPage - props.numberSugestPage
+  const endPage = props.currentPage + (props.numberSugestPage + 1)
 
   while (firstPage <= endPage) {
     if (firstPage > 0 && firstPage <= props.lastPage)
-      listPage.value.push(firstPage);
-    firstPage++;
+      listPage.value.push(firstPage)
+    firstPage++
   }
-};
-computeListPage();
+}
+computeListPage()
 watch(
   () => props.currentPage,
   () => computeListPage()
-);
+)
 
 const arrowPrevious = () => {
-  if (props.currentPage !== 1) emit(props.currentPage - 1);
-};
+  if (props.currentPage !== 1) emit(props.currentPage - 1)
+}
 const arrowNext = () => {
-  if (props.currentPage !== props.lastPage) emit(props.currentPage + 1);
-};
+  if (props.currentPage !== props.lastPage) emit(props.currentPage + 1)
+}
 </script>
 
 <template>
@@ -91,5 +94,5 @@ const arrowNext = () => {
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/paginate.scss";
+@import '../../assets/style/components/paginate.scss';
 </style>

@@ -1,6 +1,6 @@
-import { defineStore } from "pinia";
-import { navigateTo, useCookie, useRuntimeConfig, useFetch } from "#imports";
-export const GloriousStore = defineStore("GloriousStore", {
+import { defineStore } from 'pinia'
+import { navigateTo, useCookie, useRuntimeConfig, useFetch } from '#imports'
+export const GloriousStore = defineStore('GloriousStore', {
   state: (): any => ({
     auth: {
       loaded: false,
@@ -9,88 +9,90 @@ export const GloriousStore = defineStore("GloriousStore", {
     loading: {},
     keepData: {},
     forms: {},
+    response: {},
+    keepResponse: [],
   }),
   getters: {
     authIsLogin() {
-      const moduleConfig: any = useRuntimeConfig();
-      const cookie = useCookie(moduleConfig.public.glorious.auth.cookie.name);
+      const moduleConfig: any = useRuntimeConfig()
+      const cookie = useCookie(moduleConfig.public.glorious.auth.cookie.name)
 
-      return typeof cookie.value !== "undefined";
+      return typeof cookie.value !== 'undefined'
     },
   },
   actions: {
     formCreate(key: string | Array<string>) {
-      this.forms = {};
-      if (typeof key === "string")
+      this.forms = {}
+      if (typeof key === 'string')
         this.forms[<string>key] = {
           form: {},
           errors: [],
-        };
+        }
       else
         key.map((item) => {
           this.forms[item] = {
             form: {},
             errors: [],
-          };
-        });
+          }
+        })
     },
     modalCreate(key: string | Array<string>) {
       //TODO: maybe should be remove because when use two component in page have conflict
-      this.modals = {};
+      this.modals = {}
       const defaultValue = {
         show: false,
         keepData: {},
-      };
-      if (typeof key === "string") this.modals[key] = defaultValue;
+      }
+      if (typeof key === 'string') this.modals[key] = defaultValue
       else
         key.map((item) => {
-          this.modals[item] = defaultValue;
-        });
+          this.modals[item] = defaultValue
+        })
     },
     drawerCreate(key: string | Array<string>) {
-      this.drawers = {};
-      if (typeof key === "string") this.drawers[key] = false;
+      this.drawers = {}
+      if (typeof key === 'string') this.drawers[key] = false
       else
         key.map((item) => {
-          this.drawers[item] = false;
-        });
+          this.drawers[item] = false
+        })
     },
     authLogout() {
-      const moduleConfig: any = useRuntimeConfig();
-      const token = useCookie(moduleConfig.public.glorious.auth.cookie.name);
-      token.value = null;
-      this.auth.loaded = false;
+      const moduleConfig: any = useRuntimeConfig()
+      const token = useCookie(moduleConfig.public.glorious.auth.cookie.name)
+      token.value = null
+      this.auth.loaded = false
 
-      navigateTo(moduleConfig.public.glorious.auth.redirect.logout);
+      navigateTo(moduleConfig.public.glorious.auth.redirect.logout)
     },
     authSetToken(token: string, to: string | null = null) {
-      const moduleConfig: any = useRuntimeConfig();
-      const decodeToken = this.authParseToken(token);
+      const moduleConfig: any = useRuntimeConfig()
+      const decodeToken = this.authParseToken(token)
       const cookie = useCookie(moduleConfig.public.glorious.auth.cookie.name, {
         expires: new Date(Math.floor(decodeToken.exp * 1e3)),
         httpOnly: moduleConfig.public.glorious.auth.cookie.httpOnly,
-      });
-      cookie.value = token;
+      })
+      cookie.value = token
 
-      this.authGetUser(token);
-      if (to) navigateTo(to);
+      this.authGetUser(token)
+      if (to) navigateTo(to)
     },
     authParseToken(token: any) {
-      const base64Url = token.split(".")[1];
-      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
       const jsonPayload = decodeURIComponent(
         window
           .atob(base64)
-          .split("")
+          .split('')
           .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
           })
-          .join("")
-      );
-      return JSON.parse(jsonPayload);
+          .join('')
+      )
+      return JSON.parse(jsonPayload)
     },
-    authGetUser(token: string = "") {
-      const moduleConfig: any = useRuntimeConfig();
+    authGetUser(token: string = '') {
+      const moduleConfig: any = useRuntimeConfig()
 
       useFetch(
         moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.url,
@@ -98,8 +100,8 @@ export const GloriousStore = defineStore("GloriousStore", {
           lazy: false,
           baseURL: moduleConfig.public.glorious.fetch.baseURL,
           headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + token,
           },
           method:
             moduleConfig.public.glorious.auth.strategy.endpoints.userInfo
@@ -107,13 +109,13 @@ export const GloriousStore = defineStore("GloriousStore", {
         }
       ).then((data: any) => {
         const pick =
-          moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.pick;
+          moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.pick
 
-        if (pick !== "") this.auth.user = data.data.value[pick];
-        else this.auth.user = data.data.value;
+        if (pick !== '') this.auth.user = data.data.value[pick]
+        else this.auth.user = data.data.value
 
-        this.auth.loaded = true;
-      });
+        this.auth.loaded = true
+      })
     },
   },
-});
+})
