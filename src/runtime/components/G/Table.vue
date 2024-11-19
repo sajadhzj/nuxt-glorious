@@ -2,8 +2,8 @@
 const props = defineProps({
   color: {
     required: false,
-    default: "blue",
-    type: String as () => "orange" | "blue" | "gray" | "red" | "green",
+    default: 'blue',
+    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'green',
   },
   header: {
     required: true,
@@ -21,28 +21,37 @@ const props = defineProps({
   loadingOption: {
     required: false,
     default: {
-      color: "green",
+      color: 'green',
     },
     type: {
       color: String,
     },
   },
-});
+})
 </script>
 
 <template>
   <div class="flex flex-col">
-    <div class="glorious-table" :class="[`color-${props.color}`]">
+    <div
+      class="glorious-table"
+      :class="[`color-${props.color}`]"
+    >
       <table>
         <thead>
           <tr>
-            <th v-for="(headItem, index) in props.header" :key="index">
+            <th
+              v-for="(headItem, index) in props.header"
+              :key="index"
+            >
               {{ headItem }}
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(bodyItem, index) in props.body" :key="index">
+        <tbody v-if="!props.loading">
+          <tr
+            v-for="(bodyItem, bodyIndex) in props.body"
+            :key="bodyIndex"
+          >
             <td
               v-for="(headItem, headKey, headIndex) in props.header"
               :key="headIndex"
@@ -50,7 +59,7 @@ const props = defineProps({
               <slot
                 v-if="typeof $slots[headKey] !== 'undefined'"
                 :name="headKey"
-                :item="bodyItem"
+                :item="{ ...bodyItem, index: bodyIndex }"
               />
               <template v-else>
                 {{ bodyItem[headKey] }}
@@ -60,12 +69,15 @@ const props = defineProps({
         </tbody>
       </table>
     </div>
-    <div class="flex justify-center">
-      <GLoading v-if="props.loading" :color="props.loadingOption.color" />
+    <div
+      v-if="props.loading"
+      class="flex justify-center mt-3"
+    >
+      <GLoading :color="props.loadingOption.color" />
     </div>
   </div>
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/table.scss";
+@import '../../assets/style/components/table.scss';
 </style>

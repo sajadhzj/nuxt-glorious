@@ -10,7 +10,7 @@
 - switch component added
 - rating component added
 - timeline component added
-- simple table component added
+- table component added
 - breadcrumb component changed props
 - drawer component now work with v-model and $drawer() not supported
 - type check fixed
@@ -18,6 +18,7 @@
 - input component now can get options for search select when type is tag
 - tab component now show arrow if scrolled
 - now you can access to response in all of project with `gs.response` see more information is `useGloriousFetch`
+- new props for select component `displayTextKey`
 
 ## `v1.2.0`
 

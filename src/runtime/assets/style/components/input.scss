@@ -124,4 +124,8 @@
       @apply top-11;
     }
   }
+
+  div > input::placeholder {
+    @apply text-gray-500;
+  }
 }

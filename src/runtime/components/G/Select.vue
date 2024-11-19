@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
+import { ref, watch } from '#imports'
 interface selectOptionsInterface {
-  text: string;
-  value: [string, object];
+  text: string
+  value: [string, object]
 }
-const props = defineProps({
+const props: any = defineProps({
   modelValue: {
     required: false,
     default: null,
@@ -17,22 +17,22 @@ const props = defineProps({
   },
   color: {
     required: false,
-    default: "primary",
+    default: 'primary',
     type: String,
   },
   size: {
     required: false,
-    default: "md",
+    default: 'md',
     type: String,
   },
   title: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
   error: {
     required: false,
-    default: "|",
+    default: '|',
     type: String,
   },
   disabled: {
@@ -41,28 +41,36 @@ const props = defineProps({
     type: Boolean,
   },
   placeholder: {
-    require: false,
-    default: "",
+    required: false,
+    default: '',
     type: String,
   },
-});
-const selectValue: any = ref(null);
-const emits = defineEmits(["update:modelValue"]);
+  displayTextKey: {
+    required: false,
+    default: 'text',
+    type: String,
+  },
+})
+const selectValue: any = ref(null)
+const emits = defineEmits(['update:modelValue'])
 watch(
   () => selectValue.value,
   () => {
-    emits("update:modelValue", selectValue.value);
+    emits('update:modelValue', selectValue.value)
   }
-);
+)
 
 // -------------------------------------- init value
-selectValue.value = props.modelValue;
+selectValue.value = props.modelValue
 watch(
   () => props.modelValue,
   () => {
-    selectValue.value = props.modelValue;
+    selectValue.value = props.modelValue
   }
-);
+)
+
+emits('update:modelValue', null)
+selectValue.value = null
 </script>
 
 <template>
@@ -81,12 +89,12 @@ watch(
           :key="index"
           :value="item.value"
         >
-          {{ item.text }}
+          {{ item[props.displayTextKey] }}
         </option>
       </select>
       <span
         v-if="selectValue === null"
-        class="absolute top-0 bottom-0 my-auto pr-2 h-max"
+        class="absolute top-0 bottom-0 my-auto pr-2 h-max text-gray-500"
       >
         {{ props.placeholder }}
       </span>
@@ -96,5 +104,5 @@ watch(
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/select.scss";
+@import '../../assets/style/components/select.scss';
 </style>
