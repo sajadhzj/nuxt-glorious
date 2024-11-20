@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import { ref, watch } from "#imports";
+import { ref, watch } from '#imports'
 
 const props = defineProps({
   name: {
     required: true,
     type: String,
-    default: "",
+    default: '',
   },
   color: {
     required: false,
     type: String,
-    default: "#000",
+    default: '#000',
   },
   size: {
     required: false,
@@ -22,112 +22,113 @@ const props = defineProps({
     type: [Number, null],
     default: null,
   },
-});
+})
 
-const icon = ref("");
+const icon = ref('')
 
 const methods = {
   computeProps: (icon: any) => {
     //color
-    icon = icon.replaceAll("\n", " ");
+    icon = icon.replaceAll('\n', ' ')
     //stroke
     icon = icon
-      .split(" ")
+      .split(' ')
       .map((item: any) =>
-        item.includes('stroke="') && typeof props.color !== "undefined"
+        item.includes('stroke="') && typeof props.color !== 'undefined'
           ? 'stroke="' + props.color + '"'
           : item
       )
-      .join(" ");
+      .join(' ')
 
     //fill
-    if (typeof props.color !== "undefined") {
+    if (typeof props.color !== 'undefined') {
       icon = icon
-        .split(" ")
+        .split(' ')
         .map((item: any) => {
           if (!item.includes('fill="none"')) {
             if (item.includes('fill="') && !item.includes('"/>'))
-              return `fill="${props.color}"`;
+              return `fill="${props.color}"`
             else if (item.includes('fill="') && item.includes('"/>'))
-              return `fill="${props.color}"/>`;
-            else return item;
-          } else return item;
+              return `fill="${props.color}"/>`
+            else return item
+          } else return item
         })
-        .join(" ");
+        .join(' ')
     }
 
     //size
-    icon = icon.replaceAll("\n", " ");
+    icon = icon.replaceAll('\n', ' ')
 
     //width
     icon = icon
-      .split(" ")
+      .split(' ')
       .map((item: any) =>
         item.includes('width="') &&
-        !item.includes("stroke-width") &&
-        typeof props.size !== "undefined"
+        !item.includes('stroke-width') &&
+        typeof props.size !== 'undefined'
           ? 'width="' + props.size + '"'
           : item
       )
-      .join(" ");
+      .join(' ')
 
     icon = icon
-      .split(" ")
+      .split(' ')
       .map((item: any) =>
-        item.includes('height="') && typeof props.size !== "undefined"
+        item.includes('height="') && typeof props.size !== 'undefined'
           ? 'height="' + props.size + '"'
           : item
       )
-      .join(" ");
+      .join(' ')
 
     //stroke
     if (props.stroke !== null) {
-      icon = icon.replaceAll("\n", " ");
+      icon = icon.replaceAll('\n', ' ')
       icon = icon
-        .split(" ")
+        .split(' ')
         .map((item: any) =>
-          item.includes("stroke-width") && typeof props.stroke !== "undefined"
+          item.includes('stroke-width') && typeof props.stroke !== 'undefined'
             ? 'stroke-width="' + props.stroke + '"'
             : item
         )
-        .join(" ");
+        .join(' ')
     }
 
-    return icon;
+    return icon
   },
-};
+}
 
 async function getIcon() {
   try {
-    const iconsImport = import.meta.glob("assets/icons/**/**.svg", {
-      query: "?raw",
+    const iconsImport = import.meta.glob('assets/icons/**/**.svg', {
+      query: '?raw',
       eager: false,
-    });
-    let rawIcon = "";
-    if (typeof iconsImport[`/assets/icons/${props.name}.svg`] !== "undefined") {
-      const icon: any = await iconsImport[`/assets/icons/${props.name}.svg`]();
-      rawIcon = icon.default;
+    })
+
+    let rawIcon = ''
+    if (typeof iconsImport[`/assets/icons/${props.name}.svg`] !== 'undefined') {
+      const icon: any = await iconsImport[`/assets/icons/${props.name}.svg`]()
+      rawIcon = icon.default
     } else {
-      const staticAssets = import.meta.glob("../../../assets/icons/**/**.svg", {
-        query: "?raw",
+      const staticAssets = import.meta.glob('../../assets/icons/**/**.svg', {
+        query: '?raw',
         eager: false,
-      });
+      })
 
       const icon: any = await staticAssets[
-        `../../../assets/icons/${props.name}.svg`
-      ]();
-      rawIcon = icon.default;
+        `../../assets/icons/${props.name}.svg`
+      ]()
+      rawIcon = icon.default
     }
 
-    icon.value = methods.computeProps(rawIcon);
+    icon.value = methods.computeProps(rawIcon)
   } catch (e) {
     console.error(
       `glorious error -> Icon '${props.name}' doesn't exist in 'assets/icons'`
-    );
+    )
   }
 }
 
-await getIcon();
+await getIcon()
 
 watch(
   () => props,
@@ -135,9 +136,12 @@ watch(
   {
     deep: true,
   }
-);
+)
 </script>
 <template>
   <!-- eslint-disable vue/no-v-html -->
-  <div class="w-max h-max" v-html="icon" />
+  <div
+    class="w-max h-max"
+    v-html="icon"
+  />
 </template>

@@ -11,7 +11,8 @@ const props = defineProps({
   },
   body: {
     required: true,
-    type: Object,
+    type: Array<Object>,
+    default: [],
   },
   loading: {
     required: false,

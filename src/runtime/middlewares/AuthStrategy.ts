@@ -1,20 +1,16 @@
-import {
-  defineNuxtRouteMiddleware,
-  useCookie,
-  useNuxtApp,
-} from "#imports";
-import { GloriousStore } from "../stores/GloriousStore";
+import { defineNuxtRouteMiddleware, useCookie, useNuxtApp } from '#imports'
+import { GloriousStore } from '../stores/GloriousStore'
 
 export default defineNuxtRouteMiddleware(() => {
-  const nuxtApp = useNuxtApp();
-  const moduleConfig: any = nuxtApp.$config.public.glorious;
-  const gs = GloriousStore();
+  const nuxtApp = useNuxtApp()
+  const moduleConfig: any = nuxtApp.$config.public.glorious
+  const gs = GloriousStore()
 
-  if (moduleConfig.auth.strategy.provider === "") return;
+  if (moduleConfig.auth.strategy.provider === '') return
 
-  const cookieToken: any = useCookie(moduleConfig.auth.cookie.name);
+  const cookieToken: any = useCookie(moduleConfig.auth.cookie.name)
 
-  if (typeof cookieToken.value === "undefined") return;
+  if (typeof cookieToken.value === 'undefined') return
 
-  nuxtApp.hook("app:beforeMount", () => gs.authGetUser(cookieToken.value));
-});
+  nuxtApp.hook('app:beforeMount', () => gs.authGetUser(cookieToken.value))
+})

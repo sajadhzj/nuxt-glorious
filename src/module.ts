@@ -10,7 +10,8 @@ import {
 
 import defu from 'defu'
 // Module options TypeScript interface definition
-export interface ModuleOptions {}
+import defaultModuleOption from './config/defaultModuleOption'
+import type { ModuleOptions } from './types'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -23,38 +24,10 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url)
 
     //config
-    nuxt.options.runtimeConfig.public.glorious = defu(nuxt.options.glorious, {
-      fetch: {
-        baseURL: '/',
-        credentials: 'same-origin',
-      },
-      seo: {
-        suffix: '',
-        title: '',
-        description: '',
-      },
-      auth: {
-        cookie: {
-          name: 'ga-token',
-          httpOnly: false,
-        },
-        redirect: {
-          logout: '/login',
-          login: '/login',
-        },
-        strategy: {
-          provider: '',
-          //[laravel-passport]
-          endpoints: {
-            userInfo: {
-              url: '/',
-              method: 'GET',
-              pick: '',
-            },
-          },
-        },
-      },
-    })
+    nuxt.options.runtimeConfig.public.glorious = defu(
+      nuxt.options.glorious,
+      defaultModuleOption
+    )
 
     await installModule('@nuxtjs/tailwindcss', {
       // module configuration
