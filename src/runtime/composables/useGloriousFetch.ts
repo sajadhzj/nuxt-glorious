@@ -135,8 +135,6 @@ function computeFormData(options: gloriousFetchOptions) {
   const form: any = new FormData()
 
   Object.entries(<Object>options.body).forEach((item: any) => {
-    console.log(item[1])
-
     if (item[1] === null) return
 
     if (

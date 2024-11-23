@@ -1,109 +1,15 @@
 <script setup lang="ts">
 import { computed, ref, watch } from '#imports'
 import { useGloriousCore } from '../../composables/useGloriousCore'
+import _props from '../props/Input'
+
 const props = defineProps({
   modelValue: {
     required: false,
     default: '',
     type: [String, Array<String>, Number],
   },
-  color: {
-    required: false,
-    default: 'primary',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'primary',
-  },
-  placeholder: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  title: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  size: {
-    required: false,
-    default: 'md',
-    type: String as () => 'xl' | 'lg' | 'md' | 'sm' | 'xsm',
-  },
-  error: {
-    required: false,
-    default: '|',
-    type: String,
-  },
-  icon: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  type: {
-    required: false,
-    default: 'text',
-    type: String as () =>
-      | 'button'
-      | 'checkbox'
-      | 'color'
-      | 'date'
-      | 'email'
-      | 'file'
-      | 'hidden'
-      | 'password'
-      | 'radio'
-      | 'range'
-      | 'tel'
-      | 'text'
-      | 'url'
-      | 'number',
-  },
-  autocomplete: {
-    required: false,
-    default: 'off',
-    type: String as () => 'off' | 'on' | 'new-password',
-  },
-  display: {
-    required: false,
-    default: '',
-    type: String as () => 'price',
-  },
-  inputMode: {
-    required: false,
-    default: 'text',
-    type: String as () =>
-      | 'text'
-      | 'none'
-      | 'decimal'
-      | 'numeric'
-      | 'tel'
-      | 'search'
-      | 'email'
-      | 'url',
-  },
-  mode: {
-    required: false,
-    default: 'normal',
-    type: String as () => 'normal' | 'tag',
-  },
-  tagLockOption: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  options: {
-    required: false,
-    default: [],
-    type: Array<object>,
-  },
-  loadingOptions: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
+  ..._props,
 })
 
 const inputValue: any = ref(null)
@@ -262,7 +168,10 @@ const inputClicked = (event: any) => {
           class="glorious-input-options hidden"
           :class="[`size-${props.size}`]"
         >
-          <div v-if="props.loadingOptions" class="flex justify-center">
+          <div
+            v-if="props.loadingOptions"
+            class="flex justify-center"
+          >
             <GLoading color="green" />
           </div>
           <template v-else>
@@ -276,8 +185,14 @@ const inputClicked = (event: any) => {
           </template>
         </div>
       </div>
-      <div v-if="tags.length !== 0" class="glorious-input-tag">
-        <div v-for="(item, index) in tags" :key="index">
+      <div
+        v-if="tags.length !== 0"
+        class="glorious-input-tag"
+      >
+        <div
+          v-for="(item, index) in tags"
+          :key="index"
+        >
           {{ typeof item === 'object' ? item.text : item }}
           <GIcon
             name="glorious-x"

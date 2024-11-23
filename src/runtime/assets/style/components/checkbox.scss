@@ -1,6 +1,5 @@
-@import "../variable.scss";
-$svg-check-icon: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzFfNDg2MTQpIj4KPHBhdGggZD0iTTkuOTk5OTkgMTUuMTcyTDE5LjE5MiA1Ljk3OUwyMC42MDcgNy4zOTNMOS45OTk5OSAxOEwzLjYzNTk5IDExLjYzNkw1LjA0OTk5IDEwLjIyMkw5Ljk5OTk5IDE1LjE3MloiIGZpbGw9IndoaXRlIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfMV80ODYxNCI+CjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0id2hpdGUiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8L3N2Zz4K";
-
+@import '../variable.scss';
+$svg-check-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgMzIgMzIiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJNIDI4LjI4MTI1IDYuMjgxMjUgTCAxMSAyMy41NjI1IEwgMy43MTg3NSAxNi4yODEyNSBMIDIuMjgxMjUgMTcuNzE4NzUgTCAxMC4yODEyNSAyNS43MTg3NSBMIDExIDI2LjQwNjI1IEwgMTEuNzE4NzUgMjUuNzE4NzUgTCAyOS43MTg3NSA3LjcxODc1IFoiLz48L3N2Zz4K';
 .glorious-checkbox {
   @apply block relative cursor-pointer;
 
@@ -27,15 +26,16 @@ $svg-check-icon: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQi
 
     &:after {
       content: url(#{$svg-check-icon});
+
       @apply absolute hidden top-1 right-0 left-0 bottom-0 m-auto;
     }
   }
 
   @each $color in $colors {
-    &.#{$color} {
+    &.#{'color-' + $color} {
       > input {
         &:checked ~ div {
-          @apply bg-#{$color}-500;
+          @apply #{"bg-" + $color + "-500"};
         }
       }
     }

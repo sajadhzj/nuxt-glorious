@@ -1,28 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
-
-const props = defineProps({
-  name: {
-    required: true,
-    type: String,
-    default: '',
-  },
-  color: {
-    required: false,
-    type: String,
-    default: '#000',
-  },
-  size: {
-    required: false,
-    type: Number,
-    default: 20,
-  },
-  stroke: {
-    required: false,
-    type: [Number, null],
-    default: null,
-  },
-})
+import _props from '../props/Icon'
+const props = defineProps(_props)
 
 const icon = ref('')
 
@@ -139,7 +118,6 @@ watch(
 )
 </script>
 <template>
-  <!-- eslint-disable vue/no-v-html -->
   <div
     class="w-max h-max"
     v-html="icon"

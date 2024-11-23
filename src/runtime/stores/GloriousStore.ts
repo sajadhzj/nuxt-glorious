@@ -36,27 +36,6 @@ export const GloriousStore = defineStore('GloriousStore', {
           }
         })
     },
-    modalCreate(key: string | Array<string>) {
-      //TODO: maybe should be remove because when use two component in page have conflict
-      this.modals = {}
-      const defaultValue = {
-        show: false,
-        keepData: {},
-      }
-      if (typeof key === 'string') this.modals[key] = defaultValue
-      else
-        key.map((item) => {
-          this.modals[item] = defaultValue
-        })
-    },
-    drawerCreate(key: string | Array<string>) {
-      this.drawers = {}
-      if (typeof key === 'string') this.drawers[key] = false
-      else
-        key.map((item) => {
-          this.drawers[item] = false
-        })
-    },
     authLogout() {
       const moduleConfig: any = useRuntimeConfig()
       const token = useCookie(moduleConfig.public.glorious.auth.cookie.name)

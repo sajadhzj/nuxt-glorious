@@ -1,21 +1,7 @@
 <script lang="ts" setup>
-interface breadcrumbInterface {
-  text: String;
-  icon?: String;
-  to?: String;
-}
+import _props from '../props/Breadcrumb'
 
-const props = defineProps({
-  items: {
-    required: true,
-    type: Array<breadcrumbInterface>,
-  },
-  divider: {
-    required: false,
-    type: String,
-    default: "/",
-  },
-});
+const props: any = defineProps(_props)
 </script>
 
 <template>
@@ -25,7 +11,10 @@ const props = defineProps({
       :key="index"
       class="flex items-center gap-1 flex-wrap"
     >
-      <GIcon v-if="item.icon" :name="`${item.icon}`" />
+      <GIcon
+        v-if="item.icon"
+        :name="`${item.icon}`"
+      />
       <nuxt-link
         v-if="item.to"
         class="glorious-breadcrumb-link"
@@ -45,6 +34,4 @@ const props = defineProps({
   </div>
 </template>
 
-<style lang="scss">
-@import "../../assets/style/components/breadcrumb.scss";
-</style>
+<style lang="scss" src="../../assets/style/components/breadcrumb.scss" />

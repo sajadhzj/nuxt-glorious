@@ -1,41 +1,7 @@
 <script lang="ts" setup>
-const props = defineProps({
-  color: {
-    required: false,
-    default: "primary",
-    type: String as () => "orange" | "blue" | "gray" | "red" | "primary",
-  },
-  size: {
-    required: false,
-    default: "md",
-    type: String as () => "xl" | "lg" | "md" | "sm" | "xsm",
-  },
-  outline: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  loading: {
-    requried: false,
-    default: false,
-    type: Boolean,
-  },
-  to: {
-    requried: false,
-    default: "",
-    type: String,
-  },
-  ariaLabel: {
-    requried: false,
-    default: "",
-    type: String,
-  },
-});
+import _props from '../props/Button'
+
+const props: any = defineProps(_props)
 </script>
 
 <template>
@@ -44,12 +10,15 @@ const props = defineProps({
     :aria-label="props.ariaLabel"
     :class="[
       `glorious-button-${props.color}`,
-      props.size,
+      `size-${props.size}`,
       props.outline ? 'outline' : '',
     ]"
     :disabled="props.disabled"
   >
-    <div v-if="props.loading" class="loading">
+    <div
+      v-if="props.loading"
+      class="loading"
+    >
       <GLoading />
     </div>
     <slot v-else />
@@ -64,13 +33,8 @@ const props = defineProps({
     ]"
     :disabled="props.disabled"
   >
-    <div v-if="props.loading" class="loading">
-      <GLoading />
-    </div>
-    <slot v-else />
+    <slot />
   </NuxtLink>
 </template>
 
-<style lang="scss">
-@import "../../assets/style/components/buttons.scss";
-</style>
+<style lang="scss" src="../../assets/style/components/button.scss" />

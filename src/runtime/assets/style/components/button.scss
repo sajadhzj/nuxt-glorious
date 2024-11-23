@@ -1,0 +1,26 @@
+@import '../variable.scss';
+@import '../mixin.scss';
+
+button:focus-visible {
+  @apply outline-none;
+}
+
+@each $color in $colors {
+  .#{'glorious-button-' + $color} {
+    @apply #{"bg-" + ($color) + "-600 border-" + $color + "-700 hover:bg-" + $color + "-700"};
+    @apply rounded-md text-white px-3;
+    @include loading-size(6);
+    @include load-size();
+    &.outline {
+      @apply bg-transparent border outline-none;
+      @apply #{"text-" + $color + "-500 hover:bg-" + $color + "-100"};
+      @include loading-color($color);
+    }
+    &:disabled {
+      @apply cursor-not-allowed;
+      &:not(:disabled) {
+        @apply bg-green-300;
+      }
+    }
+  }
+}

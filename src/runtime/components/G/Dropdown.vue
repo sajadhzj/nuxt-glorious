@@ -1,30 +1,32 @@
 <script lang="ts" setup>
-import { onMounted } from "#imports";
+//SHOULD DEPRICATED
+import { onMounted } from '#imports'
 
 const props = defineProps({
   icon: {
     required: false,
-    default: "",
+    default: '',
     type: String,
   },
-});
+})
 
 const openDropdown = (event: any) =>
-  event.currentTarget.parentElement.parentElement.classList.toggle("open");
+  event.currentTarget.parentElement.parentElement.classList.toggle('open')
 
 onMounted(() => {
   window.onclick = (event: any) => {
-    if (!event.target.matches(".glorious-dropdown-button")) {
-      const allDropdown = document.querySelectorAll(".glorious-dropdown");
+    if (!event.target.matches('.glorious-dropdown-button')) {
+      const allDropdown = document.querySelectorAll('.glorious-dropdown')
       allDropdown.forEach((item: any) => {
-        item.classList.remove("open");
-      });
+        item.classList.remove('open')
+      })
     }
-  };
-});
+  }
+})
 </script>
 <template>
   <div class="glorious-dropdown">
+    {{ props.icon }}
     <div>
       <button
         aria-label="dots"
@@ -33,7 +35,10 @@ onMounted(() => {
       >
         &nbsp;
       </button>
-      <GIcon :name="props.icon" color="#000" />
+      <GIcon
+        :name="props.icon"
+        color="#000"
+      />
     </div>
     <div>
       <slot />
@@ -42,5 +47,5 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import "../../assets/style/components/dropdown.scss";
+@import '../../assets/style/components/dropdown.scss';
 </style>

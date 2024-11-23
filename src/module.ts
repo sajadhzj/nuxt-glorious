@@ -36,7 +36,7 @@ export default defineNuxtModule<ModuleOptions>({
         darkMode: 'class',
         content: {
           files: [
-            resolver.resolve('./runtime/components/G/**/*.{vue,mjs,ts}'),
+            resolver.resolve('./runtime/components/**/*.{vue,mjs,ts}'),
             resolver.resolve('./runtime/*.{mjs,js,ts}'),
           ],
         },

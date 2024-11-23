@@ -1,82 +1,19 @@
-%file-size {
-  &.xl {
-    @apply py-2.5;
-  }
-  &.lg {
-    @apply py-2;
-  }
-  &.md {
-    @apply py-1.5;
-  }
-  &.sm {
-    @apply py-1;
-  }
-  &.xsm {
-    @apply py-0.5;
-  }
-}
+@import '../variable.scss';
+@import '../mixin.scss';
 
-.glorious-file-primary {
-  @apply rounded-md ring-1 ring-green-500 overflow-hidden cursor-pointer relative;
+@each $color in $colors {
+  .#{'glorious-file-' + $color} {
+    @apply #{"ring-"+ $color +"-500"};
+    @apply rounded-md ring-1 overflow-hidden cursor-pointer relative;
 
-  > div.placeholder {
-    @apply bg-green-500 text-white px-3 w-max;
-    @extend %file-size;
-  }
+    > div.placeholder {
+      @apply #{"bg-"+ $color +"-500"};
+      @apply text-white px-3 w-max;
+      @include load-size();
+    }
 
-  > div:last-child {
-    @apply absolute left-3 hidden;
-  }
-}
-
-.glorious-file-red {
-  @apply rounded-md ring-1 ring-red-500 px-3 cursor-pointer relative;
-
-  > div.placeholder {
-    @apply bg-green-500 text-white px-3 w-max;
-    @extend %file-size;
-  }
-
-  > div:last-child {
-    @apply absolute left-3;
-  }
-}
-
-.glorious-file-gray {
-  @apply rounded-md ring-1 ring-gray-500 px-3 cursor-pointer relative;
-
-  > div.placeholder {
-    @apply bg-green-500 text-white px-3 w-max;
-    @extend %file-size;
-  }
-
-  > div:last-child {
-    @apply absolute left-3;
-  }
-}
-
-.glorious-file-blue {
-  @apply rounded-md ring-1 ring-blue-500 px-3 cursor-pointer relative;
-
-  > div.placeholder {
-    @apply bg-green-500 text-white px-3 w-max;
-    @extend %file-size;
-  }
-
-  > div:last-child {
-    @apply absolute left-3;
-  }
-}
-
-.glorious-file-orange {
-  @apply rounded-md ring-1 ring-orange-500 px-3 cursor-pointer relative;
-
-  > div.placeholder {
-    @apply bg-green-500 text-white px-3 w-max;
-    @extend %file-size;
-  }
-
-  > div:last-child {
-    @apply absolute left-3;
+    > div:last-child {
+      @apply absolute left-3 hidden;
+    }
   }
 }

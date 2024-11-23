@@ -1,42 +1,21 @@
 <script lang="ts" setup>
-const props = defineProps({
-  modelValue: {
-    required: false,
-    default: true,
-    type: Boolean,
-  },
-  color: {
-    required: false,
-    default: 'green',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'green',
-  },
-  size: {
-    required: false,
-    default: 'md',
-    type: String as () => 'xl' | 'lg' | 'md' | 'sm' | 'xs',
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-})
+import _props from '../props/CheckBox'
 
-const emits = defineEmits(['update:modelValue'])
+const props: any = defineProps(_props)
+const model = defineModel()
+const inputFunction = (event: any) => (model.value = event.target.checked)
 
-const inputFunction = (event: any) =>
-  emits('update:modelValue', event.currentTarget.checked)
-
-emits('update:modelValue', false)
+model.value = props.checked
 </script>
 
 <template>
   <label
     class="glorious-checkbox"
-    :class="[props.color, `size-${props.size}`]"
+    :class="[`color-${props.color}`, `size-${props.size}`]"
   >
     <input
       type="checkbox"
+      :checked="props.checked"
       :disabled="props.disabled"
       @input="inputFunction($event)"
     />
@@ -44,6 +23,4 @@ emits('update:modelValue', false)
   </label>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/checkbox.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/checkbox.scss" />

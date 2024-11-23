@@ -21,7 +21,7 @@
   }
 }
 
-.glorious-input-primary {
+.glorious-input-green {
   @apply rounded-md ring-1 ring-green-500;
   @extend %input-size, %focus;
   &:disabled {

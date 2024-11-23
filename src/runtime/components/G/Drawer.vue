@@ -1,56 +1,23 @@
 <script lang="ts" setup>
-import { useGloriousAppSetting } from "../../composables/useGloriousAppSetting";
-import { watch } from "#imports";
+import { watch } from '#imports'
+import _props from '../props/Drawer'
+import { createBlurDom, removeBlurDom } from '../helper'
 
-const props = defineProps({
-  modelValue: {
-    required: true,
-    default: false,
-    type: Boolean,
-  },
-  dir: {
-    require: false,
-    default: null,
-    type: String as () => "rtl" | "ltr",
-  },
-});
-
-const emits = defineEmits(["update:modelValue"]);
-
-const addBlurBackground = (): void => {
-  const backgroundBlur = document.createElement("div");
-  backgroundBlur.classList.add("glorious-scaffold-drawer-bg-blur");
-  const nuxt: any = document.getElementById("__nuxt");
-  nuxt.appendChild(backgroundBlur);
-  backgroundBlur.addEventListener("click", () => {
-    console.log("here");
-
-    emits("update:modelValue", false);
-    backgroundBlur.remove();
-  });
-};
+const props = defineProps(_props)
+const modelValue = defineModel()
 
 watch(
-  () => props.modelValue,
+  () => modelValue.value,
   () => {
-    if (props.modelValue) {
-      addBlurBackground();
-    } else {
-      const blur: any = document.querySelector(
-        ".glorious-scaffold-drawer-bg-blur"
-      );
-      if (blur !== null) blur.remove();
-    }
+    if (modelValue.value) createBlurDom(() => (modelValue.value = false))
+    else removeBlurDom()
   }
-);
+)
 </script>
 <template>
   <div
-    :class="[
-      props.dir === null ? useGloriousAppSetting.getSetting().dir : props.dir,
-      props.modelValue ? 'open' : 'close',
-    ]"
-    class="drawer close hidden"
+    :class="[props.position, modelValue ? 'open' : 'close']"
+    class="glorious-drawer close hidden"
   >
     <div class="w-full">
       <slot></slot>
@@ -58,6 +25,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss">
-@import "../../assets/style/components/drawer.scss";
-</style>
+<style lang="scss" src="../../assets/style/components/drawer.scss" />
