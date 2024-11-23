@@ -1,3 +1,6 @@
+@import '../variable.scss';
+@import '../mixin.scss';
+
 %select-size {
   &.xl {
     @apply py-[0.657rem];
@@ -22,47 +25,14 @@
   }
 }
 
-.glorious-select-primary {
-  @apply rounded-md ring-1 ring-green-500 px-3 text-gray-500 text-[14px];
-  @extend %select-size, %focus;
+@each $color in $colors {
+  .#{'glorious-select-' + $color} {
+    @apply #{"ring-" + $color +"-500"};
+    @apply rounded-md ring-1 px-3 text-gray-500 text-[14px];
+    @extend %select-size, %focus;
 
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-select-red {
-  @apply rounded-md ring-1 ring-red-500 px-3;
-  @extend %select-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-select-gray {
-  @apply rounded-md ring-1 ring-gray-500 px-3;
-  @extend %select-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-select-blue {
-  @apply rounded-md ring-1 ring-blue-500 px-3;
-  @extend %select-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-select-orange {
-  @apply rounded-md ring-1 ring-orange-500 px-3;
-  @extend %select-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
+    &:disabled {
+      @apply cursor-not-allowed;
+    }
   }
 }

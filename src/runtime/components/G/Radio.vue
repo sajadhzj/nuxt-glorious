@@ -1,48 +1,19 @@
 <script lang="ts" setup>
-const props = defineProps({
-  modelValue: {
-    required: false,
-    default: true,
-    type: [Boolean, String, Object],
-  },
-  color: {
-    required: false,
-    default: "green",
-    type: String as () => "orange" | "blue" | "gray" | "red" | "green",
-  },
-  size: {
-    required: false,
-    default: "md",
-    type: String as () => "xl" | "lg" | "md" | "sm" | "xs",
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  name: {
-    required: true,
-    type: String,
-  },
-  value: {
-    required: false,
-    default: "",
-    type: String,
-  },
-  checked: {
-    required: false,
-    type: Boolean,
-  },
-});
+import _props from '../props/Radio'
+const props = defineProps(_props)
+const modelValue = defineModel()
 
-const emits = defineEmits(["update:modelValue"]);
-
-const inputFunction = (event: any) =>
-  emits("update:modelValue", event.currentTarget.checked);
+const inputFunction = (event: Event) => {
+  const target = event.currentTarget as HTMLInputElement
+  modelValue.value = target.checked
+}
 </script>
 
 <template>
-  <label class="glorious-radio" :class="[props.color, `size-${props.size}`]">
+  <label
+    class="glorious-radio"
+    :class="[props.color, `size-${props.size}`]"
+  >
     <input
       :name="props.name"
       type="radio"
@@ -55,6 +26,4 @@ const inputFunction = (event: any) =>
   </label>
 </template>
 
-<style lang="scss">
-@import "../../assets/style/components/radio.scss";
-</style>
+<style lang="scss" src="../../assets/style/components/radio.scss" />

@@ -1,26 +1,11 @@
 <script lang="ts" setup>
-const props = defineProps({
-  modelValue: {
-    required: false,
-    default: true,
-    type: Boolean,
-  },
-  checked: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  color: {
-    required: false,
-    default: 'green',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'green',
-  },
-})
+import _props from '../props/Switch'
 
-const emits = defineEmits(['update:modelValue'])
+const props = defineProps(_props)
+const modelValue = defineModel()
 const input = (e: Event) => {
   const target = e.target as HTMLInputElement
-  emits('update:modelValue', target.checked)
+  modelValue.value = target.checked
 }
 </script>
 
@@ -40,6 +25,4 @@ const input = (e: Event) => {
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/switch.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/switch.scss" />

@@ -1,7 +1,7 @@
 import { color, size, disabled, loading, to, ariaLabel } from './common'
 
 export default {
-  ...color,
+  ...color(),
   ...size(),
   ...disabled,
   ...loading,

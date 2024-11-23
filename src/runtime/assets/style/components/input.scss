@@ -1,67 +1,18 @@
-%input-size {
-  &.xl {
-    @apply py-2.5;
-  }
-  &.lg {
-    @apply py-2;
-  }
-  &.md {
-    @apply py-1.5;
-  }
-  &.sm {
-    @apply py-1;
-  }
-  &.xsm {
-    @apply py-0.5;
-  }
-}
-%focus {
-  &:focus-visible {
-    @apply outline-none ring-2;
-  }
-}
+@import '../mixin.scss';
+@import '../variable.scss';
 
-.glorious-input-green {
-  @apply rounded-md ring-1 ring-green-500;
-  @extend %input-size, %focus;
-  &:disabled {
-    @apply bg-green-100 cursor-not-allowed;
-  }
-}
-
-.glorious-input-red {
-  @apply rounded-md ring-1 ring-red-500;
-  @extend %input-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-input-gray {
-  @apply rounded-md ring-1 ring-gray-500;
-  @extend %input-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-input-blue {
-  @apply rounded-md ring-1 ring-blue-500;
-  @extend %input-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
-  }
-}
-
-.glorious-input-orange {
-  @apply rounded-md ring-1 ring-orange-500;
-  @extend %input-size, %focus;
-
-  &:disabled {
-    @apply cursor-not-allowed;
+@each $color in $colors {
+  .#{'glorious-input-' + $color} {
+    @apply #{"ring-" + $color + "-500"};
+    @apply rounded-md ring-1;
+    @include load-size();
+    &:focus-visible {
+      @apply outline-none ring-2;
+    }
+    &:disabled {
+      @apply #{"bg-" + $color + "-100"};
+      @apply cursor-not-allowed;
+    }
   }
 }
 
@@ -71,7 +22,7 @@
     @apply w-full;
   }
   > input::placeholder {
-    @apply text-[14px];
+    @apply text-sm;
   }
   &.icon-xl {
     > input {

@@ -1,23 +1,9 @@
 <script lang="ts" setup>
-interface itemsType {
-  active: boolean
-  text: string
-  key: string
-}
-const props = defineProps({
-  items: {
-    required: true,
-    default: [],
-    type: Array<itemsType>,
-  },
-  modelValue: {
-    required: true,
-    type: String,
-  },
-})
-const emits = defineEmits(['update:modelValue'])
+import _props from '../props/Tab'
+const props: any = defineProps(_props)
+const modelValue = defineModel()
 const tabClicked: any = (key: string, event: any) => {
-  emits('update:modelValue', key)
+  modelValue.value = key
   Array.from(event.currentTarget.parentElement.parentElement.children).map(
     (item: any) => item.children[0].classList.remove('active')
   )
@@ -65,7 +51,7 @@ const scrollPrevious = (event: Event) => {
   <div class="glorious-tab relative">
     <div
       @click="scrollNext($event)"
-      class="bg-green-700 absolute right-0 h-full top-0 w-8 justify-center items-center rounded-r-lg hidden cursor-auto"
+      class="bg-green-700 absolute right-0 h-full top-0 w-8 justify-center items-center rounded-r-lg hidden cursor-pointer"
     >
       <GIcon
         name="glorious-arrow"
@@ -104,6 +90,4 @@ const scrollPrevious = (event: Event) => {
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/tab.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/tab.scss" />

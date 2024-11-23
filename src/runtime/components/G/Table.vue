@@ -1,34 +1,6 @@
 <script lang="ts" setup>
-const props = defineProps({
-  color: {
-    required: false,
-    default: 'blue',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'green',
-  },
-  header: {
-    required: true,
-    type: Object,
-  },
-  body: {
-    required: true,
-    type: Array<Object>,
-    default: [],
-  },
-  loading: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  loadingOption: {
-    required: false,
-    default: {
-      color: 'green',
-    },
-    type: {
-      color: String,
-    },
-  },
-})
+import _props from '../props/Table'
+const props = defineProps(_props)
 </script>
 
 <template>
@@ -76,9 +48,15 @@ const props = defineProps({
     >
       <GLoading :color="props.loadingOption.color" />
     </div>
+    <div
+      class="flex justify-center mt-3"
+      v-if="!props.loading && props.body.length === 0"
+    >
+      <div class="bg-white shadow p-2 rounded w-max">
+        <span> {{ props.emptyText }} </span>
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/table.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/table.scss" />

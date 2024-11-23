@@ -23,6 +23,7 @@ export const createBlurDom = (callback: Function) => {
 }
 
 export const removeBlurDom = () => {
-  const blur = document.querySelector('glorious-backdrop') as HTMLDivElement
+  const blur = document.querySelector('.glorious-backdrop') as HTMLDivElement
+
   if (blur !== null) blur.remove()
 }

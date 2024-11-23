@@ -1,62 +1,14 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
-interface selectOptionsInterface {
-  text: string
-  value: [string, object]
-}
-const props: any = defineProps({
-  modelValue: {
-    required: false,
-    default: null,
-    type: [String, Number],
-  },
-  options: {
-    required: true,
-    default: [],
-    type: Array<selectOptionsInterface>,
-  },
-  color: {
-    required: false,
-    default: 'primary',
-    type: String,
-  },
-  size: {
-    required: false,
-    default: 'md',
-    type: String,
-  },
-  title: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  error: {
-    required: false,
-    default: '|',
-    type: String,
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  placeholder: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  displayTextKey: {
-    required: false,
-    default: 'text',
-    type: String,
-  },
-})
+import _props from '../props/Select'
+
+const props: any = defineProps(_props)
+const modelValue = defineModel()
 const selectValue: any = ref(null)
-const emits = defineEmits(['update:modelValue'])
 watch(
   () => selectValue.value,
   () => {
-    emits('update:modelValue', selectValue.value)
+    modelValue.value = selectValue.value
   }
 )
 
@@ -69,7 +21,7 @@ watch(
   }
 )
 
-emits('update:modelValue', null)
+modelValue.value = null
 selectValue.value = null
 </script>
 
@@ -103,6 +55,4 @@ selectValue.value = null
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/select.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/select.scss" />

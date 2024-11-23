@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const emits = defineEmits(['update:modelValue'])
+const modelValue = defineModel()
 const computeModelValue = (event: Event) => {
   const target = event.target as HTMLInputElement
-  emits('update:modelValue', target.value)
+  modelValue.value = target.value
 }
 
 const id = useId()
@@ -27,6 +27,4 @@ const value = [5, 4, 3, 2, 1]
   </div>
 </template>
 
-<style scoped lang="scss">
-@import '../../assets/style/components/rating.scss';
-</style>
+<style scoped lang="scss" src="../../assets/style/components/rating.scss" />

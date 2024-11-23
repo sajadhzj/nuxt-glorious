@@ -3,18 +3,10 @@ import { computed, ref, watch } from '#imports'
 import { useGloriousCore } from '../../composables/useGloriousCore'
 import _props from '../props/Input'
 
-const props = defineProps({
-  modelValue: {
-    required: false,
-    default: '',
-    type: [String, Array<String>, Number],
-  },
-  ..._props,
-})
-
+const props: any = defineProps(_props)
+const modelValue = defineModel()
+modelValue.value = ''
 const inputValue: any = ref(null)
-
-const emits = defineEmits(['update:modelValue'])
 
 watch(
   () => inputValue.value,
@@ -23,16 +15,13 @@ watch(
 
     switch (props.display) {
       case 'price':
-        inputValue.value = useGloriousCore.numbersWithSeperateSamePrice(
+        inputValue.value = useGloriousCore.numbersWithSeparateSamePrice(
           inputValue.value
         )
-        emits(
-          'update:modelValue',
-          inputValue.value.toString().replaceAll(',', '')
-        )
+        modelValue.value = inputValue.value.toString().replaceAll(',', '')
         break
       default:
-        emits('update:modelValue', inputValue.value)
+        modelValue.value = inputValue.value
         break
     }
   }
@@ -54,7 +43,7 @@ const computeIconSize = computed(() => {
     case 'sm':
       iconSize = 23
       break
-    case 'xsm':
+    case 'xs':
       iconSize = 20
       break
     default:
@@ -76,7 +65,7 @@ const addTag = (event: any) => {
   if (props.mode !== 'tag') return
   const value: any = event.target.value
   tags.value.push(value)
-  emits('update:modelValue', tags.value)
+  modelValue.value = tags.value
   inputValue.value = ''
 }
 
@@ -86,27 +75,27 @@ const addTagViaOption = (option: any, event: any) => {
 
   const value: any = option
   tags.value.push(value)
-  emits('update:modelValue', tags.value)
+  modelValue.value = tags.value
   inputValue.value = ''
 }
 
 const removeTag = (tag: string) => {
   tags.value = tags.value.filter((item: any) => item !== tag)
-  emits('update:modelValue', tags.value)
+  modelValue.value = tags.value
 }
 
 // -------------------------------------- init value
 const initValue = () => {
   if (props.mode === 'tag') {
-    tags.value = props.modelValue
+    tags.value = modelValue.value
     return
   }
 
-  inputValue.value = props.modelValue
+  inputValue.value = modelValue.value
 }
 initValue()
 watch(
-  () => props.modelValue,
+  () => modelValue.value,
   () => initValue()
 )
 
@@ -138,7 +127,7 @@ const inputClicked = (event: any) => {
           :autocomplete="props.autocomplete"
           class="w-full glorious-input-field"
           :class="[
-            props.size,
+            `size-${props.size}`,
             `glorious-input-${props.color}`,
             props.type === 'password' ? 'pl-[30px] pr-3' : 'px-3',
           ]"
@@ -213,6 +202,4 @@ const inputClicked = (event: any) => {
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/input.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/input.scss" />

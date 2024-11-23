@@ -1,59 +1,19 @@
 <script setup lang="ts">
-import { ref, watch } from "#imports";
-const props = defineProps({
-  modelValue: {
-    required: false,
-    default: "",
-    type: String,
-  },
-  color: {
-    required: false,
-    default: "primary",
-    type: String as () => "orange" | "blue" | "gray" | "red" | "primary",
-  },
-  placeholder: {
-    required: false,
-    default: "",
-    type: String,
-  },
-  title: {
-    required: false,
-    default: "",
-    type: String,
-  },
-  size: {
-    required: false,
-    default: "md",
-    type: String as () => "xl" | "lg" | "md" | "sm" | "xsm",
-  },
-  error: {
-    required: false,
-    default: "|",
-    type: String,
-  },
-  disabled: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  autocomplete: {
-    required: false,
-    default: "off",
-    type: String,
-  },
-});
+import { ref, watch } from '#imports'
+import _props from '../props/Textarea'
+const props = defineProps(_props)
+const modelValue = defineModel()
 
-const inputValue: any = ref(null);
-if (props.modelValue !== "") inputValue.value = props.modelValue;
-const emits = defineEmits(["update:modelValue"]);
+const inputValue: any = ref(null)
+if (modelValue.value !== '') inputValue.value = modelValue.value
 watch(
   () => inputValue.value,
-  () => emits("update:modelValue", inputValue.value)
-);
+  () => (modelValue.value = inputValue.value)
+)
 watch(
-  () => props.modelValue,
-  () => (inputValue.value = props.modelValue)
-);
+  () => modelValue.value,
+  () => (inputValue.value = modelValue.value)
+)
 </script>
 
 <template>
@@ -62,16 +22,14 @@ watch(
     <div class="glorious-textarea">
       <textarea
         v-model="inputValue"
-        :autocomplete="props.autocomplete"
-        :class="[props.size, `glorious-textarea-${props.color}`]"
+        :class="[`glorious-textarea-${props.color}`]"
         :placeholder="props.placeholder"
         :disabled="props.disabled"
+        :rows="props.rows"
       />
     </div>
     <GErrorText :error="props.error" />
   </div>
 </template>
 
-<style lang="scss">
-@import "../../assets/style/components/textarea.scss";
-</style>
+<style lang="scss" src="../../assets/style/components/textarea.scss" />

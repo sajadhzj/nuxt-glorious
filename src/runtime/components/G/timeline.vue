@@ -1,14 +1,6 @@
 <script lang="ts" setup>
-const props = defineProps({
-  items: {
-    required: true,
-  },
-  color: {
-    required: false,
-    default: 'green',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'green',
-  },
-})
+import _props from '../props/Timeline'
+const props: any = defineProps(_props)
 </script>
 <template>
   <div class="flex gap-3 mr-4">
@@ -33,6 +25,4 @@ const props = defineProps({
   </div>
 </template>
 
-<style scoped lang="scss">
-@import '../../assets/style/components/timeline.scss';
-</style>
+<style scoped lang="scss" src="../../assets/style/components/timeline.scss" />

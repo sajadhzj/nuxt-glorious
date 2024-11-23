@@ -10,7 +10,7 @@ import {
 } from './common'
 
 export default {
-  ...color,
+  ...color(),
   ...placeholder(),
   ...title(),
   ...size(),

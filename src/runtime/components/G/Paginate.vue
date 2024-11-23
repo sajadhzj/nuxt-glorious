@@ -1,32 +1,14 @@
 <script lang="ts" setup>
 import { watch, ref } from '#imports'
-const props = defineProps({
-  currentPage: {
-    required: true,
-    type: Number,
-    default: 1,
-  },
-  lastPage: {
-    required: true,
-    type: Number,
-    default: 1,
-  },
-  numberSugestPage: {
-    required: false,
-    type: Number,
-    default: 3,
-  },
-  modelValue: {
-    required: false,
-    type: Number,
-  },
-})
+import _props from '../props/Paginate'
 
-const emits = defineEmits(['update:modelValue', 'change'])
+const props = defineProps(_props)
+const modelValue = defineModel()
+const emits = defineEmits(['change'])
 
 const emit = (item: any) => {
   if (props.currentPage !== item) {
-    emits('update:modelValue', item)
+    modelValue.value = item
     emits('change', { page: item })
   }
 }
@@ -35,8 +17,8 @@ const listPage = ref<Array<Number>>([])
 
 const computeListPage = () => {
   listPage.value = []
-  let firstPage = props.currentPage - props.numberSugestPage
-  const endPage = props.currentPage + (props.numberSugestPage + 1)
+  let firstPage = props.currentPage - props.numberSuggestPage
+  const endPage = props.currentPage + (props.numberSuggestPage + 1)
 
   while (firstPage <= endPage) {
     if (firstPage > 0 && firstPage <= props.lastPage)
@@ -93,6 +75,4 @@ const arrowNext = () => {
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/paginate.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/paginate.scss" />

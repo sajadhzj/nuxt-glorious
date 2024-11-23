@@ -1,93 +1,28 @@
 <script lang="ts" setup>
 import { watch } from '#imports'
+import { createBlurDom, removeBlurDom } from '../helper'
+import _props from '../props/Modal'
 
-const props = defineProps({
-  modelValue: {
-    required: true,
-    default: false,
-    type: Boolean,
-  },
-  size: {
-    required: false,
-    default: 'md',
-    type: String as () => 'xl' | 'lg' | 'md' | 'sm' | 'full',
-  },
-  title: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  okBtn: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  okBtnLoading: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
-  closeBtn: {
-    required: false,
-    default: '',
-    type: String,
-  },
-  rtl: {
-    required: false,
-    default: 'rtl',
-    type: String as () => 'rtl' | 'ltr',
-  },
-  blur: {
-    required: false,
-    default: true,
-    type: Boolean,
-  },
-  blurClose: {
-    required: false,
-    default: true,
-    type: Boolean,
-  },
-  colorBtn: {
-    required: false,
-    default: 'primary',
-    type: String as () => 'orange' | 'blue' | 'gray' | 'red' | 'primary',
-  },
-})
-
-const emits = defineEmits(['ok', 'close', 'update:modelValue'])
-
-const addBlurBackground = (): void => {
-  const backgroundBlur = document.createElement('div')
-  backgroundBlur.classList.add('glorious-scaffold-modal-bg-blur')
-  const nuxt: any = document.getElementById('__nuxt')
-  nuxt.appendChild(backgroundBlur)
-  backgroundBlur.addEventListener('click', () => {
-    if (props.blurClose) {
-      emits('update:modelValue', false)
-      backgroundBlur.remove()
-    }
-  })
-}
+const props = defineProps(_props)
+const emits = defineEmits(['ok', 'close'])
+const modelValue = defineModel()
 
 watch(
-  () => props.modelValue,
+  () => modelValue.value,
   () => {
     const modals = document.querySelectorAll('.glorious-scaffold-modal')
-    if (props.modelValue && props.blur) {
-      addBlurBackground()
+    if (modelValue.value && props.blur) {
+      createBlurDom(() => (modelValue.value = false))
       setTimeout(() => {
         modals.forEach((el: any) => {
           el.classList.remove('animation')
         })
       }, 500)
     } else {
-      const blur: any = document.querySelector(
-        '.glorious-scaffold-modal-bg-blur'
-      )
       modals.forEach((el: any) => {
         el.classList.add('animation')
       })
-      if (blur !== null) blur.remove()
+      removeBlurDom()
     }
   }
 )
@@ -96,7 +31,7 @@ watch(
 <template>
   <div
     class="glorious-scaffold-modal animation"
-    :class="[props.modelValue ? 'open' : 'close', `size-${props.size}`]"
+    :class="[modelValue ? 'open' : 'close', `size-${props.size}`]"
   >
     <!-- header -->
     <div
@@ -108,7 +43,7 @@ watch(
         class="flex justify-center items-center w-6 h-6"
         size="sm"
         color="red"
-        @click="emits('update:modelValue', false)"
+        @click="modelValue = false"
       >
         <GIcon
           name="glorious-x"
@@ -143,7 +78,7 @@ watch(
         :color="props.colorBtn"
         v-show="props.closeBtn !== ''"
         outline
-        @click="emits('update:modelValue', false)"
+        @click="modelValue = false"
       >
         {{ props.closeBtn }}
       </GButton>
@@ -152,6 +87,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss">
-@import '../../assets/style/components/modal.scss';
-</style>
+<style lang="scss" src="../../assets/style/components/modal.scss" />

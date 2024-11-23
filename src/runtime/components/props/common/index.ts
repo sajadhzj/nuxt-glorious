@@ -1,12 +1,12 @@
 import type { colors, sizes, rounded as roundedType } from '../../../../types'
 
-export const color = {
+export const color = (def: string = 'green') => ({
   color: {
     required: false,
-    default: 'green',
+    default: def,
     type: String as () => colors,
   },
-}
+})
 
 export const size = (def: sizes = 'md') => ({
   size: {
@@ -37,6 +37,15 @@ export const loading = {
     required: false,
     default: false,
     type: Boolean,
+  },
+  loadingOption: {
+    required: false,
+    default: {
+      color: 'green',
+    },
+    type: {
+      color: String,
+    },
   },
 }
 
@@ -112,21 +121,21 @@ export const hashColor = {
   },
 }
 
-export const intSize = {
+export const intSize = (def: number = 20) => ({
   size: {
     required: false,
     type: Number,
-    default: 20,
+    default: def,
   },
-}
+})
 
-export const stroke = {
+export const stroke = (def: number | null = null) => ({
   stroke: {
     required: false,
     type: [Number, null],
-    default: null,
+    default: def,
   },
-}
+})
 
 export const icon = {
   icon: {
@@ -148,3 +157,11 @@ export const options = {
     type: Boolean,
   },
 }
+
+export const value = () => ({
+  value: {
+    required: false,
+    default: '',
+    type: String,
+  },
+})
