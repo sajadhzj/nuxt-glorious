@@ -37,4 +37,4 @@ const props: any = defineProps(_props)
   </NuxtLink>
 </template>
 
-<style lang="scss" src="../../assets/style/components/button.scss" />
+<style lang="scss" src="../../style/components/button.scss" />

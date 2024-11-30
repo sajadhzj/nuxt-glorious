@@ -32,4 +32,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/textarea.scss" />
+<style lang="scss" src="../../style/components/textarea.scss" />

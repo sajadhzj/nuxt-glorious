@@ -5,7 +5,7 @@ const modelValue = defineModel()
 
 const inputFunction = (event: Event) => {
   const target = event.currentTarget as HTMLInputElement
-  modelValue.value = target.checked
+  modelValue.value = target.value
 }
 </script>
 
@@ -19,11 +19,10 @@ const inputFunction = (event: Event) => {
       type="radio"
       :disabled="props.disabled"
       :value="props.value"
-      :checked="props.checked"
       @input="inputFunction($event)"
     />
     <div></div>
   </label>
 </template>
 
-<style lang="scss" src="../../assets/style/components/radio.scss" />
+<style lang="scss" src="../../style/components/radio.scss" />

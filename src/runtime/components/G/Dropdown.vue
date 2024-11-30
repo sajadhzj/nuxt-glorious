@@ -47,5 +47,5 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-@import '../../assets/style/components/dropdown.scss';
+@import '../../style/components/dropdown.scss';
 </style>

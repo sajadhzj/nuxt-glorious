@@ -90,4 +90,4 @@ const scrollPrevious = (event: Event) => {
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/tab.scss" />
+<style lang="scss" src="../../style/components/tab.scss" />

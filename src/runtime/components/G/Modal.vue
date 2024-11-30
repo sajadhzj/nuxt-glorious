@@ -87,4 +87,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/modal.scss" />
+<style lang="scss" src="../../style/components/modal.scss" />

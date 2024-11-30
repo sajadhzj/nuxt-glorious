@@ -27,4 +27,4 @@ const value = [5, 4, 3, 2, 1]
   </div>
 </template>
 
-<style scoped lang="scss" src="../../assets/style/components/rating.scss" />
+<style scoped lang="scss" src="../../style/components/rating.scss" />

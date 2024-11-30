@@ -25,4 +25,4 @@ const props: any = defineProps(_props)
   </div>
 </template>
 
-<style scoped lang="scss" src="../../assets/style/components/timeline.scss" />
+<style scoped lang="scss" src="../../style/components/timeline.scss" />

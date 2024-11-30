@@ -59,4 +59,4 @@ const props = defineProps(_props)
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/table.scss" />
+<style lang="scss" src="../../style/components/table.scss" />

@@ -202,4 +202,4 @@ const inputClicked = (event: any) => {
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/input.scss" />
+<style lang="scss" src="../../style/components/input.scss" />

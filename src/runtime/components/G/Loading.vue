@@ -15,4 +15,4 @@ const props: any = defineProps(_props)
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/loading.scss" />
+<style lang="scss" src="../../style/components/loading.scss" />

@@ -75,4 +75,4 @@ const arrowNext = () => {
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/paginate.scss" />
+<style lang="scss" src="../../style/components/paginate.scss" />

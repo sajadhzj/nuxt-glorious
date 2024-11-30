@@ -55,4 +55,4 @@ selectValue.value = null
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/select.scss" />
+<style lang="scss" src="../../style/components/select.scss" />

@@ -25,4 +25,4 @@ watch(
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/drawer.scss" />
+<style lang="scss" src="../../style/components/drawer.scss" />

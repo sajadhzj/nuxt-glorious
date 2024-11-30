@@ -34,4 +34,4 @@ const props: any = defineProps(_props)
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/breadcrumb.scss" />
+<style lang="scss" src="../../style/components/breadcrumb.scss" />

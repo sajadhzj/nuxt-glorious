@@ -25,4 +25,4 @@ const input = (e: Event) => {
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/switch.scss" />
+<style lang="scss" src="../../style/components/switch.scss" />

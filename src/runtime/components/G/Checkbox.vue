@@ -23,4 +23,4 @@ model.value = props.checked
   </label>
 </template>
 
-<style lang="scss" src="../../assets/style/components/checkbox.scss" />
+<style lang="scss" src="../../style/components/checkbox.scss" />

@@ -45,4 +45,4 @@ const deleteFile = (event: any) => {
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/file.scss" />
+<style lang="scss" src="../../style/components/file.scss" />

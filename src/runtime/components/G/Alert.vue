@@ -13,4 +13,4 @@ const props = defineProps(_props)
   </div>
 </template>
 
-<style lang="scss" src="../../assets/style/components/alert.scss" />
+<style lang="scss" src="../../style/components/alert.scss" />
