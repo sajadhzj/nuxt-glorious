@@ -1,5 +1,5 @@
 {
-  "version": "1.2.9-2",
+  "version": "1.2.9-31",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
   "repository": "sajadhzj/nuxt-glorious",
@@ -29,26 +29,27 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.11.1",
+    "@nuxt/kit": "^3.14.1592",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "@pinia/nuxt": "^0.5.1",
     "defu": "^6.1.4",
     "pinia": "^2.1.7",
-    "sass": "^1.77.5"
+    "sass": "^1.80.3"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.5",
-    "@nuxt/schema": "^3.11.1",
+    "@nuxt/schema": "^3.14.1592",
     "@nuxt/test-utils": "^3.12.0",
     "@types/node": "^20.11.29",
     "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.14.1592",
     "vitest": "^1.4.0"
   },
   "overrides": {
     "vue": "latest"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

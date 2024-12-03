@@ -28,7 +28,7 @@ const props: any = defineProps(_props)
     :to="props.to"
     :class="[
       `glorious-button-${props.color}`,
-      props.size,
+      `size-${props.size}`,
       props.outline ? 'outline' : '',
     ]"
     :disabled="props.disabled"

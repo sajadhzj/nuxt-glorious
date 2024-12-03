@@ -1,9 +1,9 @@
-@import "../variable.scss";
+@use '../variable.scss' as var;
 
 .glorious-table {
   @apply overflow-x-auto;
-  @each $color in $colors {
-    &.#{"color-" + $color} {
+  @each $color in var.$colors {
+    &.#{'color-' + $color} {
       > table > thead {
         @apply rounded-t-md overflow-hidden;
         > tr {

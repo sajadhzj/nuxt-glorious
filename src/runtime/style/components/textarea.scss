@@ -1,5 +1,5 @@
-@import '../mixin.scss';
-@import '../variable.scss';
+@use '../mixin.scss' as mixin;
+@use '../variable.scss' as var;
 
 %textarea-size {
   &.xl {
@@ -19,7 +19,7 @@
   }
 }
 
-@each $color in $colors {
+@each $color in var.$colors {
   .#{'glorious-textarea-' + $color} {
     @apply #{"ring-" + $color + "-500"};
     @apply rounded-md ring-1 px-3;

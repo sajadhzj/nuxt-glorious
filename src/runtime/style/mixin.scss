@@ -1,7 +1,7 @@
-@import 'variable.scss';
+@use 'variable.scss' as var;
 
 @mixin load-bg($range: 100) {
-  @each $color in $colors {
+  @each $color in var.$colors {
     &.#{'color-' + $color} {
       @apply #{"bg-" + $color + "-" + $range};
     }
@@ -9,7 +9,7 @@
 }
 
 @mixin load-size() {
-  @each $key, $value in $pSize {
+  @each $key, $value in var.$pSize {
     &.#{'size-' + $key} {
       @apply #{"py-" + $value};
     }
@@ -17,7 +17,7 @@
 }
 
 @mixin load-border($range: 300) {
-  @each $color in $colors {
+  @each $color in var.$colors {
     &.#{'color-' + $color} {
       @apply #{"border border-" + $color + "-" + $range};
     }

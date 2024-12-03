@@ -1,4 +1,4 @@
-@import '../variable.scss';
+@use '../variable.scss' as var;
 
 .switch {
   direction: ltr;
@@ -37,7 +37,7 @@
     }
   }
 
-  @each $color in $colors {
+  @each $color in var.$colors {
     &#{'.color-' + $color} {
       input[type='checkbox']:checked + .switch-slider {
         background-color: #{theme('colors.' + $color + '.500')};

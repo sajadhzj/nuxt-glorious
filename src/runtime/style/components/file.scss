@@ -1,15 +1,15 @@
-@import '../variable.scss';
-@import '../mixin.scss';
+@use '../variable.scss' as var;
+@use '../mixin.scss' as mixin;
 
-@each $color in $colors {
+@each $color in var.$colors {
   .#{'glorious-file-' + $color} {
-    @apply #{"ring-"+ $color +"-500"};
+    @apply #{"ring-"+$color+"-500"};
     @apply rounded-md ring-1 overflow-hidden cursor-pointer relative;
 
     > div.placeholder {
-      @apply #{"bg-"+ $color +"-500"};
+      @apply #{"bg-"+$color+"-500"};
       @apply text-white px-3 w-max;
-      @include load-size();
+      @include mixin.load-size();
     }
 
     > div:last-child {

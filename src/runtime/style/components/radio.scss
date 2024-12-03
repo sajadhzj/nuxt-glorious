@@ -1,4 +1,4 @@
-@import "../variable.scss";
+@use '../variable.scss' as var;
 
 .glorious-radio {
   @apply block relative cursor-pointer;
@@ -10,7 +10,7 @@
       @apply border-none;
 
       &:after {
-        content: "";
+        content: '';
         @apply block w-1 h-1 bg-white rounded-full;
       }
     }
@@ -30,17 +30,17 @@
     }
   }
 
-  @each $color in $colors {
-    &.#{$color} {
+  @each $color in var.$colors {
+    &.#{'' + $color} {
       > input {
         &:checked ~ div {
-          @apply bg-#{$color}-500;
+          @apply #{'bg-'+$color+'-500'};
         }
       }
     }
   }
 
-  @each $key, $value in $sizes {
+  @each $key, $value in var.$sizes {
     &.size-#{$key} {
       @apply w-[#{($value - 14)}px] h-[#{($value - 14)}px];
       > div:last-child {

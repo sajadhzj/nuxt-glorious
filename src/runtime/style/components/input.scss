@@ -1,11 +1,11 @@
-@import '../mixin.scss';
-@import '../variable.scss';
+@use '../variable.scss' as var;
+@use '../mixin.scss' as mixin;
 
-@each $color in $colors {
+@each $color in var.$colors {
   .#{'glorious-input-' + $color} {
     @apply #{"ring-" + $color + "-500"};
     @apply rounded-md ring-1;
-    @include load-size();
+    @include mixin.load-size();
     &:focus-visible {
       @apply outline-none ring-2;
     }

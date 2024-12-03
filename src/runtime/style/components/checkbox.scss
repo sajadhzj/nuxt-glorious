@@ -1,4 +1,4 @@
-@import '../variable.scss';
+@use '../variable.scss' as var;
 $svg-check-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgMzIgMzIiIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiPjxwYXRoIGZpbGw9IndoaXRlIiBkPSJNIDI4LjI4MTI1IDYuMjgxMjUgTCAxMSAyMy41NjI1IEwgMy43MTg3NSAxNi4yODEyNSBMIDIuMjgxMjUgMTcuNzE4NzUgTCAxMC4yODEyNSAyNS43MTg3NSBMIDExIDI2LjQwNjI1IEwgMTEuNzE4NzUgMjUuNzE4NzUgTCAyOS43MTg3NSA3LjcxODc1IFoiLz48L3N2Zz4K';
 .glorious-checkbox {
   @apply block relative cursor-pointer;
@@ -31,7 +31,7 @@ $svg-check-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
     }
   }
 
-  @each $color in $colors {
+  @each $color in var.$colors {
     &.#{'color-' + $color} {
       > input {
         &:checked ~ div {
@@ -41,7 +41,7 @@ $svg-check-icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5v
     }
   }
 
-  @each $key, $value in $sizes {
+  @each $key, $value in var.$sizes {
     &.size-#{$key} {
       @apply w-[#{$value}px] h-[#{$value}px];
       > div:last-child {

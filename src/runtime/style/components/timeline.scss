@@ -1,4 +1,4 @@
-@import '../variable.scss';
+@use '../variable.scss' as var;
 
 .glorious-timeline {
   &-items {
@@ -21,7 +21,7 @@
       @apply text-white flex justify-center items-center font-medium;
     }
 
-    @each $color in $colors {
+    @each $color in var.$colors {
       &.#{'color-' + $color} > div {
         &::before {
           @apply #{"bg-" + $color + "-500"};
@@ -29,7 +29,7 @@
       }
     }
 
-    @each $color in $colors {
+    @each $color in var.$colors {
       &.#{'color-' + $color} {
         .glorious-timeline-items-count {
           @apply #{"bg-" + $color + "-500"};

@@ -1,8 +1,7 @@
-@import '../variable.scss';
-@import '../mixin.scss';
+@use '../mixin.scss' as mixin;
 
 .glorious-alert {
   @apply p-3 rounded shadow;
-  @include load-bg();
-  @include load-border();
+  @include mixin.load-bg();
+  @include mixin.load-border();
 }
