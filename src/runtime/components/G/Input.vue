@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watch } from '#imports'
+import { computed, GloriousStore, ref, watch } from '#imports'
+import { hasValidationError } from '../helper'
 import { useGloriousCore } from '../../composables/useGloriousCore'
 import _props from '../props/Input'
 
@@ -111,14 +112,22 @@ const inputClicked = (event: any) => {
       optionsElement.classList.remove('hidden')
   }
 }
+
+const gs = GloriousStore()
 </script>
 
 <template>
   <div class="flex flex-col">
-    <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
+    <span class="glorious-title text-sm font-medium text-gray-500">
+      {{ props.title }}
+    </span>
+
     <div
       class="glorious-input"
-      :class="[props.icon !== '' ? `icon-${props.size}` : '']"
+      :class="[
+        props.icon !== '' ? `icon-${props.size}` : '',
+        hasValidationError(props.error) ? 'validation-error' : '',
+      ]"
     >
       <div class="relative">
         <input

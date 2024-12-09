@@ -19,6 +19,7 @@ const inputFunction = (event: Event) => {
       type="radio"
       :disabled="props.disabled"
       :value="props.value"
+      :checked="props.checked"
       @input="inputFunction($event)"
     />
     <div></div>

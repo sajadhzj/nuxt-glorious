@@ -9,7 +9,7 @@ const props: any = defineProps(_props)
     class="glorious-avatar"
     :class="[`size-${props.size}`, `rounded-${props.rounded}`]"
   >
-    <img :src="props.src" />
+    <nuxt-img :src="props.src" />
   </div>
 </template>
 

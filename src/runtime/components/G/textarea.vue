@@ -18,7 +18,9 @@ watch(
 
 <template>
   <div class="flex flex-col">
-    <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
+    <span class="glorious-title text-sm font-medium text-gray-500">{{
+      props.title
+    }}</span>
     <div class="glorious-textarea">
       <textarea
         v-model="inputValue"

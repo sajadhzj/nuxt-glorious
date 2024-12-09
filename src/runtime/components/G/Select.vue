@@ -23,19 +23,33 @@ watch(
 
 modelValue.value = null
 selectValue.value = null
+const firstVal = selectValue.value
 </script>
 
 <template>
   <div class="flex flex-col">
-    <span class="text-[14px] font-medium text-gray-500">{{ props.title }}</span>
+    <span class="glorious-title text-sm font-medium text-gray-500">
+      {{ props.title }}
+    </span>
     <div class="grow flex relative">
+      {{ selectValue }}
       <select
         v-model="selectValue"
         aria-label="glorious select"
         :disabled="props.disabled"
-        class="grow"
-        :class="[`glorious-select-${props.color}`, props.size]"
+        class="grow glorious-select"
+        :class="[`color-${props.color}`, props.size]"
       >
+        <option
+          :selected="
+            selectValue === null ||
+            selectValue === '' ||
+            typeof selectValue === 'undefined'
+          "
+          :value="firstVal"
+        >
+          {{ props.placeholder }}
+        </option>
         <option
           v-for="(item, index) in props.options"
           :key="index"
@@ -44,12 +58,6 @@ selectValue.value = null
           {{ item[props.displayTextKey] }}
         </option>
       </select>
-      <span
-        v-if="selectValue === null"
-        class="absolute top-0 bottom-0 my-auto pr-2 h-max text-gray-500"
-      >
-        {{ props.placeholder }}
-      </span>
     </div>
     <GErrorText :error="props.error" />
   </div>

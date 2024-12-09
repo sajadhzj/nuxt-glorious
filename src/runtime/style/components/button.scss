@@ -5,12 +5,14 @@ button:focus-visible {
   @apply outline-none;
 }
 
+.glorious-button {
+  @apply rounded-md text-white px-3 relative;
+  @include mixin.loading-size(6);
+  @include mixin.load-size();
+}
 @each $color in var.$colors {
-  .#{'glorious-button-' + $color} {
+  .#{'button-color-' + $color} {
     @apply #{"bg-" + ($color) + "-600 border-" + $color + "-700 hover:bg-" + $color + "-700"};
-    @apply rounded-md text-white px-3 relative;
-    @include mixin.loading-size(6);
-    @include mixin.load-size();
 
     &.outline {
       @apply bg-transparent border outline-none;
@@ -21,7 +23,7 @@ button:focus-visible {
     &:disabled {
       @apply cursor-not-allowed;
       &:not(:disabled) {
-        @apply bg-green-300;
+        @apply #{"bg-" + ($color) + "-300"};
       }
     }
   }

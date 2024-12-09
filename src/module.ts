@@ -43,6 +43,7 @@ export default defineNuxtModule<ModuleOptions>({
       },
     })
     await installModule('@pinia/nuxt')
+    await installModule('@nuxt/image')
 
     addImportsDir(resolver.resolve('runtime/composables'))
     addImportsDir(resolver.resolve('runtime/stores'))

@@ -9,7 +9,7 @@ const error: any = props.error.split('|')
 <template>
   <span
     v-if="gs.forms[error[0]]?.errors[error[1]]"
-    class="text-red-500 text-sm"
+    class="validation-error-text text-red-500 text-sm"
   >
     {{ gs.forms[error[0]].errors[error[1]][0] }}
   </span>

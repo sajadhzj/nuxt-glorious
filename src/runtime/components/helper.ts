@@ -1,3 +1,5 @@
+import { GloriousStore } from '../stores/GloriousStore'
+
 export const createBlurDom = (callback: Function) => {
   const div = document.createElement('div')
   div.classList.add(
@@ -26,4 +28,18 @@ export const removeBlurDom = () => {
   const blur = document.querySelector('.glorious-backdrop') as HTMLDivElement
 
   if (blur !== null) blur.remove()
+}
+
+export const hasValidationError = (errorProp: string): boolean => {
+  const gs = GloriousStore()
+  const error: any = errorProp.split('|')
+
+  let condition = false
+  if (typeof gs.forms[error[0]]?.errors !== 'undefined')
+    condition = Object.prototype.hasOwnProperty.call(
+      gs.forms[error[0]]?.errors,
+      error[1]
+    )
+
+  return condition
 }

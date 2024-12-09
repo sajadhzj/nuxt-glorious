@@ -17,6 +17,11 @@
 }
 
 .glorious-input {
+  &.validation-error {
+    > div > input {
+      @apply ring-red-500 bg-red-50;
+    }
+  }
   @apply relative w-full;
   > input {
     @apply w-full;

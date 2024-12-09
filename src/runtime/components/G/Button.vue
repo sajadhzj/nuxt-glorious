@@ -9,7 +9,8 @@ const props: any = defineProps(_props)
     v-if="props.to === ''"
     :aria-label="props.ariaLabel"
     :class="[
-      `glorious-button-${props.color}`,
+      `glorious-button`,
+      `color-${props.color}`,
       `size-${props.size}`,
       props.outline ? 'outline' : '',
     ]"
@@ -17,7 +18,7 @@ const props: any = defineProps(_props)
   >
     <div
       v-if="props.loading"
-      class="loading"
+      class="loading flex justify-center"
     >
       <GLoading />
     </div>
@@ -27,7 +28,8 @@ const props: any = defineProps(_props)
     v-else
     :to="props.to"
     :class="[
-      `glorious-button-${props.color}`,
+      `glorious-button`,
+      `button-color-${props.color}`,
       `size-${props.size}`,
       props.outline ? 'outline' : '',
     ]"

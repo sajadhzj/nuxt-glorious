@@ -25,13 +25,16 @@
 }
 
 @each $color in var.$colors {
-  .#{'glorious-select-' + $color} {
+  .#{'color-' + $color} {
     @apply #{'ring-'+$color+'-500'};
-    @apply rounded-md ring-1 px-3 text-gray-500 text-[14px];
-    @extend %select-size, %focus;
+  }
+}
 
-    &:disabled {
-      @apply cursor-not-allowed;
-    }
+.glorious-select {
+  @apply rounded-md ring-1 px-3 text-gray-500 text-sm;
+  @extend %select-size, %focus;
+
+  &:disabled {
+    @apply cursor-not-allowed;
   }
 }
