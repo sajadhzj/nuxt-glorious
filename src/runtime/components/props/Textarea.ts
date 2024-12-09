@@ -1,10 +1,19 @@
-import { color, placeholder, title, size, error, disabled } from './common'
+import {
+  color,
+  placeholder,
+  title,
+  size,
+  error,
+  disabled,
+  required,
+} from './common'
 
 export default {
   ...color(),
   ...placeholder(),
   ...title(),
   ...size(),
+  ...required(),
   ...error,
   ...disabled,
   rows: {

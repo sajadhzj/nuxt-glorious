@@ -6,6 +6,7 @@ import {
   error,
   disabled,
   placeholder,
+  required,
 } from './common'
 
 export default {
@@ -13,6 +14,7 @@ export default {
   ...title(),
   ...placeholder(),
   ...color(),
+  ...required(),
   ...error,
   ...disabled,
   ...options,

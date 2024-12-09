@@ -120,6 +120,12 @@ const gs = GloriousStore()
   <div class="flex flex-col">
     <span class="glorious-title text-sm font-medium text-gray-500">
       {{ props.title }}
+      <span
+        v-if="props.required"
+        class="text-red-500"
+      >
+        *
+      </span>
     </span>
 
     <div

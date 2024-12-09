@@ -165,3 +165,11 @@ export const value = () => ({
     type: String,
   },
 })
+
+export const required = () => ({
+  required: {
+    required: false,
+    default: false,
+    type: Boolean,
+  },
+})

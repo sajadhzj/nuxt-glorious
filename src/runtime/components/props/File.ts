@@ -1,4 +1,12 @@
-import { color, placeholder, title, text, size, error } from './common'
+import {
+  color,
+  placeholder,
+  title,
+  text,
+  size,
+  error,
+  required,
+} from './common'
 
 export default {
   ...error,
@@ -7,4 +15,5 @@ export default {
   ...title('file'),
   ...text('No file has been selected'),
   ...size(),
+  ...required(),
 }

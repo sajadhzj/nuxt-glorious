@@ -7,6 +7,7 @@ import {
   icon,
   disabled,
   options,
+  required,
 } from './common'
 
 export default {
@@ -18,6 +19,7 @@ export default {
   ...icon,
   ...disabled,
   ...options,
+  ...required(),
   type: {
     required: false,
     default: 'text',
