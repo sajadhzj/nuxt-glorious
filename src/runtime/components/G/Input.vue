@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, GloriousStore, ref, watch } from '#imports'
+import { computed, ref, watch } from '#imports'
 import { hasValidationError } from '../helper'
 import { useGloriousCore } from '../../composables/useGloriousCore'
 import _props from '../props/Input'
@@ -112,8 +112,6 @@ const inputClicked = (event: any) => {
       optionsElement.classList.remove('hidden')
   }
 }
-
-const gs = GloriousStore()
 </script>
 
 <template>
@@ -190,7 +188,7 @@ const gs = GloriousStore()
         </div>
       </div>
       <div
-        v-if="tags.length !== 0"
+        v-if="tags?.length !== 0"
         class="glorious-input-tag"
       >
         <div

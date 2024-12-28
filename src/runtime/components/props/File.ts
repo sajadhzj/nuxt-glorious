@@ -10,7 +10,7 @@ import {
 
 export default {
   ...error,
-  ...color,
+  ...color(),
   ...placeholder('choose file'),
   ...title('file'),
   ...text('No file has been selected'),

@@ -37,4 +37,8 @@
   &:disabled {
     @apply cursor-not-allowed;
   }
+
+  &.validation-error {
+    @apply ring-red-500 bg-red-50 !important;
+  }
 }

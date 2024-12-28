@@ -29,7 +29,7 @@ const defaultOptions: gloriousFetchOptions = {
   credentials: 'same-origin',
 }
 
-export default function (
+export default async function (
   url: string,
   options: gloriousFetchOptions = defaultOptions
 ) {
@@ -40,7 +40,11 @@ export default function (
   const gKey: String = computeGKey(options.gKey, url)
 
   options.params = computeParams(<Object>options.params)
-  options.headers = { ...options.headers, ...computeAuth() }
+  options.headers = {
+    ...options.headers,
+    ...computeAuth(),
+    ...(await computeHeaderFetch({ ...options, url: url })),
+  }
 
   if (options.bodyType === 'formData') options.body = computeFormData(options)
 
@@ -152,4 +156,15 @@ function computeFormData(options: gloriousFetchOptions) {
   })
 
   return form
+}
+
+async function computeHeaderFetch(options: object) {
+  const fetch = import.meta.glob('/glorious/fetch.ts')
+  let data: any = {}
+  if (typeof fetch['/glorious/fetch.ts'] !== 'undefined') {
+    data = await fetch['/glorious/fetch.ts']()
+    data = data.fetchHandler.headers(options)
+  }
+
+  return data
 }

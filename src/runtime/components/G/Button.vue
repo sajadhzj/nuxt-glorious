@@ -10,7 +10,7 @@ const props: any = defineProps(_props)
     :aria-label="props.ariaLabel"
     :class="[
       `glorious-button`,
-      `color-${props.color}`,
+      `button-color-${props.color}`,
       `size-${props.size}`,
       props.outline ? 'outline' : '',
     ]"

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
 import _props from '../props/Select'
+import { hasValidationError } from '../helper'
 
 const props: any = defineProps(_props)
 const modelValue = defineModel()
@@ -38,13 +39,16 @@ const firstVal = selectValue.value
       </span>
     </span>
     <div class="grow flex relative">
-      {{ selectValue }}
       <select
         v-model="selectValue"
         aria-label="glorious select"
         :disabled="props.disabled"
         class="grow glorious-select"
-        :class="[`color-${props.color}`, props.size]"
+        :class="[
+          `color-${props.color}`,
+          props.size,
+          hasValidationError(props.error) ? 'validation-error' : '',
+        ]"
       >
         <option
           :selected="
