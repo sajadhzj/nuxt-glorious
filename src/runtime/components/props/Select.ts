@@ -7,6 +7,7 @@ import {
   disabled,
   placeholder,
   required,
+  displayTextKey,
 } from './common'
 
 export default {
@@ -15,12 +16,8 @@ export default {
   ...placeholder(),
   ...color(),
   ...required(),
+  ...displayTextKey(),
   ...error,
   ...disabled,
   ...options,
-  displayTextKey: {
-    required: false,
-    default: 'text',
-    type: String,
-  },
 }

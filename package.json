@@ -1,5 +1,5 @@
 {
-  "version": "1.2.9-8-8",
+  "version": "1.2.9-9-3",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
   "repository": "sajadhzj/nuxt-glorious",
@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "prepack": "nuxt-module-build build && cp -R src/runtime/style dist/runtime",
-    "dev": "nuxi dev playground",
+    "dev": "nuxi dev --port=3001 playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
     "release": "npm run prepack && npm publish",

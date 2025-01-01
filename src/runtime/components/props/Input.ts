@@ -8,6 +8,7 @@ import {
   disabled,
   options,
   required,
+  displayTextKey,
 } from './common'
 
 export default {
@@ -15,6 +16,7 @@ export default {
   ...placeholder(),
   ...title(),
   ...size(),
+  ...displayTextKey(),
   ...error,
   ...icon,
   ...disabled,

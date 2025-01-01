@@ -70,15 +70,15 @@
 .glorious-input {
   // -------------------------------------------------- OPTION
   &-options {
-    @apply p-1 shadow-lg absolute w-full bg-white rounded border-gray-200 border max-h-[200px] overflow-y-auto z-40;
+    @apply p-1 shadow-lg fixed w-full bg-white rounded border-gray-200 border max-h-[200px] overflow-y-auto z-40;
 
     > div {
       @apply py-2 hover:bg-gray-100 cursor-pointer rounded px-2;
     }
 
-    &.size-md {
-      @apply top-11;
-    }
+    // &.size-md {
+    //   @apply top-11;
+    // }
   }
 
   div > input::placeholder {

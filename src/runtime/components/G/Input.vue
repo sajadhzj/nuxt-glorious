@@ -72,12 +72,21 @@ const addTag = (event: any) => {
 
 const addTagViaOption = (option: any, event: any) => {
   //   event.stopPropagation() if want not close with window
-  if (tags.value.length === 0) tags.value = []
+  if (
+    typeof tags.value === 'string' ||
+    typeof tags.value === 'undefined' ||
+    tags.value.length === 0
+  )
+    tags.value = []
 
-  const value: any = option
-  tags.value.push(value)
-  modelValue.value = tags.value
-  inputValue.value = ''
+  const find = tags.value.find((item: any) => item.value === option.value)
+
+  if (typeof find === 'undefined') {
+    const value: any = option
+    tags.value.push(value)
+    modelValue.value = tags.value
+    inputValue.value = ''
+  }
 }
 
 const removeTag = (tag: string) => {
@@ -108,7 +117,10 @@ const inputClicked = (event: any) => {
     gio.forEach((element: any) => element.classList.add('hidden'))
 
     const optionsElement = event.currentTarget.parentElement.children[1]
-    if (optionsElement.classList.contains('hidden'))
+    if (
+      typeof optionsElement !== 'undefined' &&
+      optionsElement.classList.contains('hidden')
+    )
       optionsElement.classList.remove('hidden')
   }
 }
@@ -143,6 +155,7 @@ const inputClicked = (event: any) => {
             `size-${props.size}`,
             `glorious-input-${props.color}`,
             props.type === 'password' ? 'pl-[30px] pr-3' : 'px-3',
+            `mode-${props.mode}`,
           ]"
           :placeholder="props.placeholder"
           :disabled="props.disabled"
@@ -171,20 +184,12 @@ const inputClicked = (event: any) => {
           :class="[`size-${props.size}`]"
         >
           <div
-            v-if="props.loadingOptions"
-            class="flex justify-center"
+            v-for="(option, index) in props.options"
+            :key="index"
+            @click="addTagViaOption(option, $event)"
           >
-            <GLoading color="green" />
+            {{ option[props.displayTextKey] }}
           </div>
-          <template v-else>
-            <div
-              v-for="(option, index) in props.options"
-              :key="index"
-              @click="addTagViaOption(option, $event)"
-            >
-              {{ option.text }}
-            </div>
-          </template>
         </div>
       </div>
       <div
@@ -195,7 +200,7 @@ const inputClicked = (event: any) => {
           v-for="(item, index) in tags"
           :key="index"
         >
-          {{ typeof item === 'object' ? item.text : item }}
+          {{ typeof item === 'object' ? item[props.displayTextKey] : item }}
           <GIcon
             name="glorious-x"
             :size="10"
@@ -210,6 +215,12 @@ const inputClicked = (event: any) => {
         :name="props.icon"
         :size="computeIconSize"
       />
+      <div
+        v-if="props.loadingOptions"
+        class="absolute top-1 bottom-0 my-auto left-1"
+      >
+        <GLoading color="green" />
+      </div>
     </div>
     <GErrorText :error="props.error" />
   </div>

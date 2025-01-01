@@ -173,3 +173,11 @@ export const required = () => ({
     type: Boolean,
   },
 })
+
+export const displayTextKey = () => ({
+  displayTextKey: {
+    required: false,
+    default: 'text',
+    type: String,
+  },
+})

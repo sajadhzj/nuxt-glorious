@@ -38,6 +38,7 @@ const firstVal = selectValue.value
         *
       </span>
     </span>
+    {{ selectValue === '' }}
     <div class="grow flex relative">
       <select
         v-model="selectValue"
@@ -48,6 +49,9 @@ const firstVal = selectValue.value
           `color-${props.color}`,
           props.size,
           hasValidationError(props.error) ? 'validation-error' : '',
+          selectValue === null || selectValue === ''
+            ? 'text-gray-500'
+            : 'text-black',
         ]"
       >
         <option
