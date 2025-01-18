@@ -181,3 +181,11 @@ export const displayTextKey = () => ({
     type: String,
   },
 })
+
+export const keyOfValue = () => ({
+  keyOfValue: {
+    required: false,
+    default: 'value',
+    type: String,
+  },
+})

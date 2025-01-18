@@ -18,7 +18,10 @@ const deleteFile = (event: any) => {
 </script>
 <template>
   <div class="flex flex-col">
-    <span class="text-sm font-medium text-gray-500">
+    <span
+      v-if="props.title !== ''"
+      class="glorious-title text-sm font-medium text-gray-500"
+    >
       {{ props.title }}
       <span
         v-if="props.required"
@@ -29,7 +32,7 @@ const deleteFile = (event: any) => {
     </span>
     <label
       :class="[`glorious-file-${props.color}`]"
-      class="flex items-center gap-3 text-gray-500"
+      class="flex items-center gap-3 text-gray-500 bg-white"
     >
       <div
         class="placeholder"

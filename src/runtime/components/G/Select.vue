@@ -38,7 +38,6 @@ const firstVal = selectValue.value
         *
       </span>
     </span>
-    {{ selectValue === '' }}
     <div class="grow flex relative">
       <select
         v-model="selectValue"
@@ -67,7 +66,7 @@ const firstVal = selectValue.value
         <option
           v-for="(item, index) in props.options"
           :key="index"
-          :value="item.value"
+          :value="item[props.keyOfValue]"
         >
           {{ item[props.displayTextKey] }}
         </option>

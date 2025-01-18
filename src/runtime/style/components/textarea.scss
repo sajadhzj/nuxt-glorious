@@ -33,9 +33,13 @@
 }
 
 .glorious-textarea {
-  @apply relative w-full;
+  @apply relative w-full flex flex-col;
   > textarea {
-    @apply w-full;
+    @apply w-full p-2;
+
+    &.validation-error{
+        @apply ring-red-500 bg-red-50
+    }
   }
   > textarea::placeholder {
     @apply text-[14px];

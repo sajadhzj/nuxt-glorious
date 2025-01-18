@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from '#imports'
 import _props from '../props/Textarea'
+import { hasValidationError } from '../helper'
 const props = defineProps(_props)
 const modelValue = defineModel()
 
@@ -30,13 +31,16 @@ watch(
     <div class="glorious-textarea">
       <textarea
         v-model="inputValue"
-        :class="[`glorious-textarea-${props.color}`]"
+        :class="[
+          `glorious-textarea-${props.color}`,
+          hasValidationError(props.error) ? 'validation-error' : '',
+        ]"
         :placeholder="props.placeholder"
         :disabled="props.disabled"
         :rows="props.rows"
       />
+      <GErrorText :error="props.error" />
     </div>
-    <GErrorText :error="props.error" />
   </div>
 </template>
 

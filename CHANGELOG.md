@@ -19,6 +19,7 @@
 - tab component now show arrow if scrolled
 - now you can access to response in all of project with `gs.response` see more information is `useGloriousFetch`
 - new props for select component `displayTextKey`
+- new props for select component `keyOfValue`
 
 ## `v1.2.0`
 

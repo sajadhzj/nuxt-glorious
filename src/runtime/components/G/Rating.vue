@@ -1,12 +1,19 @@
 <script lang="ts" setup>
-const modelValue = defineModel()
+import { useId, ref } from '#imports'
+
+const filler = ref(true)
+const id = useId()
+const value = [5, 4, 3, 2, 1]
+const modelValue: any = defineModel()
 const computeModelValue = (event: Event) => {
+  const check = document.querySelectorAll(`input[name=star-name${id}]`)
+  check.forEach((item) => {
+    item.nextElementSibling?.classList.remove('checked')
+  })
+  filler.value = false
   const target = event.target as HTMLInputElement
   modelValue.value = target.value
 }
-
-const id = useId()
-const value = [5, 4, 3, 2, 1]
 </script>
 
 <template>
@@ -22,7 +29,10 @@ const value = [5, 4, 3, 2, 1]
         :value="value[index]"
         @input="computeModelValue"
       />
-      <label :for="`star${item}-${id}`"></label>
+      <label
+        :for="`star${item}-${id}`"
+        :class="[value[index] < modelValue + 1 && filler ? 'checked' : '']"
+      />
     </template>
   </div>
 </template>

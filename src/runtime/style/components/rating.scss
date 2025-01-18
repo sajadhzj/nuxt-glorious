@@ -20,6 +20,10 @@
 .rating input:checked ~ label,
 .rating label:hover,
 .rating label:hover ~ label {
-  color: #ffd700;
+  color: #ffd700 !important;
   transition: color 0.3s;
+}
+
+label.checked {
+    color: #ffd700;
 }

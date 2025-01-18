@@ -8,6 +8,7 @@ import {
   placeholder,
   required,
   displayTextKey,
+  keyOfValue,
 } from './common'
 
 export default {
@@ -17,6 +18,7 @@ export default {
   ...color(),
   ...required(),
   ...displayTextKey(),
+  ...keyOfValue(),
   ...error,
   ...disabled,
   ...options,

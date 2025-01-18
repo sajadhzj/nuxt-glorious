@@ -31,7 +31,7 @@
 }
 
 .glorious-select {
-  @apply rounded-md ring-1 px-3 text-gray-500 text-sm;
+  @apply rounded-md ring-1 px-3 text-gray-500 text-sm h-max;
   @extend %select-size, %focus;
 
   &:disabled {
