@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, ref, watch } from '#imports'
+import { computed, ref, watch, useGloriousCore } from '#imports'
 import { hasValidationError } from '../helper'
-import { useGloriousCore } from '../../composables/useGloriousCore'
 import _props from '../props/Input'
 
 const props: any = defineProps(_props)
 const modelValue = defineModel()
+const { numbersWithSeparateSamePrice } = useGloriousCore()
 modelValue.value = ''
 const inputValue: any = ref(null)
 
@@ -16,9 +16,7 @@ watch(
 
     switch (props.display) {
       case 'price':
-        inputValue.value = useGloriousCore.numbersWithSeparateSamePrice(
-          inputValue.value
-        )
+        inputValue.value = numbersWithSeparateSamePrice(inputValue.value)
         modelValue.value = inputValue.value.toString().replaceAll(',', '')
         break
       default:
@@ -184,11 +182,19 @@ const inputClicked = (event: any) => {
           :class="[`size-${props.size}`]"
         >
           <div
-            v-for="(option, index) in props.options"
-            :key="index"
-            @click="addTagViaOption(option, $event)"
+            v-if="props.loading"
+            class="flex justify-center"
           >
-            {{ option[props.displayTextKey] }}
+            <GLoading color="green" />
+          </div>
+          <div v-else>
+            <div
+              v-for="(option, index) in props.options"
+              :key="index"
+              @click="addTagViaOption(option, $event)"
+            >
+              {{ option[props.displayTextKey] }}
+            </div>
           </div>
         </div>
       </div>

@@ -87,9 +87,15 @@ export const GloriousStore = defineStore('GloriousStore', {
               .method,
         }
       ).then((data: any) => {
+        if (data.status.value === 'error') {
+          const moduleConfig: any = useRuntimeConfig()
+          const token = useCookie(moduleConfig.public.glorious.auth.cookie.name)
+          token.value = null
+          this.auth.loaded = false
+        }
+
         const pick =
           moduleConfig.public.glorious.auth.strategy.endpoints.userInfo.pick
-
         if (pick !== '') this.auth.user = data.data.value[pick]
         else this.auth.user = data.data.value
 

@@ -9,7 +9,9 @@ import {
   options,
   required,
   displayTextKey,
-} from './common'
+  keyOfValue,
+  loading,
+} from './common/index'
 
 export default {
   ...color(),
@@ -17,11 +19,12 @@ export default {
   ...title(),
   ...size(),
   ...displayTextKey(),
+  ...required(),
   ...error,
   ...icon,
   ...disabled,
   ...options,
-  ...required(),
+  ...loading,
   type: {
     required: false,
     default: 'text',
