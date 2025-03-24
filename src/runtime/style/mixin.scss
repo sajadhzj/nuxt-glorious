@@ -19,7 +19,7 @@
 @mixin load-border($range: 300) {
   @each $color in var.$colors {
     &.#{'color-' + $color} {
-      @apply #{"border border-" + $color + "-" + $range};
+      @apply #{"border-2 border-" + $color + "-" + $range};
     }
   }
 }

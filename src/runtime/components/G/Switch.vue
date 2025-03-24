@@ -24,5 +24,3 @@ const input = (e: Event) => {
     </label>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/switch.scss" />

@@ -6,99 +6,99 @@ import {
   addImportsDir,
   installModule,
   addRouteMiddleware,
-} from "@nuxt/kit";
+} from '@nuxt/kit'
 
-import defu from "defu";
+import defu from 'defu'
 // Module options TypeScript interface definition
 export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "glorious",
-    configKey: "glorious",
+    name: 'glorious',
+    configKey: 'glorious',
   },
   // Default configuration options of the Nuxt module
   defaults: {},
   async setup(options: any, nuxt: any) {
-    const resolver = createResolver(import.meta.url);
+    const resolver = createResolver(import.meta.url)
 
     //config
     nuxt.options.runtimeConfig.public.glorious = defu(nuxt.options.glorious, {
       fetch: {
-        baseURL: "/",
-        credentials: "same-origin",
+        baseURL: '/',
+        credentials: 'same-origin',
       },
       seo: {
-        suffix: "",
-        title: "",
-        description: "",
+        suffix: '',
+        title: '',
+        description: '',
       },
       auth: {
         cookie: {
-          name: "ga-token",
+          name: 'ga-token',
           httpOnly: false,
         },
         redirect: {
-          logout: "/login",
-          login: "/login",
+          logout: '/login',
+          login: '/login',
         },
         strategy: {
-          provider: "",
+          provider: '',
           //[laravel-passport]
           endpoints: {
             userInfo: {
-              url: "/",
-              method: "GET",
-              pick: "",
+              url: '/',
+              method: 'GET',
+              pick: '',
             },
           },
         },
       },
-    });
+    })
 
-    await installModule("@nuxtjs/tailwindcss", {
+    await installModule('@nuxtjs/tailwindcss', {
       // module configuration
       exposeConfig: true,
       config: {
-        darkMode: "class",
+        darkMode: 'class',
         content: {
           files: [
-            resolver.resolve("./runtime/components/G/**/*.{vue,mjs,ts}"),
-            resolver.resolve("./runtime/*.{mjs,js,ts}"),
+            resolver.resolve('./runtime/components/G/**/*.{vue,mjs,ts}'),
+            resolver.resolve('./runtime/*.{mjs,js,ts}'),
           ],
         },
       },
-    });
-    await installModule("@pinia/nuxt");
+    })
+    await installModule('@pinia/nuxt')
 
-    addImportsDir(resolver.resolve("runtime/composables"));
-    addImportsDir(resolver.resolve("runtime/stores"));
-    addImportsDir(resolver.resolve("runtime/middlewares"));
+    addImportsDir(resolver.resolve('runtime/composables'))
+    addImportsDir(resolver.resolve('runtime/stores'))
+    addImportsDir(resolver.resolve('runtime/middlewares'))
     addComponentsDir({
-      path: resolver.resolve("runtime/components"),
+      path: resolver.resolve('runtime/components'),
       global: true,
       watch: false,
-    });
-    nuxt.hook("nitro:config", async (nitro: any) => {
+    })
+    nuxt.hook('nitro:config', async (nitro: any) => {
       nitro.publicAssets.push({
-        dir: resolver.resolve("./runtime/assets"),
-      });
-    });
+        dir: resolver.resolve('./runtime/assets'),
+      })
+    })
 
-    addPlugin(resolver.resolve("./runtime/plugins/glorious-app-setting"));
+    addPlugin(resolver.resolve('./runtime/plugins/glorious-app-setting'))
     addPlugin({
-      src: resolver.resolve("./runtime/plugins/InputComponent"),
-      mode: "client",
-    });
+      src: resolver.resolve('./runtime/plugins/InputComponent'),
+      mode: 'client',
+    })
 
     addRouteMiddleware({
-      name: "g-auth-strategy",
-      path: resolver.resolve("./runtime/middlewares/AuthStrategy"),
+      name: 'g-auth-strategy',
+      path: resolver.resolve('./runtime/middlewares/AuthStrategy'),
       global: true,
-    });
+    })
     addRouteMiddleware({
-      name: "g-auth",
-      path: resolver.resolve("./runtime/middlewares/Auth"),
-    });
+      name: 'g-auth',
+      path: resolver.resolve('./runtime/middlewares/Auth'),
+    })
   },
-});
+})

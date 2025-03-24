@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from '#imports'
 import _props from '../props/Textarea'
-import { hasValidationError } from '../helper'
+import { hasValidationError, getAttribute } from '../helper'
+
 const props = defineProps(_props)
 const modelValue = defineModel()
 
@@ -20,9 +21,9 @@ watch(
 <template>
   <div class="flex flex-col">
     <span class="glorious-title text-sm font-medium text-gray-500">
-      {{ props.title }}
+      {{ getAttribute(props.title, 'textarea', 'title') }}
       <span
-        v-if="props.required"
+        v-if="getAttribute(props.required, 'textarea', 'required')"
         class="text-red-500"
       >
         *
@@ -32,16 +33,16 @@ watch(
       <textarea
         v-model="inputValue"
         :class="[
-          `glorious-textarea-${props.color}`,
+          `glorious-textarea-${getAttribute(props.color, 'textarea', 'color')}`,
           hasValidationError(props.error) ? 'validation-error' : '',
         ]"
-        :placeholder="props.placeholder"
-        :disabled="props.disabled"
-        :rows="props.rows"
+        :placeholder="
+          getAttribute(props.placeholder, 'textarea', 'placeholder')
+        "
+        :disabled="getAttribute(props.disabled, 'textarea', 'disabled')"
+        :rows="getAttribute(props.rows, 'textarea', 'rows')"
       />
       <GErrorText :error="props.error" />
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/textarea.scss" />

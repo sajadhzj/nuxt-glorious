@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
 import _props from '../props/Select'
-import { hasValidationError } from '../helper'
+import { hasValidationError, getAttribute } from '../helper'
 
 const props: any = defineProps(_props)
 const modelValue = defineModel()
@@ -32,7 +32,7 @@ const firstVal = selectValue.value
     <span class="glorious-title text-sm font-medium text-gray-500">
       {{ props.title }}
       <span
-        v-if="props.required"
+        v-if="getAttribute(props.required, 'select', 'required')"
         class="text-red-500"
       >
         *
@@ -42,11 +42,11 @@ const firstVal = selectValue.value
       <select
         v-model="selectValue"
         aria-label="glorious select"
-        :disabled="props.disabled"
+        :disabled="getAttribute(props.disabled, 'select', 'disabled')"
         class="grow glorious-select"
         :class="[
-          `color-${props.color}`,
-          props.size,
+          `color-${getAttribute(props.color, 'select', 'color')}`,
+          getAttribute(props.size, 'select', 'size'),
           hasValidationError(props.error) ? 'validation-error' : '',
           selectValue === null || selectValue === ''
             ? 'text-gray-500'
@@ -66,14 +66,14 @@ const firstVal = selectValue.value
         <option
           v-for="(item, index) in props.options"
           :key="index"
-          :value="item[props.keyOfValue]"
+          :value="item[getAttribute(props.keyOfValue, 'select', 'keyOfValue')]"
         >
-          {{ item[props.displayTextKey] }}
+          {{
+            item[getAttribute(props.displayTextKey, 'select', 'displayTextKey')]
+          }}
         </option>
       </select>
     </div>
     <GErrorText :error="props.error" />
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/select.scss" />

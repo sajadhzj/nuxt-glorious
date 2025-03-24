@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, useGloriousCore } from '#imports'
-import { hasValidationError } from '../helper'
+import { hasValidationError, getAttribute } from '../helper'
 import _props from '../props/Input'
 
 const props: any = defineProps(_props)
@@ -12,9 +12,9 @@ const inputValue: any = ref(null)
 watch(
   () => inputValue.value,
   () => {
-    if (props.mode === 'tag') return
+    if (getAttribute(props.mode, 'icon', 'mode') === 'tag') return
 
-    switch (props.display) {
+    switch (getAttribute(props.display, 'icon', 'display')) {
       case 'price':
         inputValue.value = numbersWithSeparateSamePrice(inputValue.value)
         modelValue.value = inputValue.value.toString().replaceAll(',', '')
@@ -57,11 +57,11 @@ const computeIconSize = computed(() => {
 const tags: any = ref([])
 
 const addTag = (event: any) => {
-  if (props.tagLockOption) return
+  if (getAttribute(props.tagLockOption, 'icon', 'tagLockOption')) return
 
   if (tags.value.length === 0) tags.value = []
 
-  if (props.mode !== 'tag') return
+  if (getAttribute(props.mode, 'icon', 'mode') !== 'tag') return
   const value: any = event.target.value
   tags.value.push(value)
   modelValue.value = tags.value
@@ -94,7 +94,7 @@ const removeTag = (tag: string) => {
 
 // -------------------------------------- init value
 const initValue = () => {
-  if (props.mode === 'tag') {
+  if (getAttribute(props.mode, 'icon', 'mode') === 'tag') {
     tags.value = modelValue.value
     return
   }
@@ -107,10 +107,10 @@ watch(
   () => initValue()
 )
 
-const typeInput = ref(props.type)
+const typeInput = ref(getAttribute(props.type, 'icon', 'type'))
 
 const inputClicked = (event: any) => {
-  if (props.mode === 'tag' && props.options) {
+  if (getAttribute(props.mode, 'icon', 'mode') === 'tag' && props.options) {
     const gio = document.querySelectorAll('.glorious-input-options')
     gio.forEach((element: any) => element.classList.add('hidden'))
 
@@ -127,9 +127,9 @@ const inputClicked = (event: any) => {
 <template>
   <div class="flex flex-col">
     <span class="glorious-title text-sm font-medium text-gray-500">
-      {{ props.title }}
+      {{ getAttribute(props.title, 'icon', 'title') }}
       <span
-        v-if="props.required"
+        v-if="getAttribute(props.required, 'icon', 'required')"
         class="text-red-500"
       >
         *
@@ -146,30 +146,40 @@ const inputClicked = (event: any) => {
       <div class="relative">
         <input
           v-model="inputValue"
-          :inputmode="props.inputMode"
-          :autocomplete="props.autocomplete"
+          :inputmode="getAttribute(props.inputMode, 'icon', 'inputMode')"
+          :autocomplete="
+            getAttribute(props.autocomplete, 'icon', 'autocomplete')
+          "
           class="w-full glorious-input-field"
           :class="[
             `size-${props.size}`,
-            `glorious-input-${props.color}`,
-            props.type === 'password' ? 'pl-[30px] pr-3' : 'px-3',
-            `mode-${props.mode}`,
+            `glorious-input-${getAttribute(props.color, 'icon', 'color')}`,
+            getAttribute(props.type, 'icon', 'type') === 'password'
+              ? 'pl-[30px] pr-3'
+              : 'px-3',
+            `mode-${getAttribute(props.mode, 'icon', 'mode')}`,
           ]"
-          :placeholder="props.placeholder"
-          :disabled="props.disabled"
+          :placeholder="getAttribute(props.placeholder, 'icon', 'placeholder')"
+          :disabled="getAttribute(props.disable, 'icon', 'disable')"
           :type="typeInput"
           @keyup.enter="addTag($event)"
           @click="inputClicked($event)"
         />
         <GIcon
-          v-if="props.type === 'password' && typeInput === 'password'"
+          v-if="
+            getAttribute(props.type, 'icon', 'type') === 'password' &&
+            typeInput === 'password'
+          "
           class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
           :size="23"
           name="glorious-eye-fill"
           @click="typeInput = 'text'"
         ></GIcon>
         <GIcon
-          v-if="props.type === 'password' && typeInput === 'text'"
+          v-if="
+            getAttribute(props.type, 'icon', 'type') === 'password' &&
+            typeInput === 'text'
+          "
           class="absolute left-0 top-0 bottom-0 my-auto ml-1 cursor-pointer"
           :size="23"
           name="glorious-eye-off-fill"
@@ -182,7 +192,7 @@ const inputClicked = (event: any) => {
           :class="[`size-${props.size}`]"
         >
           <div
-            v-if="props.loading"
+            v-if="getAttribute(props.loading, 'icon', 'loading')"
             class="flex justify-center"
           >
             <GLoading color="green" />
@@ -193,7 +203,11 @@ const inputClicked = (event: any) => {
               :key="index"
               @click="addTagViaOption(option, $event)"
             >
-              {{ option[props.displayTextKey] }}
+              {{
+                option[
+                  getAttribute(props.displayTextKey, 'icon', 'displayTextKey')
+                ]
+              }}
             </div>
           </div>
         </div>
@@ -206,7 +220,13 @@ const inputClicked = (event: any) => {
           v-for="(item, index) in tags"
           :key="index"
         >
-          {{ typeof item === 'object' ? item[props.displayTextKey] : item }}
+          {{
+            typeof item === 'object'
+              ? item[
+                  getAttribute(props.displayTextKey, 'icon', 'displayTextKey')
+                ]
+              : item
+          }}
           <GIcon
             name="glorious-x"
             :size="10"
@@ -222,7 +242,7 @@ const inputClicked = (event: any) => {
         :size="computeIconSize"
       />
       <div
-        v-if="props.loadingOptions"
+        v-if="getAttribute(props.loading, 'icon', 'loading')"
         class="absolute top-1 bottom-0 my-auto left-1"
       >
         <GLoading color="green" />
@@ -231,5 +251,3 @@ const inputClicked = (event: any) => {
     <GErrorText :error="props.error" />
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/input.scss" />

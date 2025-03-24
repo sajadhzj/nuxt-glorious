@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { watch, ref } from '#imports'
 import _props from '../props/Paginate'
+import { getAttribute } from '../helper'
 
 const props = defineProps(_props)
 const modelValue = defineModel()
 const emits = defineEmits(['change'])
 
 const emit = (item: any) => {
-  if (props.currentPage !== item) {
+  if (getAttribute(props.currentPage, 'paginate', 'currentPage') !== item) {
     modelValue.value = item
     emits('change', { page: item })
   }
@@ -17,37 +18,57 @@ const listPage = ref<Array<Number>>([])
 
 const computeListPage = () => {
   listPage.value = []
-  let firstPage = props.currentPage - props.numberSuggestPage
-  const endPage = props.currentPage + (props.numberSuggestPage + 1)
+  let firstPage =
+    getAttribute(props.currentPage, 'paginate', 'currentPage') -
+    getAttribute(props.numberSuggestPage, 'paginate', 'numberSuggestPage')
+  const endPage =
+    getAttribute(props.currentPage, 'paginate', 'currentPage') +
+    (getAttribute(props.numberSuggestPage, 'paginate', 'numberSuggestPage') + 1)
 
   while (firstPage <= endPage) {
-    if (firstPage > 0 && firstPage <= props.lastPage)
+    if (
+      firstPage > 0 &&
+      firstPage <= getAttribute(props.lastPage, 'paginate', 'lastPage')
+    )
       listPage.value.push(firstPage)
     firstPage++
   }
 }
 computeListPage()
 watch(
-  () => props.currentPage,
+  () => getAttribute(props.currentPage, 'paginate', 'currentPage'),
   () => computeListPage()
 )
 
 const arrowPrevious = () => {
-  if (props.currentPage !== 1) emit(props.currentPage - 1)
+  if (getAttribute(props.currentPage, 'paginate', 'currentPage') !== 1)
+    emit(getAttribute(props.currentPage, 'paginate', 'currentPage') - 1)
 }
 const arrowNext = () => {
-  if (props.currentPage !== props.lastPage) emit(props.currentPage + 1)
+  if (
+    getAttribute(props.currentPage, 'paginate', 'currentPage') !==
+    getAttribute(props.lastPage, 'paginate', 'lastPage')
+  )
+    emit(getAttribute(props.currentPage, 'paginate', 'currentPage') + 1)
 }
 </script>
 
 <template>
   <div
-    v-if="props.currentPage && props.lastPage !== 1"
+    v-if="
+      getAttribute(props.currentPage, 'paginate', 'currentPage') &&
+      getAttribute(props.lastPage, 'paginate', 'lastPage') !== 1
+    "
     class="w-max glorious-paginate"
+    :class="[`color-${getAttribute(props.color, 'paginate', 'color')}`]"
   >
     <div>
       <GIcon
-        :color="props.currentPage !== 1 ? '#000' : '#cbd5e1'"
+        :color="
+          getAttribute(props.currentPage, 'paginate', 'currentPage') !== 1
+            ? '#000'
+            : '#cbd5e1'
+        "
         class="ml-2 cursor-pointer"
         name="glorious-arrow"
         :size="15"
@@ -58,14 +79,23 @@ const arrowNext = () => {
         v-for="(item, index) in listPage"
         :key="index"
         class="w-6 h-6 rounded-lg flex items-center justify-center paginate font-bold"
-        :class="[props.currentPage === item ? 'active' : 'cursor-pointer']"
+        :class="[
+          getAttribute(props.currentPage, 'paginate', 'currentPage') === item
+            ? 'active'
+            : 'cursor-pointer',
+        ]"
         @click="emit(item)"
       >
         {{ item }}
       </div>
 
       <GIcon
-        :color="props.currentPage !== props.lastPage ? '#000' : '#cbd5e1'"
+        :color="
+          getAttribute(props.currentPage, 'paginate', 'currentPage') !==
+          getAttribute(props.lastPage, 'paginate', 'lastPage')
+            ? '#000'
+            : '#cbd5e1'
+        "
         name="glorious-arrow"
         class="mr-2 cursor-pointer"
         :size="15"
@@ -74,5 +104,3 @@ const arrowNext = () => {
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/paginate.scss" />

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/Button'
+import { getAttribute } from '../helper'
 
 const props: any = defineProps(_props)
 </script>
@@ -10,14 +11,14 @@ const props: any = defineProps(_props)
     :aria-label="props.ariaLabel"
     :class="[
       `glorious-button`,
-      `button-color-${props.color}`,
-      `size-${props.size}`,
-      props.outline ? 'outline' : '',
+      `button-color-${getAttribute(props.color, 'button', 'color')}`,
+      `size-${getAttribute(props.size, 'button', 'size')}`,
+      getAttribute(props.outline, 'button', 'outline') ? 'outline' : '',
     ]"
-    :disabled="props.disabled"
+    :disabled="getAttribute(props.disabled, 'button', 'disable')"
   >
     <div
-      v-if="props.loading"
+      v-if="getAttribute(props.loading, 'button', 'loading')"
       class="loading flex justify-center"
     >
       <GLoading />
@@ -29,14 +30,12 @@ const props: any = defineProps(_props)
     :to="props.to"
     :class="[
       `glorious-button`,
-      `button-color-${props.color}`,
-      `size-${props.size}`,
-      props.outline ? 'outline' : '',
+      `button-color-${getAttribute(props.color, 'button', 'color')}`,
+      `size-${getAttribute(props.size, 'button', 'size')}`,
+      getAttribute(props.outline, 'button', 'outline') ? 'outline' : '',
     ]"
-    :disabled="props.disabled"
+    :disabled="getAttribute(props.disabled, 'button', 'disable')"
   >
     <slot />
   </NuxtLink>
 </template>
-
-<style lang="scss" src="../../style/components/button.scss" />

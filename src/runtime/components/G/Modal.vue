@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { watch } from '#imports'
-import { createBlurDom, removeBlurDom } from '../helper'
+import { createBlurDom, removeBlurDom, getAttribute } from '../helper'
 import _props from '../props/Modal'
 
 const props = defineProps(_props)
@@ -31,7 +31,10 @@ watch(
 <template>
   <div
     class="glorious-scaffold-modal animation"
-    :class="[modelValue ? 'open' : 'close', `size-${props.size}`]"
+    :class="[
+      modelValue ? 'open' : 'close',
+      `size-${getAttribute(props.size, 'icon', 'size')}`,
+    ]"
   >
     <!-- header -->
     <div
@@ -68,14 +71,14 @@ watch(
       class="glorious-scaffold-modal-footer"
     >
       <GButton
-        :color="props.colorBtn"
+        :color="getAttribute(props.colorBtn, 'icon', 'colorBtn')"
         :loading="props.okBtnLoading"
         @click="emits('ok')"
       >
         {{ props.okBtn }}
       </GButton>
       <GButton
-        :color="props.colorBtn"
+        :color="getAttribute(props.colorBtn, 'icon', 'colorBtn')"
         v-show="props.closeBtn !== ''"
         outline
         @click="modelValue = false"
@@ -86,5 +89,3 @@ watch(
     <!-- end footer -->
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/modal.scss" />

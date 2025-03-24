@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/Tab'
+
 const props: any = defineProps(_props)
 const modelValue = defineModel()
 const tabClicked: any = (key: string, event: any) => {
@@ -89,5 +90,3 @@ const scrollPrevious = (event: Event) => {
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/tab.scss" />

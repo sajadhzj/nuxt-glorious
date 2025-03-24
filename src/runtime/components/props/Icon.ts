@@ -5,4 +5,8 @@ export default {
   ...hashColor,
   ...intSize(),
   ...stroke(),
+  hoverColor: {
+    required: false,
+    default: '',
+  },
 }

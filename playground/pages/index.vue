@@ -1,7 +1,9 @@
-<script lang="ts" setup>
-const moduleConfig: any = useRuntimeConfig()
-console.log(moduleConfig)
-</script>
+<script lang="ts" setup></script>
 <template>
-  <div></div>
+  <h1 class="text-5xl font-bold underline cm">Hello world!</h1>
+  <GIcon
+    :size="40"
+    color="red"
+    name="glorious-users-group"
+  ></GIcon>
 </template>

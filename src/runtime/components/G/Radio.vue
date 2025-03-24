@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import _props from '../props/Radio'
+import { getAttribute } from '../helper'
+
 const props = defineProps(_props)
 const modelValue = defineModel()
 
@@ -12,18 +14,19 @@ const inputFunction = (event: Event) => {
 <template>
   <label
     class="glorious-radio"
-    :class="[props.color, `size-${props.size}`]"
+    :class="[
+      getAttribute(props.color, 'radio', 'color'),
+      `size-${getAttribute(props.size, 'radio', 'size')}`,
+    ]"
   >
     <input
-      :name="props.name"
+      :name="getAttribute(props.checked, 'radio', 'checked')"
       type="radio"
       :disabled="props.disabled"
       :value="props.value"
-      :checked="props.checked"
+      :checked="getAttribute(props.checked, 'radio', 'checked')"
       @input="inputFunction($event)"
     />
     <div></div>
   </label>
 </template>
-
-<style lang="scss" src="../../style/components/radio.scss" />

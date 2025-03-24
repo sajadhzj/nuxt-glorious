@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import _props from '../props/Loading'
+import { getAttribute } from '../helper'
+
 const props: any = defineProps(_props)
 </script>
 
@@ -8,11 +10,13 @@ const props: any = defineProps(_props)
     <div
       class="glorious-loading"
       :style="{
-        width: `${props.size}px`,
-        border: `${props.stroke}px solid ${props.color}`,
+        width: `${getAttribute(props.size, 'icon', 'size')}px`,
+        border: `${getAttribute(
+          props.stroke,
+          'icon',
+          'stroke'
+        )}px solid ${getAttribute(props.color, 'icon', 'color')}`,
       }"
     />
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/loading.scss" />
