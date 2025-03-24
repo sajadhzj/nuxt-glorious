@@ -1,48 +1,28 @@
-import { useCookie, useFetch, useRuntimeConfig } from 'nuxt/app'
+import { useFetch, useRuntimeConfig } from 'nuxt/app'
 import { GloriousStore } from '../stores/GloriousStore'
+import type { gloriousFetchOptions } from './helper/useGloriousFetch/gloriousFetchOptionsInterface'
+import defaultOptions from './helper/useGloriousFetch/gloriousFetchDefaultOptions'
+import computeGKey from './helper/useGloriousFetch/functionComputeGKey'
+import computeParams from './helper/useGloriousFetch/functionComputeParams'
+import computeHeaderFetch from './helper/useGloriousFetch/functionComputeHeaderFetch'
+import computeFormData from './helper/useGloriousFetch/functionComputeFormData'
+import computeAuth from './helper/useGloriousFetch/functionComputeAuth'
+import computeValidation from './helper/useGloriousFetch/functionComputeValidation'
 import defu from 'defu'
-interface gloriousFetchOptions {
-  gKey?: String
-  params?: Object
-  server?: Boolean
-  is$?: Boolean
-  lazy?: Boolean
-  headers?: Object
-  body?: Object
-  keepResponse?: Boolean
-  bodyType?: 'formData' | 'formDataCustom' | 'normal'
-  method?: 'POST' | 'GET' | 'PATCH' | 'PUT' | 'DELETE' | 'HEAD'
-  credentials?: 'same-origin' | 'include'
-  watch?: Array<Object>
-}
-const defaultOptions: gloriousFetchOptions = {
-  server: false,
-  method: 'GET',
-  lazy: true,
-  is$: true,
-  keepResponse: false,
-  params: {},
-  headers: {
-    Accept: 'application/json',
-  },
-  bodyType: 'normal',
-  credentials: 'same-origin',
-}
 
 export default async function (
   url: string,
   options: gloriousFetchOptions = defaultOptions
 ) {
   const moduleConfig: any = useRuntimeConfig()
-  options = defu(moduleConfig.public.glorious.fetch, options, defaultOptions)
-
   const gs: any = GloriousStore()
   const gKey: String = computeGKey(options.gKey, url)
 
+  options = defu(moduleConfig.public.glorious.fetch, options, defaultOptions)
   options.params = computeParams(<Object>options.params)
   options.headers = {
     ...options.headers,
-    ...computeAuth(),
+    ...computeAuth(moduleConfig),
     ...(await computeHeaderFetch({ ...options, url: url })),
   }
 
@@ -62,13 +42,6 @@ export default async function (
       try {
         gs.loading[<string>gKey] = false
         gs.forms[<string>gKey].errors = []
-        // if (
-        //   res.status >= 200 &&
-        //   res.status <= 299 &&
-        //   Object.prototype.hasOwnProperty.call(options, "saveBody") &&
-        //   !options.saveBody
-        // )
-        //   gs.forms[<string>gKey].form = {};
       } catch (e) {
         /* empty */
       }
@@ -95,6 +68,8 @@ export default async function (
   if (opt.keepResponse && !gs.keepResponse.includes(gKey))
     gs.keepResponse.push(gKey)
 
+  computeValidation(options.validationRequest, gKey, options.body)
+
   if (opt.method === 'GET' && typeof opt.body !== 'undefined') {
     opt.method = 'POST'
     return $fetch(url, opt)
@@ -105,66 +80,4 @@ export default async function (
   )
     return useFetch(url, opt)
   else return $fetch(url, opt)
-}
-
-function computeParams(params: Object): Object {
-  const computeParams: any = {}
-  Object.entries(params).map((item: any) => {
-    if (item[1] !== null && item[1] !== '') computeParams[item[0]] = item[1]
-  })
-
-  return computeParams
-}
-
-function computeGKey(gKey: String | undefined, url: string) {
-  return typeof gKey !== 'undefined'
-    ? gKey
-    : url.split('/')[url.split('/').length - 1]
-}
-
-function computeAuth(): Object {
-  const moduleConfig: any = useRuntimeConfig()
-
-  type headerType = { Authorization?: String }
-  const header: headerType = {}
-  const token = useCookie(moduleConfig.public.glorious.auth.cookie.name)
-
-  if (typeof token.value !== 'undefined')
-    header.Authorization = 'Bearer ' + token.value
-
-  return header
-}
-
-function computeFormData(options: gloriousFetchOptions) {
-  const form: any = new FormData()
-
-  Object.entries(<Object>options.body).forEach((item: any) => {
-    if (item[1] === null) return
-
-    if (
-      typeof item[1] === 'object' &&
-      typeof item[1].lastModifiedDate === 'undefined' &&
-      typeof item[1].type === 'undefined' &&
-      typeof item[1].size === 'undefined'
-    )
-      Object.entries(item[1]).forEach((nestedItem, index) => {
-        form.append(`${item[0]}[${index}]`, nestedItem[1])
-      })
-    else {
-      form.append(`${item[0]}`, item[1])
-    }
-  })
-
-  return form
-}
-
-async function computeHeaderFetch(options: object) {
-  const fetch = import.meta.glob('/glorious/fetch.ts')
-  let data: any = {}
-  if (typeof fetch['/glorious/fetch.ts'] !== 'undefined') {
-    data = await fetch['/glorious/fetch.ts']()
-    data = data.fetchHandler.headers(options)
-  }
-
-  return data
 }

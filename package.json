@@ -11,7 +11,8 @@
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
       "require": "./dist/module.cjs"
-    }
+    },
+    "./dist/scss/*" : "./dist/scss/*"
   },
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
@@ -30,23 +31,25 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",
-    "@nuxt/kit": "^3.14.1592",
-    "@nuxtjs/tailwindcss": "^6.12.0",
+    "@nuxt/kit": "^3.16.0",
     "@pinia/nuxt": "^0.5.1",
+    "@tailwindcss/postcss": "^4.0.14",
+    "@tailwindcss/vite": "^4.0.14",
     "defu": "^6.1.4",
     "pinia": "^2.1.7",
-    "sass": "^1.80.3"
+    "sass": "^1.86.0",
+    "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxt/eslint-config": "^0.2.0",
     "@nuxt/module-builder": "^0.5.5",
-    "@nuxt/schema": "^3.14.1592",
+    "@nuxt/schema": "^3.16.0",
     "@nuxt/test-utils": "^3.12.0",
     "@types/node": "^20.11.29",
     "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.16.0",
     "vitest": "^1.4.0"
   },
   "overrides": {

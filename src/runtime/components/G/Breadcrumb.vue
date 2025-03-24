@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/Breadcrumb'
+import { getAttribute } from '../helper'
 
 const props: any = defineProps(_props)
 </script>
@@ -29,9 +30,9 @@ const props: any = defineProps(_props)
       >
         {{ item.text }}
       </span>
-      <span v-if="index + 1 !== props.items.length">{{ props.divider }}</span>
+      <span v-if="index + 1 !== props.items.length">
+        {{ getAttribute(props.divider, 'breadcrumb', 'divider') }}
+      </span>
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/breadcrumb.scss" />

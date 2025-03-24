@@ -36,5 +36,3 @@ const computeModelValue = (event: Event) => {
     </template>
   </div>
 </template>
-
-<style scoped lang="scss" src="../../style/components/rating.scss" />

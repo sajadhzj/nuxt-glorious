@@ -4,7 +4,7 @@ export const color = (def: string = 'green') => ({
   color: {
     required: false,
     default: def,
-    type: String as () => colors,
+    type: String as () => colors | string,
   },
 })
 

@@ -12,7 +12,6 @@ export default {
   ...color(),
   ...placeholder(),
   ...title(),
-  ...size(),
   ...required(),
   ...error,
   ...disabled,

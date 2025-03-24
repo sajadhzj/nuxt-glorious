@@ -1,4 +1,6 @@
+import { color } from './common/index'
 export default {
+  ...color(),
   currentPage: {
     required: true,
     type: Number,

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from './../props/Alert'
+import { getAttribute } from '../helper'
 
 const props = defineProps(_props)
 </script>
@@ -7,10 +8,8 @@ const props = defineProps(_props)
 <template>
   <div
     class="glorious-alert"
-    :class="[`color-${props.color}`]"
+    :class="[`color-${getAttribute(props.color, 'alert', 'color')}`]"
   >
     <slot />
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/alert.scss" />

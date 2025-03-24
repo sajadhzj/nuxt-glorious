@@ -1,4 +1,4 @@
-import { color } from './common'
+import { color } from './common/index'
 
 export default {
   ...color(),

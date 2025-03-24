@@ -1,82 +1,46 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
 import _props from '../props/Icon'
+import { getAttribute } from '../helper'
+
 const props = defineProps(_props)
-
+const isHover = ref(false)
 const icon = ref('')
+const computeProps = (icon: any) => {
+  const size = getAttribute(props.size, 'icon', 'size')
+  const color = getAttribute(props.color, 'icon', 'color')
+  const strokeWidth = getAttribute(props.stroke, 'icon', 'stroke')
+  const stroke = getAttribute(props.color, 'icon', 'color')
 
-const methods = {
-  computeProps: (icon: any) => {
-    //color
-    icon = icon.replaceAll('\n', ' ')
-    //stroke
-    icon = icon
-      .split(' ')
-      .map((item: any) =>
-        item.includes('stroke="') && typeof props.color !== 'undefined'
-          ? 'stroke="' + props.color + '"'
-          : item
-      )
-      .join(' ')
-
-    //fill
-    if (typeof props.color !== 'undefined') {
-      icon = icon
-        .split(' ')
-        .map((item: any) => {
-          if (!item.includes('fill="none"')) {
-            if (item.includes('fill="') && !item.includes('"/>'))
-              return `fill="${props.color}"`
-            else if (item.includes('fill="') && item.includes('"/>'))
-              return `fill="${props.color}"/>`
-            else return item
-          } else return item
-        })
-        .join(' ')
-    }
-
-    //size
-    icon = icon.replaceAll('\n', ' ')
-
-    //width
-    icon = icon
-      .split(' ')
-      .map((item: any) =>
-        item.includes('width="') &&
-        !item.includes('stroke-width') &&
-        typeof props.size !== 'undefined'
-          ? 'width="' + props.size + '"'
-          : item
-      )
-      .join(' ')
-
-    icon = icon
-      .split(' ')
-      .map((item: any) =>
-        item.includes('height="') && typeof props.size !== 'undefined'
-          ? 'height="' + props.size + '"'
-          : item
-      )
-      .join(' ')
-
-    //stroke
-    if (props.stroke !== null) {
-      icon = icon.replaceAll('\n', ' ')
-      icon = icon
-        .split(' ')
-        .map((item: any) =>
-          item.includes('stroke-width') && typeof props.stroke !== 'undefined'
-            ? 'stroke-width="' + props.stroke + '"'
-            : item
-        )
-        .join(' ')
-    }
-
-    return icon
-  },
+  return icon
+    .replace(/width="(\d+)"/g, `width="${size}"`)
+    .replace(/height="(\d+)"/g, `height="${size}"`)
+    .replace(/fill="(?!none)([^"]+)"/g, `fill="${color}"`)
+    .replace(/stroke="(?!none)([^"]+)"/g, `stroke="${stroke}"`)
+    .replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}"`)
 }
+const changeColorIcon = (color: string) => {
+  icon.value = icon.value
+    .replace(/fill="(?!none)([^"]+)"/g, `fill="${color}"`)
+    .replace(/stroke="(?!none)([^"]+)"/g, `stroke="${color}"`)
+}
+const mouseover = () => {
+  if (props.hoverColor === '') return
 
-async function getIcon() {
+  if (!isHover.value) {
+    const color = getAttribute(props.hoverColor, 'icon', 'hoverColor')
+
+    changeColorIcon(color)
+  }
+
+  isHover.value = true
+}
+const mouseleave = () => {
+  isHover.value = false
+  const color = getAttribute(props.color, 'icon', 'color')
+  changeColorIcon(color)
+}
+const getIcon = async () => {
   try {
     const iconsImport = import.meta.glob('assets/icons/**/**.svg', {
       query: '?raw',
@@ -99,7 +63,7 @@ async function getIcon() {
       rawIcon = icon.default
     }
 
-    icon.value = methods.computeProps(rawIcon)
+    icon.value = computeProps(rawIcon)
   } catch (e) {
     console.error(
       `glorious error -> Icon '${props.name}' doesn't exist in 'assets/icons'`
@@ -117,9 +81,12 @@ watch(
   }
 )
 </script>
+
 <template>
   <div
     class="w-max h-max"
+    @mouseover="mouseover"
+    @mouseleave="mouseleave"
     v-html="icon"
   />
 </template>

@@ -2,6 +2,7 @@ import { defineNuxtRouteMiddleware, useCookie, useNuxtApp } from '#imports'
 import { GloriousStore } from '../stores/GloriousStore'
 
 export default defineNuxtRouteMiddleware(() => {
+  /*
   const nuxtApp = useNuxtApp()
   const moduleConfig: any = nuxtApp.$config.public.glorious
   const gs = GloriousStore()
@@ -12,5 +13,5 @@ export default defineNuxtRouteMiddleware(() => {
 
   if (typeof cookieToken.value === 'undefined') return
 
-  nuxtApp.hook('app:beforeMount', () => gs.authGetUser(cookieToken.value))
+  nuxtApp.hook('app:beforeMount', () => gs.authGetUser(cookieToken.value))*/
 })

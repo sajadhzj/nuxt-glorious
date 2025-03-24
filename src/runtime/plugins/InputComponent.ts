@@ -29,16 +29,8 @@ export default defineNuxtPlugin((nuxtApp) => {
               event.target.nextElementSibling.offsetHeight
           ) {
             event.target.nextElementSibling.style.width = `${event.target.offsetWidth}px`
-
-            event.target.nextElementSibling.style.top = `${
-              getElementPosition(event.target) -
-              event.target.nextElementSibling.offsetHeight
-            }px`
           } else {
             event.target.nextElementSibling.style.width = `${event.target.offsetWidth}px`
-            event.target.nextElementSibling.style.top = `${
-              getElementPosition(event.target) + event.target.offsetHeight
-            }px`
           }
         }
       }

@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from '#app'
 import { GloriousStore } from '../stores/GloriousStore'
 
 export const createBlurDom = (callback: Function) => {
@@ -6,9 +7,9 @@ export const createBlurDom = (callback: Function) => {
     'fixed',
     'top-0',
     'right-0',
-    'backdrop-blur-sm',
+    'backdrop-blur-xl',
     'bg-gray-500',
-    'bg-opacity-50',
+    'opacity-75',
     'h-full',
     'w-full',
     'z-[40]',
@@ -42,4 +43,23 @@ export const hasValidationError = (errorProp: string): boolean => {
     )
 
   return condition
+}
+
+export const getAttribute = (
+  propsValue: any,
+  componentName: string,
+  prop: string
+) => {
+  let mount
+  if (import.meta.client) {
+    const config: any = useRuntimeConfig()
+    return (
+      config.public?.glorious?.components?.[componentName]?.props?.[prop] ||
+      propsValue
+    )
+  } else {
+    mount = propsValue
+  }
+
+  return mount
 }

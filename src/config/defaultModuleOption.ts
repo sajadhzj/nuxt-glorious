@@ -22,11 +22,4 @@ export default <ModuleOptions>{
       provider: '',
     },
   },
-  components: {
-    alert: {
-      props: {
-        color: 'green',
-      },
-    },
-  },
 }

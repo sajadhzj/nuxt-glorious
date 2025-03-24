@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/File'
+import { getAttribute } from '../helper'
 
 const props: any = defineProps(_props)
 const modelValue = defineModel()
@@ -22,30 +23,34 @@ const deleteFile = (event: any) => {
       v-if="props.title !== ''"
       class="glorious-title text-sm font-medium text-gray-500"
     >
-      {{ props.title }}
+      {{ getAttribute(props.title, 'file', 'title') }}
       <span
-        v-if="props.required"
+        v-if="getAttribute(props.required, 'file', 'required')"
         class="text-red-500"
       >
         *
       </span>
     </span>
     <label
-      :class="[`glorious-file-${props.color}`]"
+      :class="[`glorious-file-${getAttribute(props.color, 'file', 'color')}`]"
       class="flex items-center gap-3 text-gray-500 bg-white"
     >
       <div
         class="placeholder"
-        :class="[`size-${props.size}`]"
+        :class="[`size-${getAttribute(props.size, 'file', 'size')}`]"
       >
-        <span>{{ props.placeholder }}</span>
+        <span>{{
+          getAttribute(props.placeholder, 'file', 'placeholder')
+        }}</span>
       </div>
       <input
         type="file"
         class="hidden"
         @change="changeInput($event)"
       />
-      <span class="text-xs">{{ props.text }}</span>
+      <span class="text-xs">{{
+        getAttribute(props.text, 'file', 'text')
+      }}</span>
       <GIcon
         name="glorious-x"
         color="#ff0000"
@@ -55,5 +60,3 @@ const deleteFile = (event: any) => {
     <GErrorText :error="props.error" />
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/file.scss" />

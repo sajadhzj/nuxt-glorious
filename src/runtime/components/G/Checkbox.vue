@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/CheckBox'
+import { getAttribute } from '../helper'
 
 const props: any = defineProps(_props)
 const model = defineModel()
@@ -11,16 +12,17 @@ model.value = props.checked
 <template>
   <label
     class="glorious-checkbox"
-    :class="[`color-${props.color}`, `size-${props.size}`]"
+    :class="[
+      `color-${getAttribute(props.color, 'checkbox', 'color')}`,
+      `size-${getAttribute(props.size, 'checkbox', 'size')}`,
+    ]"
   >
     <input
       type="checkbox"
-      :checked="props.checked"
-      :disabled="props.disabled"
+      :checked="getAttribute(props.checked, 'checkbox', 'checked')"
+      :disabled="getAttribute(props.disabled, 'checkbox', 'disable')"
       @input="inputFunction($event)"
     />
     <div></div>
   </label>
 </template>
-
-<style lang="scss" src="../../style/components/checkbox.scss" />

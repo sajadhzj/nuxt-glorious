@@ -58,5 +58,3 @@ const props = defineProps(_props)
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/table.scss" />

@@ -6,6 +6,7 @@ import {
   addImportsDir,
   installModule,
   addRouteMiddleware,
+  addVitePlugin,
 } from '@nuxt/kit'
 
 import defu from 'defu'
@@ -29,37 +30,31 @@ export default defineNuxtModule<ModuleOptions>({
       defaultModuleOption
     )
 
-    await installModule('@nuxtjs/tailwindcss', {
-      // module configuration
-      exposeConfig: true,
-      config: {
-        darkMode: 'class',
-        content: {
-          files: [
-            resolver.resolve('./runtime/components/**/*.{vue,mjs,ts}'),
-            resolver.resolve('./runtime/*.{mjs,js,ts}'),
-          ],
-        },
-      },
-    })
     await installModule('@pinia/nuxt')
     await installModule('@nuxt/image')
 
     addImportsDir(resolver.resolve('runtime/composables'))
     addImportsDir(resolver.resolve('runtime/stores'))
-    addImportsDir(resolver.resolve('runtime/middlewares'))
+
     addComponentsDir({
       path: resolver.resolve('runtime/components'),
       global: true,
+
       watch: false,
     })
+    if (nuxt.options.builder === '@nuxt/vite-builder') {
+      const plugin = await import('@tailwindcss/vite').then((r) => r.default)
+
+      addVitePlugin(plugin())
+    }
+
     nuxt.hook('nitro:config', async (nitro: any) => {
       nitro.publicAssets.push({
         dir: resolver.resolve('./runtime/assets'),
       })
     })
-
-    addPlugin(resolver.resolve('./runtime/plugins/glorious-app-setting'))
+    /*
+    addPlugin(resolver.resolve('./runtime/plugins/glorious-app-setting'))*/
     addPlugin(resolver.resolve('./runtime/plugins/InputComponent'))
 
     addRouteMiddleware({

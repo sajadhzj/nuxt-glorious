@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { watch } from '#imports'
 import _props from '../props/Drawer'
+import { getAttribute } from '../helper'
 import { createBlurDom, removeBlurDom } from '../helper'
 
 const props = defineProps(_props)
@@ -16,7 +17,10 @@ watch(
 </script>
 <template>
   <div
-    :class="[props.position, modelValue ? 'open' : 'close']"
+    :class="[
+      getAttribute(props.position, 'drawer', 'position'),
+      modelValue ? 'open' : 'close',
+    ]"
     class="glorious-drawer close hidden"
   >
     <div class="w-full">
@@ -24,5 +28,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style lang="scss" src="../../style/components/drawer.scss" />
