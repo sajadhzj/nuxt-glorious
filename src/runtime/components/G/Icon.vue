@@ -13,10 +13,13 @@ const computeProps = (icon: any) => {
   const stroke = getAttribute(props.color, 'icon', 'color')
 
   return icon
-    .replace(/width="(\d+)"/g, `width="${size}"`)
+    .replace(
+      /(?<!stroke-)width="(\d+)"/g,
+      `class="g-icon-${props.name}" width="${size}"`
+    )
+    .replace(/stroke="(?!none)([^"]+)"/g, `stroke="${stroke}"`)
     .replace(/height="(\d+)"/g, `height="${size}"`)
     .replace(/fill="(?!none)([^"]+)"/g, `fill="${color}"`)
-    .replace(/stroke="(?!none)([^"]+)"/g, `stroke="${stroke}"`)
     .replace(/stroke-width="[^"]*"/g, `stroke-width="${strokeWidth}"`)
 }
 const changeColorIcon = (color: string) => {

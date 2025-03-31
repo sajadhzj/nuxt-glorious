@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "2.0.0-develop-16",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
   "repository": "sajadhzj/nuxt-glorious",
@@ -10,17 +10,18 @@
     ".": {
       "types": "./dist/types.d.ts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
-    },
-    "./dist/scss/*" : "./dist/scss/*"
+      "require": "./dist/module.cjs",
+      "style": "./dist/runtime/style/style.css"
+    }
   },
+  "style": "./dist/runtime/style/style.css",
   "main": "./dist/module.cjs",
   "types": "./dist/types.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepack": "nuxt-module-build build && cp -R src/runtime/style dist/runtime",
+    "prepack": "bash load-style.sh && nuxt-module-build build",
     "dev": "nuxi dev --port=3001 playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",

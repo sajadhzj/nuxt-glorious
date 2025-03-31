@@ -1,0 +1,30 @@
+@use 'variable.scss' as var;
+@use 'mixin.scss' as mixin;
+
+button:focus-visible {
+  @apply outline-none;
+}
+
+.glorious-button {
+  @apply rounded-md text-white px-3 relative;
+  @include mixin.loading-size(6);
+  @include mixin.load-size();
+}
+@each $color in var.$colors {
+  .#{'button-color-' + $color} {
+    @apply #{"bg-" + ($color) + "-600 border-" + $color + "-700 hover:bg-" + $color + "-700"};
+
+    &.outline {
+      @apply bg-transparent border outline-none;
+      @apply #{"text-" + $color + "-500 hover:bg-" + $color + "-100"};
+      @include mixin.loading-color($color);
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed;
+      &:not(:disabled) {
+        @apply #{"bg-" + ($color) + "-300"};
+      }
+    }
+  }
+}

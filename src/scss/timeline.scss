@@ -1,0 +1,40 @@
+@use 'variable.scss' as var;
+
+.glorious-timeline {
+  &-items {
+    @apply relative;
+
+    div {
+      @apply relative;
+
+      &::before {
+        content: '';
+        @apply absolute w-[2px] right-[-15px];
+        &:not(:last-child) {
+          @apply h-[calc(100%+20px)];
+        }
+      }
+    }
+
+    &-count {
+      @apply absolute w-5 h-5 top-0 right-[-24px] rounded-full ;
+      @apply text-white flex justify-center items-center font-medium;
+    }
+
+    @each $color in var.$colors {
+      &.#{'color-' + $color} > div {
+        &::before {
+          @apply #{"bg-" + $color + "-500"};
+        }
+      }
+    }
+
+    @each $color in var.$colors {
+      &.#{'color-' + $color} {
+        .glorious-timeline-items-count {
+          @apply #{"bg-" + $color + "-500"};
+        }
+      }
+    }
+  }
+}

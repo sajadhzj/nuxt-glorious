@@ -1,0 +1,19 @@
+@use 'variable.scss' as var;
+@use 'mixin.scss' as mixin;
+
+@each $color in var.$colors {
+  .#{'glorious-file-' + $color} {
+    @apply #{"ring-"+$color+"-500"};
+    @apply rounded-md ring-1 overflow-hidden cursor-pointer relative;
+
+    > div.placeholder {
+      @apply #{"bg-"+$color+"-500"};
+      @apply text-white px-3 w-max;
+      @include mixin.load-size();
+    }
+
+    > div:last-child {
+      @apply absolute left-3 hidden;
+    }
+  }
+}

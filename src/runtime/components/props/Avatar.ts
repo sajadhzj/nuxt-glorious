@@ -1,10 +1,8 @@
-import { size, rounded } from './common'
+import { size, rounded, alt, src } from './common'
 
 export default {
-  ...size(),
   ...rounded,
-  src: {
-    required: true,
-    type: String,
-  },
+  ...size(),
+  ...alt(),
+  ...src(),
 }

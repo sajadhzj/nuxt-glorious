@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch, onMounted } from "#imports";
+import { watch, onMounted } from '#imports'
 const props = defineProps({
   items: {
     required: true,
@@ -12,67 +12,70 @@ const props = defineProps({
   },
   progressColor: {
     required: false,
-    default: "#00ff00",
+    default: '#00ff00',
     type: String,
   },
   bgColor: {
     required: false,
-    default: "#0000ff",
+    default: '#0000ff',
     type: String,
   },
-});
+})
 
 const methods = {
   computeWizardMobile: () => {
-    const circularProgress = document.querySelectorAll(".circular-progress");
+    const circularProgress = document.querySelectorAll('.circular-progress')
     Array.from(circularProgress).forEach((progressBar: any) => {
-      const progressValue: any = progressBar.querySelector(".percentage");
-      const innerCircle: any = progressBar.querySelector(".inner-circle");
-      const eachStep = (1 / props.items.length) * 100;
+      const progressValue: any = progressBar.querySelector('.percentage')
+      const innerCircle: any = progressBar.querySelector('.inner-circle')
+      const eachStep = (1 / props.items.length) * 100
 
       let startValue =
-        Number(progressBar.getAttribute("data-percentage")) - eachStep < 0
+        Number(progressBar.getAttribute('data-percentage')) - eachStep < 0
           ? 0
-          : Number(progressBar.getAttribute("data-percentage"));
+          : Number(progressBar.getAttribute('data-percentage'))
 
       const endValue: any =
           props.step === 0
             ? 0
-            : Number(progressBar.getAttribute("data-percentage")) + eachStep,
-        progressColor = progressBar.getAttribute("data-progress-color");
+            : Number(progressBar.getAttribute('data-percentage')) + eachStep,
+        progressColor = progressBar.getAttribute('data-progress-color')
 
       const progress = setInterval(() => {
-        progressValue.textContent = props.step + 1;
+        progressValue.textContent = props.step + 1
 
         innerCircle.style.backgroundColor = `${progressBar.getAttribute(
-          "data-inner-circle-color"
-        )}`;
+          'data-inner-circle-color'
+        )}`
 
         progressBar.style.background = `conic-gradient(${progressColor} ${
           startValue * 3.6
-        }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
+        }deg,${progressBar.getAttribute('data-bg-color')} 0deg)`
 
         if (Math.floor(startValue) == Math.floor(endValue))
-          clearInterval(progress);
+          clearInterval(progress)
 
-        startValue++;
-      }, 10);
-    });
+        startValue++
+      }, 10)
+    })
   },
-};
+}
 
-onMounted(() => methods.computeWizardMobile());
+onMounted(() => methods.computeWizardMobile())
 
 watch(
   () => props.step,
   () => methods.computeWizardMobile()
-);
+)
 </script>
 
 <template>
   <div class="glorious-wizard">
     <div class="glorious-wizard-desktop">
-      <div v-for="(item, index) in props.items" :key="index">
+      <div
+        v-for="(item, index) in props.items"
+        :key="index"
+      >
         <div
           class="circle"
           :class="parseInt(index) < props.step ? 'checked' : ''"
@@ -118,7 +121,8 @@ watch(
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+/*
 .glorious-wizard {
   @apply md:w-full w-max;
 }
@@ -161,5 +165,5 @@ watch(
 .percentage {
   font-size: 1rem;
   position: relative;
-}
+}*/
 </style>

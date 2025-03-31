@@ -10,6 +10,7 @@ export const GloriousStore = defineStore('GloriousStore', {
     keepData: {},
     forms: {},
     response: {},
+    modals: {},
     keepResponse: [],
   }),
   getters: {

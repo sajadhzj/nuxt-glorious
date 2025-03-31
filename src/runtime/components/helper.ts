@@ -3,18 +3,7 @@ import { GloriousStore } from '../stores/GloriousStore'
 
 export const createBlurDom = (callback: Function) => {
   const div = document.createElement('div')
-  div.classList.add(
-    'fixed',
-    'top-0',
-    'right-0',
-    'backdrop-blur-xl',
-    'bg-gray-500',
-    'opacity-75',
-    'h-full',
-    'w-full',
-    'z-[40]',
-    'glorious-backdrop'
-  )
+  div.classList.add('glorious-backdrop')
 
   const nuxt = document.getElementById('__nuxt')
   nuxt?.appendChild(div)
@@ -50,15 +39,13 @@ export const getAttribute = (
   componentName: string,
   prop: string
 ) => {
-  let mount
+  let mount = propsValue
+
   if (import.meta.client) {
     const config: any = useRuntimeConfig()
-    return (
+    mount =
       config.public?.glorious?.components?.[componentName]?.props?.[prop] ||
       propsValue
-    )
-  } else {
-    mount = propsValue
   }
 
   return mount

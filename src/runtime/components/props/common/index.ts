@@ -17,7 +17,7 @@ export const size = (def: sizes = 'md') => ({
 })
 
 export const rounded = {
-  size: {
+  rounded: {
     required: false,
     default: 'md',
     type: String as () => roundedType,
@@ -37,6 +37,11 @@ export const loading = {
     required: false,
     default: false,
     type: Boolean,
+  },
+  loadingColor: {
+    required: false,
+    default: false,
+    type: String as () => colors,
   },
   loadingOption: {
     required: false,
@@ -129,7 +134,7 @@ export const intSize = (def: number = 20) => ({
   },
 })
 
-export const stroke = (def: number | null = null) => ({
+export const stroke = (def: number | null = 1) => ({
   stroke: {
     required: false,
     type: [Number, null],
@@ -186,6 +191,20 @@ export const keyOfValue = () => ({
   keyOfValue: {
     required: false,
     default: 'value',
+    type: String,
+  },
+})
+
+export const alt = () => ({
+  alt: {
+    required: false,
+    type: String,
+  },
+})
+
+export const src = () => ({
+  src: {
+    required: true,
     type: String,
   },
 })

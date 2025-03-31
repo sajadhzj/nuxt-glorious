@@ -31,7 +31,17 @@ export interface ModuleOptions {
   components: {
     alert: {
       props: {
-        color: string
+        color?: string
+      }
+    }
+    select: {
+      props: {
+        color?: string
+        size?: 'md'
+        disabled?: false
+        required?: false
+        displayTextKey?: 'text'
+        keyOfValue?: 'value'
       }
     }
   }

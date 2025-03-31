@@ -15,6 +15,7 @@ watch(
   }
 )
 </script>
+
 <template>
   <div
     :class="[

@@ -1,0 +1,59 @@
+@use 'variable.scss' as var;
+
+.glorious-radio {
+  @apply block relative cursor-pointer;
+
+  > input {
+    @apply hidden;
+
+    &:checked ~ div {
+      @apply border-none;
+
+      &:after {
+        content: '';
+        @apply block w-1 h-1 bg-white rounded-full;
+      }
+    }
+
+    &:disabled ~ div {
+      @apply cursor-not-allowed;
+    }
+  }
+  > div:last-child {
+    @apply border border-gray-500 rounded-full bg-white left-0 top-0 absolute hover:shadow-lg;
+    > div:first-child {
+      @apply hidden;
+    }
+
+    &:after {
+      @apply absolute hidden right-0 top-0 left-0 bottom-0 m-auto w-10 h-10 bg-white rounded-full;
+    }
+  }
+
+  @each $color in var.$colors {
+    &.#{'' + $color} {
+      > input {
+        &:checked ~ div {
+          @apply #{'bg-'+$color+'-500'};
+        }
+      }
+    }
+  }
+
+  @each $key, $value in var.$sizes {
+    &.size-#{$key} {
+      @apply w-[#{($value - 14)}px] h-[#{($value - 14)}px];
+      > div:last-child {
+        @apply w-[#{($value - 14)}px] h-[#{($value - 14)}px];
+      }
+
+      > input {
+        &:checked ~ div {
+          &:after {
+            @apply w-[#{($value - 24)}px] h-[#{($value - 24)}px];
+          }
+        }
+      }
+    }
+  }
+}

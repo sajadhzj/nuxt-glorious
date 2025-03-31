@@ -1,0 +1,26 @@
+@use 'mixin.scss';
+@use 'variable.scss';
+@use 'alert.scss';
+@use 'avatar.scss';
+@use 'breadcrumb.scss';
+@use 'button.scss';
+@use 'checkbox.scss';
+@use 'drawer.scss';
+@use 'file.scss';
+@use 'input.scss';
+@use 'loading.scss';
+@use 'modal.scss';
+@use 'paginate.scss';
+@use 'radio.scss';
+@use 'rating.scss';
+@use 'select.scss';
+@use 'switch.scss';
+@use 'tab.scss';
+@use 'table.scss';
+@use 'textarea.scss';
+@use 'timeline.scss';
+@use 'tooltip.scss';
+
+.glorious-backdrop {
+    @apply backdrop-blur-md fixed top-0 w-full h-full bg-gray-500/50 z-40;
+}

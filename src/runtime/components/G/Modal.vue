@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { watch } from '#imports'
+import { watch, onMounted } from '#imports'
 import { createBlurDom, removeBlurDom, getAttribute } from '../helper'
 import _props from '../props/Modal'
 
@@ -43,7 +43,7 @@ watch(
     >
       <span class="font-medium">{{ props.title }}</span>
       <GButton
-        class="flex justify-center items-center w-6 h-6"
+        class="close-modal-btn"
         size="sm"
         color="red"
         @click="modelValue = false"
