@@ -94,3 +94,7 @@
         @apply text-gray-500;
     }
 }
+
+.glorious-input-tag-delete-option {
+    @apply border border-red-500 rounded p-1 hover:bg-red-50;
+}

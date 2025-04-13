@@ -15,7 +15,7 @@ const props: any = defineProps(_props)
   >
     <nuxt-img
       :src="props.src"
-      :alt="getAttribute(props.rounded, 'avatar', 'rounded')"
+      :alt="getAttribute(props.rounded, 'avatar', 'alt')"
     />
   </div>
 </template>

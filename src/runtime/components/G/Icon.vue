@@ -1,16 +1,15 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
 import _props from '../props/Icon'
-import { getAttribute } from '../helper'
 
 const props = defineProps(_props)
 const isHover = ref(false)
 const icon = ref('')
 const computeProps = (icon: any) => {
-  const size = getAttribute(props.size, 'icon', 'size')
-  const color = getAttribute(props.color, 'icon', 'color')
-  const strokeWidth = getAttribute(props.stroke, 'icon', 'stroke')
-  const stroke = getAttribute(props.color, 'icon', 'color')
+  const size = props.size
+  const color = props.color
+  const strokeWidth = props.stroke
+  const stroke = props.color
 
   return icon
     .replace(
@@ -31,7 +30,7 @@ const mouseover = () => {
   if (props.hoverColor === '') return
 
   if (!isHover.value) {
-    const color = getAttribute(props.hoverColor, 'icon', 'hoverColor')
+    const color = props.hoverColor
 
     changeColorIcon(color)
   }
@@ -40,7 +39,7 @@ const mouseover = () => {
 }
 const mouseleave = () => {
   isHover.value = false
-  const color = getAttribute(props.color, 'icon', 'color')
+  const color = props.color
   changeColorIcon(color)
 }
 const getIcon = async () => {

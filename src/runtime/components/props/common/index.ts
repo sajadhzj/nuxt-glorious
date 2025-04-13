@@ -38,11 +38,6 @@ export const loading = {
     default: false,
     type: Boolean,
   },
-  loadingColor: {
-    required: false,
-    default: false,
-    type: String as () => colors,
-  },
   loadingOption: {
     required: false,
     default: {
@@ -51,6 +46,14 @@ export const loading = {
     type: {
       color: String,
     },
+  },
+}
+
+export const loadingColor = {
+  loadingColor: {
+    required: false,
+    default: 'green',
+    type: String as () => colors | string,
   },
 }
 
@@ -205,6 +208,29 @@ export const alt = () => ({
 export const src = () => ({
   src: {
     required: true,
+    type: String,
+  },
+})
+
+export const hoverColor = () => ({
+  hoverColor: {
+    required: false,
+    default: '',
+  },
+})
+
+export const outline = () => ({
+  outline: {
+    required: false,
+    default: false,
+    type: Boolean,
+  },
+})
+
+export const noItemsFound = () => ({
+  noItemsFound: {
+    required: false,
+    default: 'No items found',
     type: String,
   },
 })

@@ -39,14 +39,10 @@ export const getAttribute = (
   componentName: string,
   prop: string
 ) => {
-  let mount = propsValue
+  const config: any = useRuntimeConfig()
 
-  if (import.meta.client) {
-    const config: any = useRuntimeConfig()
-    mount =
-      config.public?.glorious?.components?.[componentName]?.props?.[prop] ||
-      propsValue
-  }
-
-  return mount
+  return (
+    config.public?.glorious?.components?.[componentName]?.props?.[prop] ||
+    propsValue
+  )
 }

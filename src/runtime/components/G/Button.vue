@@ -21,7 +21,9 @@ const props: any = defineProps(_props)
       v-if="getAttribute(props.loading, 'button', 'loading')"
       class="loading flex justify-center"
     >
-      <GLoading />
+      <GLoading
+        :color="getAttribute(props.loadingColor, 'button', 'loadingColor')"
+      />
     </div>
     <slot v-else />
   </button>

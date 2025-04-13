@@ -1,12 +1,9 @@
-import { name, hashColor, intSize, stroke } from './common'
+import { name, hashColor, intSize, stroke, hoverColor } from './common'
 
 export default {
   ...name,
   ...hashColor,
   ...intSize(),
   ...stroke(),
-  hoverColor: {
-    required: false,
-    default: '',
-  },
+  ...hoverColor(),
 }

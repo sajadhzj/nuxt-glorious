@@ -11,6 +11,7 @@ import {
   displayTextKey,
   keyOfValue,
   loading,
+  noItemsFound,
 } from './common/index'
 
 export default {
@@ -20,11 +21,13 @@ export default {
   ...size(),
   ...displayTextKey(),
   ...required(),
+  ...keyOfValue(),
   ...error,
   ...icon,
   ...disabled,
   ...options,
   ...loading,
+  ...noItemsFound(),
   type: {
     required: false,
     default: 'text',

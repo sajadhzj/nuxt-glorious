@@ -1,4 +1,5 @@
 import type { breadcrumbInterface } from '../../../types'
+
 export default {
   items: {
     required: true,

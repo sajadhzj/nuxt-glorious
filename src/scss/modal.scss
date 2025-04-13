@@ -1,14 +1,18 @@
 .glorious-scaffold-modal {
-    @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto p-3 md:rounded-md rounded-t-md md:bottom-0 bottom-0 overflow-y-auto;
+    @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto md:rounded-md rounded-t-md md:bottom-0 bottom-0;
     .close-modal-btn {
         @apply flex justify-center items-center w-6 h-6;
     }
     &-header {
-        @apply flex justify-between items-center;
+        @apply flex justify-between items-center px-3 pt-3;
+    }
+
+    &-content {
+        @apply overflow-y-auto max-h-[50vh] px-3 pb-3;
     }
 
     &-footer {
-        @apply flex justify-center gap-3 mt-3;
+        @apply flex justify-center gap-3 my-3;
         > button {
             @apply min-w-24;
         }

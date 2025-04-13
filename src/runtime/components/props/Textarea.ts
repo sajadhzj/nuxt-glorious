@@ -1,12 +1,4 @@
-import {
-  color,
-  placeholder,
-  title,
-  size,
-  error,
-  disabled,
-  required,
-} from './common'
+import { color, placeholder, title, error, disabled, required } from './common'
 
 export default {
   ...color(),

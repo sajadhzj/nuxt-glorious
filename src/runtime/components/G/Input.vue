@@ -72,15 +72,16 @@ const isSelected = (value: any): boolean => {
   if (typeof tags.value !== 'object' && typeof modelValue.value !== 'object')
     return false
 
-  console.log()
-
   return (
-    tags.value.some((item: any) => item.value === value) ||
+    tags.value.some((item: any) => item[props.keyOfValue] === value) ||
     (typeof modelValue.value === 'object' &&
-      modelValue.value.some((item: any) => item.value === value))
+      modelValue.value.some((item: any) => item[props.keyOfValue] === value))
   )
 }
 const addTagViaOption = (option: any, event: any) => {
+  if (event.currentTarget.classList.contains('disabled')) {
+    event.stopPropagation()
+  }
   //   event.stopPropagation() if want not close with window
   if (
     typeof tags.value === 'string' ||
@@ -197,7 +198,6 @@ const inputClicked = (event: any) => {
         ></GIcon>
 
         <div
-          v-if="props.options.length > 0"
           class="glorious-input-options hidden"
           :class="[`size-${props.size}`]"
         >
@@ -209,11 +209,21 @@ const inputClicked = (event: any) => {
           </div>
           <div v-else>
             <div
+              v-if="props.options.length === 0"
+              class="text-center"
+            >
+              {{ props.noItemsFound }}
+            </div>
+            <div
               v-for="(option, index) in props.options"
               :key="index"
               @click="addTagViaOption(option, $event)"
-              :class="[isSelected(option.value) ? 'disabled' : '']"
+              :class="[isSelected(option[props.keyOfValue]) ? 'disabled' : '']"
             >
+              <slot
+                name="option"
+                :item="option"
+              ></slot>
               {{
                 option[
                   getAttribute(props.displayTextKey, 'input', 'displayTextKey')
@@ -231,6 +241,10 @@ const inputClicked = (event: any) => {
           v-for="(item, index) in tags"
           :key="index"
         >
+          <slot
+            name="option"
+            :item="item"
+          ></slot>
           {{
             typeof item === 'object'
               ? item[
@@ -238,12 +252,14 @@ const inputClicked = (event: any) => {
                 ]
               : item
           }}
-          <GIcon
-            name="glorious-x"
-            :size="10"
-            color="#ff0000"
-            @click="removeTag(item)"
-          />
+          <div class="glorious-input-tag-delete-option">
+            <GIcon
+              name="glorious-x"
+              :size="10"
+              color="#ff0000"
+              @click="removeTag(item)"
+            />
+          </div>
         </div>
       </div>
       <GIcon

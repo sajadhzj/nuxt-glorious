@@ -18,11 +18,6 @@ export default {
     default: '',
     type: String,
   },
-  rtl: {
-    required: false,
-    default: 'rtl',
-    type: String as () => 'rtl' | 'ltr',
-  },
   blur: {
     required: false,
     default: true,

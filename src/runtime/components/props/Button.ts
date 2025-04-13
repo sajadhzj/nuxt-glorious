@@ -1,15 +1,21 @@
-import { color, size, disabled, loading, to, ariaLabel } from './common'
+import {
+  color,
+  size,
+  disabled,
+  loading,
+  loadingColor,
+  to,
+  ariaLabel,
+  outline,
+} from './common'
 
 export default {
   ...color(),
   ...size(),
   ...disabled,
   ...loading,
+  ...loadingColor,
   ...to,
   ...ariaLabel,
-  outline: {
-    required: false,
-    default: false,
-    type: Boolean,
-  },
+  ...outline(),
 }

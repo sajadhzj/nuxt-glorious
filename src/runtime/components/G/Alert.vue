@@ -8,7 +8,10 @@ const props = defineProps(_props)
 <template>
   <div
     class="glorious-alert"
-    :class="[`color-${getAttribute(props.color, 'alert', 'color')}`]"
+    :class="[
+      `color-${getAttribute(props.color, 'alert', 'color')}`,
+      getAttribute(props.color, 'alert', 'color'),
+    ]"
   >
     <slot />
   </div>

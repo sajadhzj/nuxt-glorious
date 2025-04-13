@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import _props from '../props/Switch'
+import { getAttribute } from '../helper'
 
 const props = defineProps(_props)
 const modelValue = defineModel()
@@ -13,7 +14,7 @@ const input = (e: Event) => {
   <div>
     <label
       class="switch"
-      :class="[`color-${props.color}`]"
+      :class="[`color-${getAttribute(props.color, 'switch', 'color')}`]"
     >
       <input
         type="checkbox"
