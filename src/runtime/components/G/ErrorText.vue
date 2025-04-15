@@ -7,14 +7,6 @@ const gs = GloriousStore()
 const error: any = props.error.split('|')
 </script>
 <template>
-<<<<<<< Updated upstream
-  <span
-    v-if="gs.forms[error[0]]?.errors[error[1]]"
-    class="validation-error-text text-red-500 text-sm"
-  >
-    {{ gs.forms[error[0]].errors[error[1]][0] }}
-  </span>
-=======
   <div>
     <span
       v-if="gs.forms[error[0]]?.errors[error[1]] && !isAll()"
@@ -35,5 +27,4 @@ const error: any = props.error.split('|')
       </li>
     </ul>
   </div>
->>>>>>> Stashed changes
 </template>
