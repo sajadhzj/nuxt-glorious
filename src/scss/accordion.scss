@@ -1,0 +1,41 @@
+@use 'variable.scss' as var;
+
+.glorious-accordion {
+    @apply border rounded h-max text-sm cursor-pointer;
+
+    @each $key, $value in var.$colors {
+        &.color-#{'#{$key}'} {
+            div.header:hover {
+                @apply rounded bg-#{$key + "-100"};
+            }
+            @apply border-#{$key + "-500"};
+            &.accordion-open {
+                + div.body {
+                    @apply mt-2 pt-3 border-t border-#{$key + "-500"};
+                }
+            }
+        }
+    }
+
+    div.header {
+        @apply p-3 flex justify-between items-center;
+
+        div:last-child {
+            @apply rotate-90 transition-[rotate] duration-300 ease-out text-sm;
+        }
+
+        &.accordion-open div:last-child {
+            @apply rotate-270 transition-[rotate] duration-300 ease-out;
+        }
+
+        &.accordion-open {
+            + div.body {
+                @apply border-t py-3;
+            }
+        }
+    }
+
+    div.body {
+        @apply px-3  max-h-0 overflow-hidden transition-all duration-300 ease-out text-sm;
+    }
+}

@@ -10,12 +10,12 @@ const props: any = defineProps(_props)
     <div
       class="glorious-loading"
       :style="{
-        width: `${getAttribute(props.size, 'icon', 'size')}px`,
+        width: `${getAttribute(props.size, 'loading', 'size')}px`,
         border: `${getAttribute(
           props.stroke,
           'icon',
           'stroke'
-        )}px solid ${getAttribute(props.color, 'icon', 'color')}`,
+        )}px solid ${getAttribute(props.color, 'loading', 'color')}`,
       }"
     />
   </div>

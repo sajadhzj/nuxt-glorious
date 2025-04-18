@@ -1,0 +1,40 @@
+@use 'variable.scss' as var;
+
+@mixin load-bg($range: 100) {
+  @each $color in var.$colors {
+    &.#{'color-' + $color} {
+      @apply #{"bg-" + $color + "-" + $range};
+    }
+  }
+}
+
+@mixin load-size() {
+  @each $key, $value in var.$pSize {
+    &.#{'size-' + $key} {
+      @apply #{"py-" + $value};
+    }
+  }
+}
+
+@mixin load-border($range: 300) {
+  @each $color in var.$colors {
+    &.#{'color-' + $color} {
+      @apply #{"border border-" + $color + "-" + $range};
+    }
+  }
+}
+
+@mixin loading-size($size) {
+  div > loading {
+    @apply flex justify-center items-center;
+  }
+  div.loading > div > div {
+    @apply #{"w-" + $size};
+  }
+}
+
+@mixin loading-color($color) {
+  div.loading > div > div {
+    border-color: theme('colors.' + $color + '.700') !important;
+  }
+}

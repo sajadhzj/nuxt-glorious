@@ -61,7 +61,11 @@ const firstVal = selectValue.value
           "
           :value="firstVal"
         >
-          {{ props.placeholder }}
+          {{
+            props.firstOptionText === ''
+              ? props.placeholder
+              : props.firstOptionText
+          }}
         </option>
         <option
           v-for="(item, index) in props.options"

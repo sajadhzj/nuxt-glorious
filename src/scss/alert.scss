@@ -1,0 +1,7 @@
+@use 'mixin.scss' as mixin;
+
+.glorious-alert {
+  @apply p-3 rounded-md shadow-md;
+  @include mixin.load-bg();
+  @include mixin.load-border();
+}

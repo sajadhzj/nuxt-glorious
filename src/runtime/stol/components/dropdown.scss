@@ -1,4 +1,5 @@
 .glorious-dropdown {
+  /*
   @apply relative;
   > div:last-child {
     @apply hidden;
@@ -15,5 +16,5 @@
 
   &.open > div:last-child {
     @apply bg-white px-2 py-2 rounded-md shadow absolute z-[41] left-[16px] top-5 flex;
-  }
+  }*/
 }

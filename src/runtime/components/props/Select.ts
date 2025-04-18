@@ -22,4 +22,9 @@ export default {
   ...error,
   ...disabled,
   ...options,
+  firstOptionText: {
+    required: false,
+    default: '',
+    type: String,
+  },
 }

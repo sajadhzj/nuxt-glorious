@@ -53,6 +53,8 @@ export default defineNuxtModule<ModuleOptions>({
         dir: resolver.resolve('./runtime/assets'),
       })
     })
+
+    addPlugin(resolver.resolve('./runtime/plugins/modalClose'))
     addPlugin(resolver.resolve('./runtime/plugins/InputComponent'))
 
     addRouteMiddleware({

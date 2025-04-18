@@ -1,0 +1,41 @@
+@use 'variable.scss' as var;
+
+.glorious-table {
+    @apply overflow-x-auto;
+    @each $color in var.$colors {
+        &.#{'color-' + $color} {
+            > table > thead {
+                @apply rounded-t-md overflow-hidden;
+                > tr {
+                    > th:first-child {
+                        @apply rtl:rounded-tr-lg ltr:rounded-tl-lg #{"bg-" + $color + "-400"};
+                    }
+                    > th {
+                        @apply #{"bg-" + $color + "-400"};
+                    }
+                    > th:last-child {
+                        @apply rtl:rounded-tl-lg ltr:rounded-tr-lg #{"bg-" + $color + "-400"};
+                    }
+                }
+            }
+
+            > table > tbody {
+                > tr {
+                    &:nth-child(even) {
+                        @apply #{"bg-" + $color + "-50"};
+                    }
+                    > td {
+                        @apply px-4 py-2 text-center;
+                    }
+                }
+            }
+        }
+    }
+    > table {
+        @apply w-full;
+
+        > thead > tr > th {
+            @apply px-4 py-2 text-center;
+        }
+    }
+}

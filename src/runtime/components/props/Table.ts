@@ -1,8 +1,9 @@
-import { color, loading } from './common'
+import { color, loading, loadingColor } from './common'
 
 export default {
   ...color(),
   ...loading,
+  ...loadingColor,
   header: {
     required: true,
     type: Object,

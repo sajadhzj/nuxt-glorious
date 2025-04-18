@@ -33,7 +33,7 @@ watch(
     class="glorious-scaffold-modal animation"
     :class="[
       modelValue ? 'open' : 'close',
-      `size-${getAttribute(props.size, 'icon', 'size')}`,
+      `size-${getAttribute(props.size, 'modal', 'size')}`,
     ]"
   >
     <!-- header -->
@@ -43,7 +43,7 @@ watch(
     >
       <span class="font-medium">{{ props.title }}</span>
       <GButton
-        class="flex justify-center items-center w-6 h-6"
+        class="close-modal-btn"
         size="sm"
         color="red"
         @click="modelValue = false"
@@ -71,14 +71,15 @@ watch(
       class="glorious-scaffold-modal-footer"
     >
       <GButton
-        :color="getAttribute(props.colorBtn, 'icon', 'colorBtn')"
+        :color="getAttribute(props.colorBtn, 'modal', 'colorBtn')"
         :loading="props.okBtnLoading"
         @click="emits('ok')"
       >
         {{ props.okBtn }}
       </GButton>
+
       <GButton
-        :color="getAttribute(props.colorBtn, 'icon', 'colorBtn')"
+        :color="getAttribute(props.colorBtn, 'modal', 'colorBtn')"
         v-show="props.closeBtn !== ''"
         outline
         @click="modelValue = false"

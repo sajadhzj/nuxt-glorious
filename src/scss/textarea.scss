@@ -1,0 +1,47 @@
+@use 'mixin.scss' as mixin;
+@use 'variable.scss' as var;
+
+%textarea-size {
+  &.xl {
+    @apply py-2.5;
+  }
+  &.lg {
+    @apply py-2;
+  }
+  &.md {
+    @apply py-1.5;
+  }
+  &.sm {
+    @apply py-1;
+  }
+  &.xsm {
+    @apply py-0.5;
+  }
+}
+
+@each $color in var.$colors {
+  .#{'glorious-textarea-' + $color} {
+    @apply #{"ring-" + $color + "-500"};
+    @apply rounded-md ring-1 px-3;
+    &:focus-visible {
+      @apply outline-none ring-2;
+    }
+    &:disabled {
+      @apply bg-green-300 cursor-not-allowed;
+    }
+  }
+}
+
+.glorious-textarea {
+  @apply relative w-full flex flex-col;
+  > textarea {
+    @apply w-full p-2;
+
+    &.validation-error{
+        @apply ring-red-500 bg-red-50
+    }
+  }
+  > textarea::placeholder {
+    @apply text-[14px];
+  }
+}

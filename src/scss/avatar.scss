@@ -1,0 +1,13 @@
+@use 'variable.scss' as var;
+
+.glorious-avatar {
+    @apply overflow-hidden;
+    @each $key, $value in var.$sizes {
+        &.#{'size-' + $key} {
+            @apply #{"w-[" + ($value + 4 ) + "px] h-[" + ($value + 4 ) + "px]"};
+            > img {
+                @apply #{"w-[" + ($value + 4 ) + "px] h-[" + ($value + 4 ) + "px]"};
+            }
+        }
+    }
+}

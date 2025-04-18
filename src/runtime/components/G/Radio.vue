@@ -20,7 +20,7 @@ const inputFunction = (event: Event) => {
     ]"
   >
     <input
-      :name="getAttribute(props.checked, 'radio', 'checked')"
+      :name="getAttribute(props.name, 'radio', 'name')"
       type="radio"
       :disabled="props.disabled"
       :value="props.value"

@@ -1,0 +1,11 @@
+.glorious-tab {
+  @apply flex justify-between bg-green-100 rounded-lg gap-3 w-max max-w-full shadow-md;
+
+  div > div > button {
+    @apply text-gray-700 text-sm hover:bg-green-200 hover:text-gray-800 cursor-pointer px-2 py-1 rounded-lg whitespace-nowrap;
+
+    &.active {
+      @apply font-bold text-white bg-green-700;
+    }
+  }
+}

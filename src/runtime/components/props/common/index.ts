@@ -17,7 +17,7 @@ export const size = (def: sizes = 'md') => ({
 })
 
 export const rounded = {
-  size: {
+  rounded: {
     required: false,
     default: 'md',
     type: String as () => roundedType,
@@ -46,6 +46,14 @@ export const loading = {
     type: {
       color: String,
     },
+  },
+}
+
+export const loadingColor = {
+  loadingColor: {
+    required: false,
+    default: 'green',
+    type: String as () => colors | string,
   },
 }
 
@@ -129,7 +137,7 @@ export const intSize = (def: number = 20) => ({
   },
 })
 
-export const stroke = (def: number | null = null) => ({
+export const stroke = (def: number | null = 1) => ({
   stroke: {
     required: false,
     type: [Number, null],
@@ -186,6 +194,43 @@ export const keyOfValue = () => ({
   keyOfValue: {
     required: false,
     default: 'value',
+    type: String,
+  },
+})
+
+export const alt = () => ({
+  alt: {
+    required: false,
+    type: String,
+  },
+})
+
+export const src = () => ({
+  src: {
+    required: true,
+    type: String,
+  },
+})
+
+export const hoverColor = () => ({
+  hoverColor: {
+    required: false,
+    default: '',
+  },
+})
+
+export const outline = () => ({
+  outline: {
+    required: false,
+    default: false,
+    type: Boolean,
+  },
+})
+
+export const noItemsFound = () => ({
+  noItemsFound: {
+    required: false,
+    default: 'No items found',
     type: String,
   },
 })

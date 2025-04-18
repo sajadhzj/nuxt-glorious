@@ -1,0 +1,29 @@
+.glorious-tooltip {
+    @apply relative w-max;
+
+    .tooltip-slot:hover + .tooltip-content {
+        opacity: 1;
+        display: inline;
+        animation: anim-glorious-tooltip 500ms backwards;
+    }
+
+    > .tooltip-content {
+        @apply bg-white w-max rounded-lg shadow-md pt-2 px-3 flex absolute bottom-10 right-0 left-0 mx-auto;
+        display: none;
+        opacity: 0;
+    }
+}
+
+@keyframes anim-glorious-tooltip {
+    0% {
+        opacity: 0;
+        display: none;
+    }
+    1% {
+        display: inline-block !important;
+    }
+    100% {
+        opacity: 1 !important;
+        display: inline-block !important;
+    }
+}

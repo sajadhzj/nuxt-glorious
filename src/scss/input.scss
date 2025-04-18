@@ -1,0 +1,100 @@
+@use 'variable.scss' as var;
+@use 'mixin.scss' as mixin;
+
+@each $color in var.$colors {
+    .#{'glorious-input-' + $color} {
+        @apply #{"ring-" + $color + "-500"};
+        @apply rounded-md ring-1 bg-white;
+        @include mixin.load-size();
+        &:focus-visible {
+            @apply outline-none ring-2;
+        }
+        &:disabled {
+            @apply #{"bg-" + $color + "-100"};
+            @apply cursor-not-allowed;
+        }
+    }
+}
+
+.glorious-input {
+    &.validation-error {
+        > div > input {
+            @apply ring-red-500 bg-red-50;
+        }
+    }
+    @apply relative w-full;
+    > input {
+        @apply w-full;
+    }
+    > input::placeholder {
+        @apply text-sm;
+    }
+    &.icon-xl {
+        > input {
+            @apply rtl:pr-9 ltr:pl-9;
+        }
+    }
+    &.icon-lg {
+        > input {
+            @apply rtl:pr-9 ltr:pl-8;
+        }
+    }
+    &.icon-md {
+        > input {
+            @apply rtl:pr-9 ltr:pl-8;
+        }
+    }
+    &.icon-sm {
+        > input {
+            @apply rtl:pr-8 ltr:pl-8;
+        }
+    }
+    &.icon-xsm {
+        > input {
+            @apply rtl:pr-8 ltr:pl-7;
+        }
+    }
+}
+.glorious-input-icon {
+    @apply absolute h-max top-0 bottom-0 my-auto rtl:right-1 ltr:left-1;
+}
+
+/* ----------------------------------------------- TAG */
+.glorious-input-tag {
+    @apply mt-3 gap-2 flex flex-wrap;
+    > div {
+        @apply bg-green-500 px-1 rounded text-white flex items-center gap-2 cursor-pointer break-all;
+    }
+}
+
+.glorious-input {
+    // -------------------------------------------------- OPTION
+    > div {
+        > input.size-md {
+            // @apply top-[20px]
+        }
+    }
+
+    &-options {
+        @apply p-1 shadow-lg absolute w-full bg-white rounded border-gray-200 border max-h-[200px] overflow-y-auto z-40;
+
+        > div > div {
+            @apply p-2 hover:bg-gray-100 cursor-pointer rounded break-words;
+            &.disabled {
+                @apply cursor-not-allowed bg-gray-50;
+            }
+        }
+
+        // &.size-md {
+        //   @apply top-11;
+        // }
+    }
+
+    div > input::placeholder {
+        @apply text-gray-500;
+    }
+}
+
+.glorious-input-tag-delete-option {
+    @apply border border-red-500 rounded p-1 hover:bg-red-50;
+}
