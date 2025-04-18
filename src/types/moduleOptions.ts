@@ -30,6 +30,11 @@ export interface ModuleOptions {
     }
   }
   components: {
+    accordion: {
+      props: {
+        color?: string
+      }
+    }
     alert: {
       props: {
         color?: string

@@ -1,4 +1,5 @@
 @use 'mixin.scss';
+@use 'accordion.scss';
 @use 'variable.scss';
 @use 'alert.scss';
 @use 'avatar.scss';
@@ -20,6 +21,7 @@
 @use 'textarea.scss';
 @use 'timeline.scss';
 @use 'tooltip.scss';
+@use 'error-text.scss';
 
 .glorious-backdrop {
     @apply backdrop-blur-md fixed top-0 w-full h-full bg-gray-500/50 z-40;
