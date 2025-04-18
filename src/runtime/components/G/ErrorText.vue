@@ -22,9 +22,9 @@ const isAll = () => error.length === 1
       <li
         v-for="(item, index) in gs.forms[error[0]].errors"
         :key="index"
-        class="validation-error-text text-red-500 text-sm"
+        class="text-sm"
       >
-        {{ item[0] }}
+        <span class="validation-error-text">{{ item[0] }}</span>
       </li>
     </ul>
   </div>
