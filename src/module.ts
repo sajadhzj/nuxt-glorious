@@ -53,8 +53,7 @@ export default defineNuxtModule<ModuleOptions>({
         dir: resolver.resolve('./runtime/assets'),
       })
     })
-    /*
-    addPlugin(resolver.resolve('./runtime/plugins/glorious-app-setting'))*/
+
     addPlugin(resolver.resolve('./runtime/plugins/modalClose'))
     addPlugin(resolver.resolve('./runtime/plugins/InputComponent'))
 

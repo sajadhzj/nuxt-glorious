@@ -5,6 +5,7 @@ import _props from '../props/ErrorText'
 const props = defineProps(_props)
 const gs = GloriousStore()
 const error: any = props.error.split('|')
+const isAll = () => error.length === 1
 </script>
 <template>
   <div>
@@ -21,7 +22,7 @@ const error: any = props.error.split('|')
       <li
         v-for="(item, index) in gs.forms[error[0]].errors"
         :key="index"
-        class="text-red-500 text-sm"
+        class="text-sm"
       >
         <span class="validation-error-text">{{ item[0] }}</span>
       </li>
