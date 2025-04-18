@@ -1,3 +1,11 @@
+html:has(.glorious-scaffold-modal.open) {
+    @apply overflow-hidden;
+
+    div.glorious-input-options {
+        @apply md:!fixed !absolute;
+    }
+}
+
 .glorious-scaffold-modal {
     @apply fixed bg-white md:top-[15%] z-50 right-0 left-0 mx-auto md:rounded-md rounded-t-md md:bottom-0 bottom-0;
     .close-modal-btn {
