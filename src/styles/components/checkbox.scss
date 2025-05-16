@@ -1,0 +1,89 @@
+@use '../variable.scss' as var;
+$svg-check-icon-sm: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIxNnB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=';
+$svg-check-icon-md: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMThweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIxOHB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=';
+$svg-check-icon-lg: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyMnB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=';
+.glorious-checkbox {
+  @apply flex gap-2 items-center cursor-pointer;
+  &.size-md {
+    span {
+      @apply text-sm;
+    }
+  }
+  &.size-sm {
+    span {
+      @apply text-xs;
+    }
+  }
+
+  &.disabled {
+    @apply cursor-not-allowed;
+  }
+
+  > label {
+    @apply block relative;
+
+    > input {
+      @apply hidden;
+
+      &:checked ~ div {
+        @apply border-none;
+
+        &:after {
+          @apply block h-max w-max;
+        }
+      }
+
+      &:disabled ~ div {
+        @apply cursor-not-allowed;
+      }
+
+      &:hover ~ div {
+        @apply border-gray-400 shadow-md;
+      }
+    }
+    > div:last-child {
+      @apply border border-gray-300 rounded bg-white left-0 top-0 absolute transition-[border] duration-200 ease-in-out;
+      > div:first-child {
+        @apply hidden;
+      }
+
+      &:after {
+        @apply absolute hidden top-1 right-0 left-0 bottom-0 m-auto;
+      }
+    }
+
+    @each $color in var.$colors {
+      &.#{'color-' + $color} {
+        > input {
+          &:checked ~ div {
+            @apply #{"bg-" + $color + "-500"};
+          }
+        }
+      }
+    }
+
+    &.size-sm {
+      @apply w-4 h-4;
+      > div:last-child {
+        content: url(#{$svg-check-icon-sm});
+        @apply w-4 h-4;
+      }
+    }
+
+    &.size-md {
+      @apply w-5 h-5;
+      > div:last-child {
+        content: url(#{$svg-check-icon-md});
+        @apply w-5 h-5;
+      }
+    }
+
+    &.size-lg {
+      @apply w-6 h-6;
+      > div:last-child {
+        content: url(#{$svg-check-icon-lg});
+        @apply w-6 h-6;
+      }
+    }
+  }
+}
