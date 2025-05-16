@@ -1,0 +1,102 @@
+.glorious-checkbox {
+  @apply flex gap-2 items-center cursor-pointer;
+}
+.glorious-checkbox.size-md span {
+  @apply text-sm;
+}
+.glorious-checkbox.size-sm span {
+  @apply text-xs;
+}
+.glorious-checkbox.disabled {
+  @apply cursor-not-allowed;
+}
+.glorious-checkbox > label {
+  @apply block relative;
+}
+.glorious-checkbox > label > input {
+  @apply hidden;
+}
+.glorious-checkbox > label > input:checked ~ div {
+  @apply border-none;
+}
+.glorious-checkbox > label > input:checked ~ div:after {
+  @apply block h-max w-max;
+}
+.glorious-checkbox > label > input:disabled ~ div {
+  @apply cursor-not-allowed;
+}
+.glorious-checkbox > label > input:hover ~ div {
+  @apply border-gray-400 shadow-md;
+}
+.glorious-checkbox > label > div:last-child {
+  @apply border border-gray-300 rounded bg-white left-0 top-0 absolute transition-[border] duration-200 ease-in-out;
+}
+.glorious-checkbox > label > div:last-child > div:first-child {
+  @apply hidden;
+}
+.glorious-checkbox > label > div:last-child:after {
+  @apply absolute hidden top-1 right-0 left-0 bottom-0 m-auto;
+}
+.glorious-checkbox > label.color-primary > input:checked ~ div {
+  @apply bg-primary-500;
+}
+.glorious-checkbox > label.color-secondary > input:checked ~ div {
+  @apply bg-secondary-500;
+}
+.glorious-checkbox > label.color-sky > input:checked ~ div {
+  @apply bg-sky-500;
+}
+.glorious-checkbox > label.color-gray > input:checked ~ div {
+  @apply bg-gray-500;
+}
+.glorious-checkbox > label.color-red > input:checked ~ div {
+  @apply bg-red-500;
+}
+.glorious-checkbox > label.size-sm {
+  @apply w-4 h-4;
+}
+.glorious-checkbox > label.size-sm > div:last-child {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIxNnB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=);
+  @apply w-4 h-4;
+}
+.glorious-checkbox > label.size-md {
+  @apply w-5 h-5;
+}
+.glorious-checkbox > label.size-md > div:last-child {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMThweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIxOHB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=);
+  @apply w-5 h-5;
+}
+.glorious-checkbox > label.size-lg {
+  @apply w-6 h-6;
+}
+.glorious-checkbox > label.size-lg > div:last-child {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyMnB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=);
+  @apply w-6 h-6;
+}
+
+@theme {
+  --color-primary-50: #f2fbf3;
+  --color-primary-100: #e1f7e4;
+  --color-primary-200: #c4eeca;
+  --color-primary-300: #96dfa1;
+  --color-primary-400: #61c770;
+  --color-primary-500: #38a248;
+  --color-primary-600: #2c8d3b;
+  --color-primary-700: #266f31;
+  --color-primary-800: #22592b;
+  --color-primary-900: #1e4926;
+  --color-primary-950: #0b2811;
+  --color-secondary-50: #f2f9f9;
+  --color-secondary-100: #ddeef0;
+  --color-secondary-200: #bedee3;
+  --color-secondary-300: #91c6cf;
+  --color-secondary-400: #5da5b3;
+  --color-secondary-500: #4896a7;
+  --color-secondary-600: #397181;
+  --color-secondary-700: #345d6a;
+  --color-secondary-800: #314f59;
+  --color-secondary-900: #2c434d;
+  --color-secondary-950: #192a33;
+}
+
+/*# sourceMappingURL=glorious.css.map */

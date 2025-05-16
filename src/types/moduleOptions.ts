@@ -1,3 +1,9 @@
+export default interface moduleOptions {
+  components?: {
+    prefix?: string
+  }
+}
+/*
 import type { colors, sizes } from './components'
 export interface ModuleOptions {
   fetch?: {
@@ -180,3 +186,4 @@ export interface ModuleOptions {
     }
   }
 }
+*/
