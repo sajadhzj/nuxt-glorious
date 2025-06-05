@@ -46,6 +46,8 @@ export default defineNuxtModule<ModuleOptions>({
       const plugin = await import('@tailwindcss/vite').then((r) => r.default)
 
       addVitePlugin(plugin())
+    } else {
+      nuxt.options.postcss.plugins['@tailwindcss/postcss'] = {}
     }
 
     nuxt.hook('nitro:config', async (nitro: any) => {
