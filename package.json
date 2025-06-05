@@ -28,7 +28,8 @@
     "release": "npm run prepack && npm publish",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:watch": "vitest watch"
+    "test:watch": "vitest watch",
+    "style": "sass src/styles/glorious.scss playground/assets/css/glorious.css --watch"
   },
   "dependencies": {
     "@nuxt/image": "^1.8.1",

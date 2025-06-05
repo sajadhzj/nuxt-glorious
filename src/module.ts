@@ -10,9 +10,9 @@ import {
 } from '@nuxt/kit'
 
 import defu from 'defu'
-// Module options TypeScript interface definition
+
 import defaultModuleOption from './config/defaultModuleOption'
-import type { ModuleOptions } from './types'
+import type ModuleOptions from './types/moduleOptions'
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
@@ -39,7 +39,7 @@ export default defineNuxtModule<ModuleOptions>({
     addComponentsDir({
       path: resolver.resolve('runtime/components'),
       global: true,
-
+      prefix: options.components?.prefix || 'G',
       watch: false,
     })
     if (nuxt.options.builder === '@nuxt/vite-builder') {
