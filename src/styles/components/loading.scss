@@ -1,7 +1,25 @@
+@use '../variable.scss' as var;
+
 .glorious-loading {
   aspect-ratio: 1;
   border-radius: 50%;
   animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+
+  @apply border-3;
+  @each $color in var.$colors {
+    &.#{'color-' + $color} {
+      @apply #{'border-' + $color + '-500'};
+    }
+  }
+  &.size-sm {
+    @apply w-5;
+  }
+  &.size-md {
+    @apply w-6;
+  }
+  &.size-lg {
+    @apply w-7;
+  }
 }
 
 @keyframes l20-1 {

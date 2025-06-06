@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { colorType, sizeType } from '~/src/types/props'
 
-interface checkboxPropsInterface {
+interface checkboxPropInterface {
   color?: colorType
   size?: sizeType
   checked?: boolean
@@ -11,7 +11,7 @@ interface checkboxPropsInterface {
   ariaLabel?: string
 }
 
-const props: any = withDefaults(defineProps<checkboxPropsInterface>(), {
+const props: any = withDefaults(defineProps<checkboxPropInterface>(), {
   color: 'primary',
   size: 'md',
   checked: false,

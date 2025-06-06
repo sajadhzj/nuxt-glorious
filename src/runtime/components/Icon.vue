@@ -1,12 +1,44 @@
 <script lang="ts" setup>
 import { ref, watch } from '#imports'
-import _props from '../props/Icon'
 
-const props = defineProps(_props)
+interface iconPropInterface {
+  name: String
+  color?: String
+  hoverColor?: String
+  size?: Number
+  strokeWidth?: Number
+}
+
+const props: any = withDefaults(defineProps<iconPropInterface>(), {
+  size: 20,
+  color: '#000',
+  strokeWidth: 3,
+})
+
 const isHover = ref(false)
 const icon = ref('')
+const computeSize = (size: number | string): number => {
+  let result: number = 0
+
+  switch (size) {
+    case 'sm':
+      result = 13
+      break
+    case 'md':
+      result = 15
+      break
+    case 'lg':
+      result = 16
+      break
+    default:
+      result = <number>size
+      break
+  }
+
+  return result
+}
 const computeProps = (icon: any) => {
-  const size = props.size
+  const size = computeSize(props.size)
   const color = props.color
   const strokeWidth = props.stroke
   const stroke = props.color
@@ -54,17 +86,15 @@ const getIcon = async () => {
       const icon: any = await iconsImport[`/assets/icons/${props.name}.svg`]()
       rawIcon = icon.default
     } else {
-      const staticAssets = import.meta.glob('../../assets/icons/**/**.svg', {
+      const staticAssets = import.meta.glob('../assets/icons/**/**.svg', {
         query: '?raw',
         eager: false,
       })
-
       const icon: any = await staticAssets[
-        `../../assets/icons/${props.name}.svg`
+        `../assets/icons/${props.name}.svg`
       ]()
       rawIcon = icon.default
     }
-
     icon.value = computeProps(rawIcon)
   } catch (e) {
     console.error(
@@ -86,7 +116,7 @@ watch(
 
 <template>
   <div
-    class="w-max h-max"
+    class="w-max h-max g-icon"
     @mouseover="mouseover"
     @mouseleave="mouseleave"
     v-html="icon"

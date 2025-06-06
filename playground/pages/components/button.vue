@@ -1,0 +1,55 @@
+<script lang="ts" setup>
+const logClicked = () => {
+  console.log('clicked')
+}
+</script>
+<template>
+  <div class="p-10 gap-3 flex">
+    <GButton
+      label="button"
+      size="sm"
+      @click="logClicked"
+      :loading="true"
+      icon="glorious-arrow"
+    />
+    <GButton
+      label="button"
+      size="sm"
+      @click="logClicked"
+      icon="glorious-arrow"
+      iconPos="left"
+    />
+    <GButton
+      label="button"
+      color="red"
+      size="md"
+      @click="logClicked"
+      :disabled="true"
+      outline
+    />
+    <GButton
+      label="button"
+      color="red"
+      size="md"
+      @click="logClicked"
+      :disabled="true"
+      outline
+      :loading="true"
+    />
+    <GButton
+      label="button"
+      color="secondary"
+      size="lg"
+      raised
+    />
+    <GButton
+      label="button"
+      color="secondary"
+      size="lg"
+      rounded
+      icon="glorious-arrow"
+      iconColor="#000"
+      outline
+    />
+  </div>
+</template>
