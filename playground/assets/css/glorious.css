@@ -66,6 +66,29 @@
     transform: scaleY(-1) rotate(-135deg);
   }
 }
+.validation-error-text {
+  @apply text-red-500 text-sm font-semibold;
+  display: inline-block;
+  animation: vibrateErrorTextLR 0.3s ease-in-out 1;
+}
+
+@keyframes vibrateErrorTextLR {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .glorious-checkbox {
   @apply flex gap-2 items-center cursor-pointer;
 }
@@ -343,6 +366,116 @@
 .glorious-button > button:disabled,
 .glorious-button a:disabled {
   @apply cursor-not-allowed;
+}
+
+.glorious-input {
+  @apply flex flex-col gap-0.5 relative;
+}
+.glorious-input > .title {
+  @apply text-base;
+}
+.glorious-input > div.input-content {
+  @apply relative;
+}
+.glorious-input > div.input-content > input {
+  @apply rounded-lg px-3;
+}
+.glorious-input > div.input-content > input.size-sm {
+  @apply py-0.25;
+}
+.glorious-input > div.input-content > input.size-md {
+  @apply py-1.25;
+}
+.glorious-input > div.input-content > input.size-lg {
+  @apply py-1.75;
+}
+.glorious-input > div.input-content > input:disabled {
+  @apply cursor-not-allowed bg-gray-200;
+}
+.glorious-input > div.input-content > input:hover.color-primary {
+  @apply border-primary-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-secondary {
+  @apply border-secondary-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-sky {
+  @apply border-sky-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-gray {
+  @apply border-gray-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-red {
+  @apply border-red-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:focus.color-primary {
+  @apply outline-primary-500;
+}
+.glorious-input > div.input-content > input:focus.color-secondary {
+  @apply outline-secondary-500;
+}
+.glorious-input > div.input-content > input:focus.color-sky {
+  @apply outline-sky-500;
+}
+.glorious-input > div.input-content > input:focus.color-gray {
+  @apply outline-gray-500;
+}
+.glorious-input > div.input-content > input:focus.color-red {
+  @apply outline-red-500;
+}
+.glorious-input > div.input-content > input.color-primary {
+  @apply border;
+  @apply border-primary-500;
+}
+.glorious-input > div.input-content > input.color-secondary {
+  @apply border;
+  @apply border-secondary-500;
+}
+.glorious-input > div.input-content > input.color-sky {
+  @apply border;
+  @apply border-sky-500;
+}
+.glorious-input > div.input-content > input.color-gray {
+  @apply border;
+  @apply border-gray-500;
+}
+.glorious-input > div.input-content > input.color-red {
+  @apply border;
+  @apply border-red-500;
+}
+.glorious-input > div.input-content > input.error {
+  @apply border-red-500;
+}
+.glorious-input > div.input-content > .icon {
+  @apply absolute top-0 bottom-0 my-auto h-max px-3 cursor-pointer;
+}
+.glorious-input > div.input-content > .icon.icon-left {
+  @apply left-0;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-sm {
+  @apply pl-7.5;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-md {
+  @apply pl-9;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-lg {
+  @apply pl-8.5;
+}
+.glorious-input > div.input-content > .icon.icon-right {
+  @apply right-0;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-sm {
+  @apply pr-7.5;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-md {
+  @apply pr-9;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-lg {
+  @apply pr-8.5;
 }
 
 @theme {

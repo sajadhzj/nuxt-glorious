@@ -62,5 +62,27 @@ const props: any = withDefaults(defineProps<buttonPropInterface>(), {
         :color="props.iconColor"
       />
     </button>
+    <a
+      v-if="props.to !== ''"
+      :to="props.to"
+      :class="[
+        `color-${props.color}`,
+        `size-${props.size}`,
+        `icon-${props.iconPos}`,
+        props.raised ? 'raised' : '',
+        props.rounded ? 'rounded' : '',
+        props.outline ? 'outline' : '',
+      ]"
+      :aria-label="props.ariaLabel"
+    >
+      <span>{{ props.label }}</span>
+
+      <GIcon
+        v-if="props.icon && !props.loading"
+        :name="props.icon"
+        :size="props.size"
+        :color="props.iconColor"
+      />
+    </a>
   </div>
 </template>

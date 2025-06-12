@@ -22,13 +22,13 @@ const computeSize = (size: number | string): number => {
 
   switch (size) {
     case 'sm':
-      result = 13
+      result = 14
       break
     case 'md':
-      result = 15
+      result = 23
       break
     case 'lg':
-      result = 16
+      result = 24
       break
     default:
       result = <number>size
@@ -59,7 +59,7 @@ const changeColorIcon = (color: string) => {
     .replace(/stroke="(?!none)([^"]+)"/g, `stroke="${color}"`)
 }
 const mouseover = () => {
-  if (props.hoverColor === '') return
+  if (typeof props.hoverColor === 'undefined') return
 
   if (!isHover.value) {
     const color = props.hoverColor
