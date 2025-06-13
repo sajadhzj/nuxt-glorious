@@ -1,3 +1,94 @@
+.glorious-loading {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l20-1 0.8s infinite linear alternate, l20-2 1.6s infinite linear;
+  @apply border-3;
+}
+.glorious-loading.color-primary {
+  @apply border-primary-500;
+}
+.glorious-loading.color-secondary {
+  @apply border-secondary-500;
+}
+.glorious-loading.color-sky {
+  @apply border-sky-500;
+}
+.glorious-loading.color-gray {
+  @apply border-gray-500;
+}
+.glorious-loading.color-red {
+  @apply border-red-500;
+}
+.glorious-loading.size-sm {
+  @apply w-5;
+}
+.glorious-loading.size-md {
+  @apply w-6;
+}
+.glorious-loading.size-lg {
+  @apply w-7;
+}
+
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%);
+  }
+}
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
+.validation-error-text {
+  @apply text-red-500 text-sm font-semibold;
+  display: inline-block;
+  animation: vibrateErrorTextLR 0.3s ease-in-out 1;
+}
+
+@keyframes vibrateErrorTextLR {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .glorious-checkbox {
   @apply flex gap-2 items-center cursor-pointer;
 }
@@ -72,6 +163,319 @@
 .glorious-checkbox > label.size-lg > div:last-child {
   content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyMnB4IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTQwMC0zMDQgMjQwLTQ2NGw1Ni01NiAxMDQgMTA0IDI2NC0yNjQgNTYgNTYtMzIwIDMyMFoiLz48L3N2Zz4=);
   @apply w-6 h-6;
+}
+
+.glorious-button > button,
+.glorious-button a {
+  @apply rounded-lg text-white cursor-pointer px-3 flex gap-2 items-center transition-["background"] duration-300 ease-in-out;
+}
+.glorious-button > button.raised,
+.glorious-button a.raised {
+  @apply shadow-md;
+}
+.glorious-button > button.icon-left,
+.glorious-button a.icon-left {
+  @apply flex-row-reverse;
+}
+.glorious-button > button.rounded,
+.glorious-button a.rounded {
+  @apply rounded-full;
+}
+.glorious-button > button.size-sm,
+.glorious-button a.size-sm {
+  @apply py-1 text-sm;
+}
+.glorious-button > button.size-md,
+.glorious-button a.size-md {
+  @apply py-1.5 text-base;
+}
+.glorious-button > button.size-lg,
+.glorious-button a.size-lg {
+  @apply py-1.5 text-lg;
+}
+.glorious-button > button.color-primary:not(.outline),
+.glorious-button a.color-primary:not(.outline) {
+  @apply bg-primary-500;
+}
+.glorious-button > button.color-primary:not(.outline):hover,
+.glorious-button a.color-primary:not(.outline):hover {
+  @apply bg-primary-600;
+}
+.glorious-button > button.color-primary:not(.outline):active,
+.glorious-button a.color-primary:not(.outline):active {
+  @apply bg-primary-700;
+}
+.glorious-button > button:disabled.color-primary:not(.outline),
+.glorious-button a:disabled.color-primary:not(.outline) {
+  @apply bg-primary-200;
+}
+.glorious-button > button.color-primary.outline,
+.glorious-button a.color-primary.outline {
+  @apply outline;
+  @apply outline-primary-500;
+  @apply text-primary-500;
+}
+.glorious-button > button.color-primary.outline:hover,
+.glorious-button a.color-primary.outline:hover {
+  @apply bg-primary-100;
+}
+.glorious-button > button.color-primary.outline:active,
+.glorious-button a.color-primary.outline:active {
+  @apply bg-primary-200;
+}
+.glorious-button > button:disabled.color-primary.outline,
+.glorious-button a:disabled.color-primary.outline {
+  @apply bg-primary-100;
+}
+.glorious-button > button.color-secondary:not(.outline),
+.glorious-button a.color-secondary:not(.outline) {
+  @apply bg-secondary-500;
+}
+.glorious-button > button.color-secondary:not(.outline):hover,
+.glorious-button a.color-secondary:not(.outline):hover {
+  @apply bg-secondary-600;
+}
+.glorious-button > button.color-secondary:not(.outline):active,
+.glorious-button a.color-secondary:not(.outline):active {
+  @apply bg-secondary-700;
+}
+.glorious-button > button:disabled.color-secondary:not(.outline),
+.glorious-button a:disabled.color-secondary:not(.outline) {
+  @apply bg-secondary-200;
+}
+.glorious-button > button.color-secondary.outline,
+.glorious-button a.color-secondary.outline {
+  @apply outline;
+  @apply outline-secondary-500;
+  @apply text-secondary-500;
+}
+.glorious-button > button.color-secondary.outline:hover,
+.glorious-button a.color-secondary.outline:hover {
+  @apply bg-secondary-100;
+}
+.glorious-button > button.color-secondary.outline:active,
+.glorious-button a.color-secondary.outline:active {
+  @apply bg-secondary-200;
+}
+.glorious-button > button:disabled.color-secondary.outline,
+.glorious-button a:disabled.color-secondary.outline {
+  @apply bg-secondary-100;
+}
+.glorious-button > button.color-sky:not(.outline),
+.glorious-button a.color-sky:not(.outline) {
+  @apply bg-sky-500;
+}
+.glorious-button > button.color-sky:not(.outline):hover,
+.glorious-button a.color-sky:not(.outline):hover {
+  @apply bg-sky-600;
+}
+.glorious-button > button.color-sky:not(.outline):active,
+.glorious-button a.color-sky:not(.outline):active {
+  @apply bg-sky-700;
+}
+.glorious-button > button:disabled.color-sky:not(.outline),
+.glorious-button a:disabled.color-sky:not(.outline) {
+  @apply bg-sky-200;
+}
+.glorious-button > button.color-sky.outline,
+.glorious-button a.color-sky.outline {
+  @apply outline;
+  @apply outline-sky-500;
+  @apply text-sky-500;
+}
+.glorious-button > button.color-sky.outline:hover,
+.glorious-button a.color-sky.outline:hover {
+  @apply bg-sky-100;
+}
+.glorious-button > button.color-sky.outline:active,
+.glorious-button a.color-sky.outline:active {
+  @apply bg-sky-200;
+}
+.glorious-button > button:disabled.color-sky.outline,
+.glorious-button a:disabled.color-sky.outline {
+  @apply bg-sky-100;
+}
+.glorious-button > button.color-gray:not(.outline),
+.glorious-button a.color-gray:not(.outline) {
+  @apply bg-gray-500;
+}
+.glorious-button > button.color-gray:not(.outline):hover,
+.glorious-button a.color-gray:not(.outline):hover {
+  @apply bg-gray-600;
+}
+.glorious-button > button.color-gray:not(.outline):active,
+.glorious-button a.color-gray:not(.outline):active {
+  @apply bg-gray-700;
+}
+.glorious-button > button:disabled.color-gray:not(.outline),
+.glorious-button a:disabled.color-gray:not(.outline) {
+  @apply bg-gray-200;
+}
+.glorious-button > button.color-gray.outline,
+.glorious-button a.color-gray.outline {
+  @apply outline;
+  @apply outline-gray-500;
+  @apply text-gray-500;
+}
+.glorious-button > button.color-gray.outline:hover,
+.glorious-button a.color-gray.outline:hover {
+  @apply bg-gray-100;
+}
+.glorious-button > button.color-gray.outline:active,
+.glorious-button a.color-gray.outline:active {
+  @apply bg-gray-200;
+}
+.glorious-button > button:disabled.color-gray.outline,
+.glorious-button a:disabled.color-gray.outline {
+  @apply bg-gray-100;
+}
+.glorious-button > button.color-red:not(.outline),
+.glorious-button a.color-red:not(.outline) {
+  @apply bg-red-500;
+}
+.glorious-button > button.color-red:not(.outline):hover,
+.glorious-button a.color-red:not(.outline):hover {
+  @apply bg-red-600;
+}
+.glorious-button > button.color-red:not(.outline):active,
+.glorious-button a.color-red:not(.outline):active {
+  @apply bg-red-700;
+}
+.glorious-button > button:disabled.color-red:not(.outline),
+.glorious-button a:disabled.color-red:not(.outline) {
+  @apply bg-red-200;
+}
+.glorious-button > button.color-red.outline,
+.glorious-button a.color-red.outline {
+  @apply outline;
+  @apply outline-red-500;
+  @apply text-red-500;
+}
+.glorious-button > button.color-red.outline:hover,
+.glorious-button a.color-red.outline:hover {
+  @apply bg-red-100;
+}
+.glorious-button > button.color-red.outline:active,
+.glorious-button a.color-red.outline:active {
+  @apply bg-red-200;
+}
+.glorious-button > button:disabled.color-red.outline,
+.glorious-button a:disabled.color-red.outline {
+  @apply bg-red-100;
+}
+.glorious-button > button:disabled,
+.glorious-button a:disabled {
+  @apply cursor-not-allowed;
+}
+
+.glorious-input {
+  @apply flex flex-col gap-0.5 relative;
+}
+.glorious-input > .title {
+  @apply text-base;
+}
+.glorious-input > div.input-content {
+  @apply relative;
+}
+.glorious-input > div.input-content > input {
+  @apply rounded-lg px-3;
+}
+.glorious-input > div.input-content > input.size-sm {
+  @apply py-0.25;
+}
+.glorious-input > div.input-content > input.size-md {
+  @apply py-1.25;
+}
+.glorious-input > div.input-content > input.size-lg {
+  @apply py-1.75;
+}
+.glorious-input > div.input-content > input:disabled {
+  @apply cursor-not-allowed bg-gray-200;
+}
+.glorious-input > div.input-content > input:hover.color-primary {
+  @apply border-primary-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-secondary {
+  @apply border-secondary-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-sky {
+  @apply border-sky-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-gray {
+  @apply border-gray-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:hover.color-red {
+  @apply border-red-600;
+  @apply shadow;
+}
+.glorious-input > div.input-content > input:focus.color-primary {
+  @apply outline-primary-500;
+}
+.glorious-input > div.input-content > input:focus.color-secondary {
+  @apply outline-secondary-500;
+}
+.glorious-input > div.input-content > input:focus.color-sky {
+  @apply outline-sky-500;
+}
+.glorious-input > div.input-content > input:focus.color-gray {
+  @apply outline-gray-500;
+}
+.glorious-input > div.input-content > input:focus.color-red {
+  @apply outline-red-500;
+}
+.glorious-input > div.input-content > input.color-primary {
+  @apply border;
+  @apply border-primary-500;
+}
+.glorious-input > div.input-content > input.color-secondary {
+  @apply border;
+  @apply border-secondary-500;
+}
+.glorious-input > div.input-content > input.color-sky {
+  @apply border;
+  @apply border-sky-500;
+}
+.glorious-input > div.input-content > input.color-gray {
+  @apply border;
+  @apply border-gray-500;
+}
+.glorious-input > div.input-content > input.color-red {
+  @apply border;
+  @apply border-red-500;
+}
+.glorious-input > div.input-content > input.error {
+  @apply border-red-500;
+}
+.glorious-input > div.input-content > .icon {
+  @apply absolute top-0 bottom-0 my-auto h-max px-3 cursor-pointer;
+}
+.glorious-input > div.input-content > .icon.icon-left {
+  @apply left-0;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-sm {
+  @apply pl-7.5;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-md {
+  @apply pl-9;
+}
+.glorious-input > div.input-content > .icon.icon-left + input.size-lg {
+  @apply pl-8.5;
+}
+.glorious-input > div.input-content > .icon.icon-right {
+  @apply right-0;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-sm {
+  @apply pr-7.5;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-md {
+  @apply pr-9;
+}
+.glorious-input > div.input-content > .icon.icon-right + input.size-lg {
+  @apply pr-8.5;
 }
 
 @theme {

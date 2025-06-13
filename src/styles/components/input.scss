@@ -1,0 +1,86 @@
+@use '../variable.scss' as var;
+
+.glorious-input {
+  @apply flex flex-col gap-0.5 relative;
+  > .title {
+    @apply text-base;
+  }
+  > div.input-content {
+    @apply relative;
+
+    > input {
+      @apply rounded-lg px-3;
+      &.size-sm {
+        @apply py-0.25;
+      }
+      &.size-md {
+        @apply py-1.25;
+      }
+      &.size-lg {
+        @apply py-1.75;
+      }
+      &:disabled {
+        @apply cursor-not-allowed bg-gray-200;
+      }
+      &:hover {
+        @each $color in var.$colors {
+          &.#{'color-' + $color} {
+            @apply #{'border-' + $color + '-600'};
+            @apply shadow;
+          }
+        }
+      }
+      &:focus {
+        @each $color in var.$colors {
+          &.#{'color-' + $color} {
+            @apply #{'outline-' + $color + '-500'};
+          }
+        }
+      }
+      @each $color in var.$colors {
+        &.#{'color-' + $color} {
+          @apply border;
+          @apply #{'border-' + $color + '-500'};
+        }
+      }
+
+      &.error {
+        @apply border-red-500;
+      }
+    }
+    > .icon {
+      @apply absolute top-0 bottom-0 my-auto h-max px-3 cursor-pointer;
+
+      &.icon-left {
+        @apply left-0;
+
+        + input {
+          &.size-sm {
+            @apply pl-7.5;
+          }
+          &.size-md {
+            @apply pl-9;
+          }
+          &.size-lg {
+            @apply pl-8.5;
+          }
+        }
+      }
+      &.icon-right {
+        @apply right-0;
+
+        + input {
+          &.size-sm {
+            @apply pr-7.5;
+          }
+          &.size-md {
+            @apply pr-9;
+          }
+          &.size-lg {
+            @apply pr-8.5;
+          }
+        }
+      }
+    }
+  }
+}

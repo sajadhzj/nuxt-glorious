@@ -1,4 +1,8 @@
+@use 'components/loading.scss';
+@use 'components/error-text.scss';
 @use 'components/checkbox.scss';
+@use 'components/button.scss';
+@use 'components/input.scss';
 
 @theme {
   --color-primary-50: #f2fbf3;

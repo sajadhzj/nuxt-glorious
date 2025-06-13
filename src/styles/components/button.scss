@@ -1,0 +1,68 @@
+@use '../variable.scss' as var;
+
+.glorious-button {
+  > button,
+  a {
+    @apply rounded-lg text-white cursor-pointer px-3 flex gap-2 items-center transition-['background'] duration-300 ease-in-out;
+
+    &.raised {
+      @apply shadow-md;
+    }
+
+    &.icon-left {
+      @apply flex-row-reverse;
+    }
+
+    &.rounded {
+      @apply rounded-full;
+    }
+
+    &.size-sm {
+      @apply py-1 text-sm;
+    }
+
+    &.size-md {
+      @apply py-1.5 text-base;
+    }
+
+    &.size-lg {
+      @apply py-1.5 text-lg;
+    }
+
+    @each $color in var.$colors {
+      &.#{'color-' + $color}:not(.outline) {
+        @apply #{'bg-' + $color + '-500'};
+        &:hover {
+          @apply #{'bg-' + $color + '-600'};
+        }
+        &:active {
+          @apply #{'bg-' + $color + '-700'};
+        }
+      }
+
+      &:disabled.#{'color-' + $color}:not(.outline) {
+        @apply #{'bg-' + $color + '-200'};
+      }
+
+      &.#{'color-' + $color}.outline {
+        @apply outline;
+        @apply #{'outline-' + $color + '-500'};
+        @apply #{'text-' + $color + '-500'};
+        &:hover {
+          @apply #{'bg-' + $color + '-100'};
+        }
+        &:active {
+          @apply #{'bg-' + $color + '-200'};
+        }
+      }
+
+      &:disabled.#{'color-' + $color}.outline {
+        @apply #{'bg-' + $color + '-100'};
+      }
+    }
+
+    &:disabled {
+      @apply cursor-not-allowed;
+    }
+  }
+}
