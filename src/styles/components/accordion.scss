@@ -1,0 +1,36 @@
+.glorious-accordion {
+  @apply rounded-lg overflow-hidden bg-white shadow transition-[box-shadow] duration-500 will-change-['box-shadow'];
+
+  &.open {
+    @apply shadow-lg;
+  }
+
+  .glorious-accordion-header {
+    @apply cursor-pointer px-4 py-5 bg-primary-50 font-semibold flex items-center justify-between transition-[background-color] duration-300;
+
+    .rotated {
+      @apply rotate-180;
+    }
+
+    &:hover {
+      @apply bg-primary-100;
+    }
+  }
+
+  .glorious-accordion-body-wrapper {
+    @apply overflow-hidden transition-[max-height] duration-300 ease-in-out will-change-[max-height];
+  }
+
+  .glorious-accordion-body {
+    @apply px-4 py-5 bg-white text-black;
+  }
+
+  .g-icon {
+    @apply rotate-90 transition duration-300;
+  }
+  &.open {
+    .g-icon {
+      @apply rotate-270;
+    }
+  }
+}

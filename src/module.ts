@@ -73,5 +73,10 @@ export default defineNuxtModule<ModuleOptions>({
       name: 'g-auth',
       path: resolver.resolve('./runtime/middlewares/Auth'),
     })
+    addRouteMiddleware({
+      name: 'g-load-color',
+      path: resolver.resolve('./runtime/middlewares/LoadColor'),
+      global: true,
+    })
   },
 })

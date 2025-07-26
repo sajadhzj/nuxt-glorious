@@ -1,7 +1,60 @@
 import { defineStore } from 'pinia'
 import { navigateTo, useCookie, useRuntimeConfig, useFetch } from '#imports'
-export const GloriousStore = defineStore('GloriousStore', {
-  state: (): any => ({
+import tc from '../scripts/store/tc'
+interface AuthState {
+  loaded: boolean
+  user: Record<string, any>
+}
+
+interface UIColors {
+  dom: Record<string, string>
+  tailwind: Record<string, string | Record<string, string>>
+}
+
+interface UIState {
+  colors: UIColors
+  isDark: boolean
+}
+
+interface FormsState {
+  [key: string]: {
+    form: Record<string, any>
+    errors: any[]
+  }
+}
+
+interface GloriousState {
+  auth: AuthState
+  loading: Record<string, any>
+  keepData: Record<string, any>
+  forms: FormsState
+  response: Record<string, any>
+  modals: Record<string, any>
+  keepResponse: any[]
+  ui: UIState
+}
+
+interface GloriousGetters {
+  [key: string]: (...args: any[]) => any
+  authIsLogin(): boolean
+}
+
+interface GloriousActions {
+  tc(color: string): string | undefined
+  formCreate(key: string | string[]): void
+  authLogout(): void
+  authSetToken(token: string, to?: string | null): void
+  authParseToken(token: string): any
+  authGetUser(token?: string): void
+}
+
+export const GloriousStore = defineStore<
+  'GloriousStore',
+  GloriousState,
+  GloriousGetters,
+  GloriousActions
+>('GloriousStore', {
+  state: (): GloriousState => ({
     auth: {
       loaded: false,
       user: {},
@@ -12,6 +65,13 @@ export const GloriousStore = defineStore('GloriousStore', {
     response: {},
     modals: {},
     keepResponse: [],
+    ui: {
+      colors: {
+        dom: {},
+        tailwind: {},
+      },
+      isDark: false,
+    },
   }),
   getters: {
     authIsLogin() {
@@ -22,6 +82,9 @@ export const GloriousStore = defineStore('GloriousStore', {
     },
   },
   actions: {
+    tc(color: string) {
+      return tc(color, this)
+    },
     formCreate(key: string | Array<string>) {
       this.forms = {}
       if (typeof key === 'string')

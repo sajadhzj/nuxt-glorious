@@ -1,8 +1,11 @@
 {
-  "version": "2.0.0-develop-33",
+  "version": "2.0.0-develop-45",
   "name": "nuxt-glorious",
   "description": "This package provides many things needed by a project, including server requests and authentication, SEO and other requirements of a project.",
-  "repository": "sajadhzj/nuxt-glorious",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajadhzj/nuxt-glorious.git"
+  },
   "author": "sajad hossein zadeh (https://github.com/sajadhzj)",
   "license": "MIT",
   "type": "module",
@@ -21,7 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "bash load-style.sh && nuxt-module-build build",
+    "prepack": "nuxt-module-build build",
     "dev": "nuxi dev --port=3001 playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",

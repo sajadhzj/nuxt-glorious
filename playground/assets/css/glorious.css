@@ -478,6 +478,211 @@
   @apply pr-8.5;
 }
 
+.glorious-accordion {
+  @apply rounded-lg overflow-hidden bg-white shadow transition-[box-shadow] duration-500 will-change-["box-shadow"];
+}
+.glorious-accordion.open {
+  @apply shadow-lg;
+}
+.glorious-accordion .glorious-accordion-header {
+  @apply cursor-pointer px-4 py-5 bg-primary-50 font-semibold flex items-center justify-between transition-[background-color] duration-300;
+}
+.glorious-accordion .glorious-accordion-header .rotated {
+  @apply rotate-180;
+}
+.glorious-accordion .glorious-accordion-header:hover {
+  @apply bg-primary-100;
+}
+.glorious-accordion .glorious-accordion-body-wrapper {
+  @apply overflow-hidden transition-[max-height] duration-300 ease-in-out will-change-[max-height];
+}
+.glorious-accordion .glorious-accordion-body {
+  @apply px-4 py-5 bg-white text-black;
+}
+.glorious-accordion .g-icon {
+  @apply rotate-90 transition duration-300;
+}
+.glorious-accordion.open .g-icon {
+  @apply rotate-270;
+}
+
+.glorious-alert {
+  @apply flex items-center gap-4 p-4 border-r-4 rounded-2xl shadow-md justify-between;
+}
+.glorious-alert-title {
+  @apply text-lg font-bold mb-1;
+}
+.glorious-alert-description {
+  @apply text-sm;
+}
+.glorious-alert .icon {
+  @apply border shadow-md w-10 h-10 flex justify-center items-center rounded-lg;
+}
+.glorious-alert.color-primary {
+  @apply border-primary-400;
+  @apply bg-primary-50;
+  @apply text-primary-800;
+}
+.glorious-alert.color-primary .icon {
+  @apply border-primary-400;
+}
+.glorious-alert.color-secondary {
+  @apply border-secondary-400;
+  @apply bg-secondary-50;
+  @apply text-secondary-800;
+}
+.glorious-alert.color-secondary .icon {
+  @apply border-secondary-400;
+}
+.glorious-alert.color-sky {
+  @apply border-sky-400;
+  @apply bg-sky-50;
+  @apply text-sky-800;
+}
+.glorious-alert.color-sky .icon {
+  @apply border-sky-400;
+}
+.glorious-alert.color-gray {
+  @apply border-gray-400;
+  @apply bg-gray-50;
+  @apply text-gray-800;
+}
+.glorious-alert.color-gray .icon {
+  @apply border-gray-400;
+}
+.glorious-alert.color-red {
+  @apply border-red-400;
+  @apply bg-red-50;
+  @apply text-red-800;
+}
+.glorious-alert.color-red .icon {
+  @apply border-red-400;
+}
+
+.glorious-avatar {
+  @apply relative inline-block rounded-md overflow-hidden bg-gray-200;
+}
+.glorious-avatar img {
+  @apply w-full h-full object-cover;
+}
+.glorious-avatar.size-sm {
+  @apply w-7 h-7;
+}
+.glorious-avatar.size-md {
+  @apply w-10.5 h-10.5;
+}
+.glorious-avatar.size-lg {
+  @apply w-14 h-14;
+}
+.glorious-avatar.circle {
+  @apply rounded-full;
+}
+
+.glorious-radio-button {
+  @apply flex items-center cursor-pointer relative gap-2;
+}
+.glorious-radio-button .radio-input {
+  @apply hidden;
+}
+.glorious-radio-button .radio-select {
+  @apply relative rounded-[50%];
+  width: 1em;
+  height: 1em;
+  transition: border-color 0.2s ease;
+}
+.glorious-radio-button .radio-select::after {
+  content: "";
+  @apply top-[50%] left-[50%] w-[60%] h-[60%] rounded-[50%] absolute opacity-0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.glorious-radio-button .radio-select.color-primary {
+  @apply border-2;
+  @apply border-primary-500;
+}
+.glorious-radio-button .radio-select.color-primary::after {
+  @apply bg-primary-500;
+}
+.glorious-radio-button .radio-select.color-secondary {
+  @apply border-2;
+  @apply border-secondary-500;
+}
+.glorious-radio-button .radio-select.color-secondary::after {
+  @apply bg-secondary-500;
+}
+.glorious-radio-button .radio-select.color-sky {
+  @apply border-2;
+  @apply border-sky-500;
+}
+.glorious-radio-button .radio-select.color-sky::after {
+  @apply bg-sky-500;
+}
+.glorious-radio-button .radio-select.color-gray {
+  @apply border-2;
+  @apply border-gray-500;
+}
+.glorious-radio-button .radio-select.color-gray::after {
+  @apply bg-gray-500;
+}
+.glorious-radio-button .radio-select.color-red {
+  @apply border-2;
+  @apply border-red-500;
+}
+.glorious-radio-button .radio-select.color-red::after {
+  @apply bg-red-500;
+}
+.glorious-radio-button input:checked + .radio-select::after {
+  @apply opacity-100!;
+  transform: translate(-50%, -50%) scale(1.2) !important;
+}
+.glorious-radio-button input:disabled + .radio-select {
+  @apply cursor-not-allowed;
+}
+.glorious-radio-button input:disabled + .radio-select.color-primary {
+  @apply border-2;
+  @apply border-primary-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-primary::after {
+  @apply bg-primary-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-secondary {
+  @apply border-2;
+  @apply border-secondary-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-secondary::after {
+  @apply bg-secondary-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-sky {
+  @apply border-2;
+  @apply border-sky-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-sky::after {
+  @apply bg-sky-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-gray {
+  @apply border-2;
+  @apply border-gray-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-gray::after {
+  @apply bg-gray-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-red {
+  @apply border-2;
+  @apply border-red-200;
+}
+.glorious-radio-button input:disabled + .radio-select.color-red::after {
+  @apply bg-red-200;
+}
+.glorious-radio-button.size-sm {
+  @apply text-base;
+}
+.glorious-radio-button.size-md {
+  @apply text-lg;
+}
+.glorious-radio-button.size-lg {
+  @apply text-xl;
+}
+
 @theme {
   --color-primary-50: #f2fbf3;
   --color-primary-100: #e1f7e4;

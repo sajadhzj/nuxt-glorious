@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const gs = GloriousStore()
 onMounted(() => {
   const body = document.querySelector('body')
 
@@ -6,5 +7,8 @@ onMounted(() => {
 })
 </script>
 <template>
-  <h1 class="text-5xl font-bold underline cm">Hello world!</h1>
+  <div>
+    <h1 class="text-5xl font-bold underline cm">Hello world!</h1>
+    {{ gs.tc('primary-200') }}
+  </div>
 </template>

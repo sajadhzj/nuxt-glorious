@@ -1,0 +1,54 @@
+@use '../variable.scss' as var;
+
+.glorious-radio-button {
+  @apply flex items-center cursor-pointer relative gap-2;
+  .radio-input {
+    @apply hidden;
+  }
+  .radio-select {
+    @apply relative rounded-[50%];
+    width: 1em;
+    height: 1em;
+    transition: border-color 0.2s ease;
+    &::after {
+      content: '';
+      @apply top-[50%] left-[50%] w-[60%] h-[60%] rounded-[50%] absolute opacity-0;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    @each $color in var.$colors {
+      &.#{'color-' + $color} {
+        @apply border-2;
+        @apply #{'border-' + $color + '-500'};
+        &::after {
+          @apply #{'bg-' + $color + '-500'};
+        }
+      }
+    }
+  }
+  input:checked + .radio-select::after {
+    @apply opacity-100!;
+    transform: translate(-50%, -50%) scale(1.2) !important;
+  }
+  input:disabled + .radio-select {
+    @apply cursor-not-allowed;
+    @each $color in var.$colors {
+      &.#{'color-' + $color} {
+        @apply border-2;
+        @apply #{'border-' + $color + '-200'};
+        &::after {
+          @apply #{'bg-' + $color + '-200'};
+        }
+      }
+    }
+  }
+  &.size-sm {
+    @apply text-base;
+  }
+  &.size-md {
+    @apply text-lg;
+  }
+  &.size-lg {
+    @apply text-xl;
+  }
+}

@@ -3,6 +3,10 @@
 @use 'components/checkbox.scss';
 @use 'components/button.scss';
 @use 'components/input.scss';
+@use 'components/accordion.scss';
+@use 'components/alert.scss';
+@use 'components/avatar.scss';
+@use 'components/radio-button.scss';
 
 @theme {
   --color-primary-50: #f2fbf3;

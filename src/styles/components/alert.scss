@@ -1,0 +1,29 @@
+@use '../variable.scss' as var;
+
+.glorious-alert {
+  @apply flex items-center gap-4 p-4 border-r-4 rounded-2xl shadow-md justify-between;
+
+  &-title {
+    @apply text-lg font-bold mb-1;
+  }
+
+  &-description {
+    @apply text-sm;
+  }
+
+  .icon {
+    @apply border shadow-md w-10 h-10 flex justify-center items-center rounded-lg;
+  }
+
+  @each $color in var.$colors {
+    &.#{'color-' + $color} {
+      @apply #{'border-' + $color +'-400'};
+      @apply #{'bg-' + $color +'-50'};
+      @apply #{'text-' + $color +'-800'};
+
+      .icon {
+        @apply #{'border-' + $color +'-400'};
+      }
+    }
+  }
+}

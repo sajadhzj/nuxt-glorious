@@ -2,18 +2,21 @@
 import { ref, watch } from '#imports'
 
 interface iconPropInterface {
-  name: String
-  color?: String
-  hoverColor?: String
-  size?: Number
-  strokeWidth?: Number
+  name: string
+  color?: string
+  hoverColor?: string
+  size?: number
+  strokeWidth?: number
 }
 
-const props: any = withDefaults(defineProps<iconPropInterface>(), {
-  size: 20,
-  color: '#000',
-  strokeWidth: 3,
-})
+const props: iconPropInterface = withDefaults(
+  defineProps<iconPropInterface>(),
+  {
+    size: 20,
+    color: '#000',
+    strokeWidth: 1,
+  }
+)
 
 const isHover = ref(false)
 const icon = ref('')
@@ -38,11 +41,10 @@ const computeSize = (size: number | string): number => {
   return result
 }
 const computeProps = (icon: any) => {
-  const size = computeSize(props.size)
+  const size = computeSize(<number>props.size)
   const color = props.color
-  const strokeWidth = props.stroke
+  const strokeWidth = props.strokeWidth
   const stroke = props.color
-
   return icon
     .replace(
       /(?<!stroke-)width="(\d+)"/g,
@@ -72,7 +74,7 @@ const mouseover = () => {
 const mouseleave = () => {
   isHover.value = false
   const color = props.color
-  changeColorIcon(color)
+  changeColorIcon(<string>color)
 }
 const getIcon = async () => {
   try {
@@ -115,10 +117,12 @@ watch(
 </script>
 
 <template>
-  <div
-    class="w-max h-max g-icon"
-    @mouseover="mouseover"
-    @mouseleave="mouseleave"
-    v-html="icon"
-  />
+  <ClientOnly>
+    <div
+      class="w-max h-max g-icon"
+      @mouseover="mouseover"
+      @mouseleave="mouseleave"
+      v-html="icon"
+    />
+  </ClientOnly>
 </template>
